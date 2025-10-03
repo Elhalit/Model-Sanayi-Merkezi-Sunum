@@ -11,123 +11,134 @@ declare global {
 export default function LocationSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<any>(null);
   const [mapInitialized, setMapInitialized] = useState(false);
   const [viewType, setViewType] = useState<'roadmap' | 'satellite'>('roadmap');
 
   useEffect(() => {
-    const loadGoogleMaps = () => {
-      if (!window.google && !document.getElementById('google-maps-script')) {
-        const script = document.createElement('script');
-        script.id = 'google-maps-script';
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'YOUR_API_KEY'}&callback=initMap`;
-        script.async = true;
-        script.defer = true;
-        
-        window.initMap = initializeMap;
-        document.head.appendChild(script);
-      } else if (window.google && !mapInitialized) {
-        initializeMap();
-      }
-    };
-
-    const initializeMap = () => {
-      if (!mapRef.current || mapInitialized) return;
-
-      // Kapaklı approximate coordinates
-      const center = { lat: 41.0578, lng: 28.0647 };
-      
-      const map = new window.google.maps.Map(mapRef.current, {
-        zoom: 11,
-        center,
-        mapTypeId: viewType,
-        styles: [
-          {
-            "featureType": "all",
-            "elementType": "geometry.fill",
-            "stylers": [{"color": "#1a1a2e"}]
-          },
-          {
-            "featureType": "water",
-            "elementType": "geometry",
-            "stylers": [{"color": "#0f3460"}]
-          }
-        ]
-      });
-
-      // Project location marker
-      const projectMarker = new window.google.maps.Marker({
-        position: center,
-        map,
-        title: 'Kapaklı Model Sanayi Merkezi',
-        icon: {
-          path: window.google.maps.SymbolPath.CIRCLE,
-          scale: 10,
-          fillColor: '#d4af37',
-          fillOpacity: 1,
-          strokeWeight: 3,
-          strokeColor: '#ffffff'
+    // Check if API key is available
+    if (import.meta.env.VITE_GOOGLE_MAPS_API_KEY && import.meta.env.VITE_GOOGLE_MAPS_API_KEY !== 'YOUR_API_KEY') {
+      const loadGoogleMaps = () => {
+        if (!window.google && !document.getElementById('google-maps-script')) {
+          const script = document.createElement('script');
+          script.id = 'google-maps-script';
+          script.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}&callback=initMap&loading=async`;
+          script.async = true;
+          script.defer = true;
+          
+          window.initMap = initializeMap;
+          document.head.appendChild(script);
+        } else if (window.google && !mapInitialized) {
+          initializeMap();
         }
-      });
+      };
 
-      // Location advantages markers
-      const locations = [
-        { position: { lat: 41.0678, lng: 28.0547 }, title: 'OSB - 5 km', icon: 'building' },
-        { position: { lat: 41.0478, lng: 28.0847 }, title: 'Otoyol - 2 km', icon: 'highway' },
-        { position: { lat: 40.9778, lng: 29.1047 }, title: 'Liman - 25 km', icon: 'port' },
-        { position: { lat: 40.9000, lng: 28.8000 }, title: 'Havalimanı - 35 km', icon: 'airport' }
-      ];
+      const initializeMap = () => {
+        if (!mapRef.current || mapInitialized || mapInstanceRef.current) return;
 
-      locations.forEach(location => {
-        const marker = new window.google.maps.Marker({
-          position: location.position,
-          map,
-          title: location.title,
-          icon: {
-            path: window.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            scale: 6,
-            fillColor: '#22c55e',
-            fillOpacity: 0.8,
-            strokeWeight: 2,
-            strokeColor: '#ffffff'
-          }
-        });
+        try {
+          // Kapaklı approximate coordinates
+          const center = { lat: 41.0578, lng: 28.0647 };
+          
+          const map = new window.google.maps.Map(mapRef.current, {
+            zoom: 11,
+            center,
+            mapTypeId: viewType,
+            styles: [
+              {
+                "featureType": "all",
+                "elementType": "geometry.fill",
+                "stylers": [{"color": "#1a1a2e"}]
+              },
+              {
+                "featureType": "water",
+                "elementType": "geometry",
+                "stylers": [{"color": "#0f3460"}]
+              }
+            ]
+          });
 
-        // Add bounce animation
-        marker.addListener('mouseover', () => {
-          marker.setAnimation(window.google.maps.Animation.BOUNCE);
-          setTimeout(() => marker.setAnimation(null), 750);
-        });
-      });
+          mapInstanceRef.current = map;
 
-      setMapInitialized(true);
-    };
+          // Project location marker
+          new window.google.maps.Marker({
+            position: center,
+            map,
+            title: 'Kapaklı Model Sanayi Merkezi',
+            icon: {
+              path: window.google.maps.SymbolPath.CIRCLE,
+              scale: 10,
+              fillColor: '#d4af37',
+              fillOpacity: 1,
+              strokeWeight: 3,
+              strokeColor: '#ffffff'
+            }
+          });
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !mapInitialized) {
-            loadGoogleMaps();
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
+          // Location advantages markers
+          const locations = [
+            { position: { lat: 41.0678, lng: 28.0547 }, title: 'OSB - 5 km', icon: 'building' },
+            { position: { lat: 41.0478, lng: 28.0847 }, title: 'Otoyol - 2 km', icon: 'highway' },
+            { position: { lat: 40.9778, lng: 29.1047 }, title: 'Liman - 25 km', icon: 'port' },
+            { position: { lat: 40.9000, lng: 28.8000 }, title: 'Havalimanı - 35 km', icon: 'airport' }
+          ];
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+          locations.forEach(location => {
+            const marker = new window.google.maps.Marker({
+              position: location.position,
+              map,
+              title: location.title,
+              icon: {
+                path: window.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                scale: 6,
+                fillColor: '#22c55e',
+                fillOpacity: 0.8,
+                strokeWeight: 2,
+                strokeColor: '#ffffff'
+              }
+            });
+
+            // Add bounce animation
+            marker.addListener('mouseover', () => {
+              marker.setAnimation(window.google.maps.Animation.BOUNCE);
+              setTimeout(() => marker.setAnimation(null), 750);
+            });
+          });
+
+          setMapInitialized(true);
+        } catch (error) {
+          console.error('Error initializing map:', error);
+        }
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !mapInitialized) {
+              loadGoogleMaps();
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      if (sectionRef.current) {
+        observer.observe(sectionRef.current);
+      }
+
+      return () => {
+        observer.disconnect();
+      };
+    } else {
+      // No API key, just show placeholder
+      setMapInitialized(false);
     }
-
-    return () => observer.disconnect();
   }, [mapInitialized, viewType]);
 
   const switchMapView = (type: 'roadmap' | 'satellite') => {
     setViewType(type);
-    if (mapRef.current && window.google && mapInitialized) {
-      const map = new window.google.maps.Map(mapRef.current, {
-        zoom: 11,
-        center: { lat: 41.0578, lng: 28.0647 },
-        mapTypeId: type
-      });
+    if (mapInstanceRef.current && window.google) {
+      mapInstanceRef.current.setMapTypeId(type);
     }
   };
 
