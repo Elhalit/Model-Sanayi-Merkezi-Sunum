@@ -1,0 +1,112 @@
+Create a full-screen horizontal presentation-style website for a commercial real estate project (Kapaklı Model Sanayi Merkezi) with the following requirements:
+
+## CORE STRUCTURE & NAVIGATION
+- Full-screen horizontal scrolling presentation (like Prezi/reveal.js style)
+- Each section takes up 100vh x 100vw
+- Fixed vertical burger menu on the right side with navigation dots/links
+- Forward/Backward arrow buttons (left/right edges)
+- Smooth scroll-snap between sections
+- Fullscreen toggle button (top-right corner)
+- Progress indicator showing current section
+
+## SECTIONS IN ORDER:
+
+### 1. HERO/ENTRANCE (GİRİŞ)
+- Use the aerial sunset image with facility icons overlay
+- Dramatic parallax effect on scroll
+- Animated fade-in of headline: "BİRBİRİNDEN ÖNEMLİ VE DEĞERLİ, SİZE ARTI DEĞER KATACAK FIRSATLARI İLE FARK YARATIN"
+- Facility icons should pulse/glow on hover
+- Smooth transition to next section
+
+### 2. COMPANY (ŞİRKETİMİZ)
+- Split screen layout showing company evolution: İnnogy → Net İnşaat + Nadir Gold → Som Prefabrik
+- Embedded video player for Som company video (autoplay muted with controls)
+- Timeline animation showing company progression
+- High-quality fade transitions
+
+### 3. PROJECT (PROJEMİZ)
+- Full-screen aerial view of the facility
+- Animated statistics (total area, number of blocks, amenities)
+- Key features with icon animations
+- 3D tilt effect on scroll
+
+### 4. LOCATION (LOKASYON)
+- **CRITICAL: Interactive animated Google Maps integration**
+- Show multiple location advantages with custom animated markers:
+  * OSB (Organized Industrial Zones) - animated icon
+  * Highways (Otoyollar) - animated icon
+  * Port (Liman) - animated icon  
+  * Airport (Havalimanı) - animated icon
+- Animated polylines/routes connecting project to key locations
+- Distance/time indicators appearing on hover
+- Zoom animation focusing on project location
+- Toggle between satellite and map view
+- Smooth marker bounce animations when revealed
+
+### 5. MASTER PLAN (VAZİYET PLANI) - **MOST IMPORTANT**
+- **Fully interactive master plan based on the provided layout image**
+- Render all blocks: M, L, K, H, G, F, E, D, C, B, A blocks with their unit numbers
+- Color coding system:
+  * RED blocks = Sold units (with company names)
+  * GREEN blocks = Available units
+  * On hover: smooth color transition + elevation shadow effect
+- **Interactive data display on click/hover:**
+  * Unit number
+  * Square meters (M²)
+  * Status (Available/Sold)
+  * Company name (if sold)
+  * Price (data-attribute driven)
+- Smooth zoom functionality (mouse wheel or pinch)
+- Pan functionality (click and drag)
+- Unit filtering (show only available, show only sold)
+- Search functionality (find specific block/unit)
+- Legend showing color meanings
+- Click on unit → Modal/sidebar with detailed information
+- Smooth animations when switching between units
+- SVG-based or Canvas-based for crisp rendering at any zoom level
+
+### 6. FLOOR PLANS (KAT PLANLARI)
+- Tabbed interface or carousel showing different blocks (F Block, M Block, etc.)
+- High-resolution floor plan images
+- Interactive hotspots on units
+- Zoom and pan functionality
+- Download floor plan button
+
+## TECHNICAL REQUIREMENTS:
+- **React or vanilla JavaScript** (specify preference)
+- **Smooth animations using GSAP or Framer Motion**
+- **Google Maps JavaScript API for location section**
+- **SVG or Canvas for interactive master plan**
+- **Intersection Observer API for scroll animations**
+- **Touch/swipe support for mobile/tablets**
+- **Keyboard navigation (arrow keys, escape for fullscreen)**
+- **Lazy loading for images and videos**
+- **Optimized performance (60fps animations)**
+- **Responsive design (desktop primary, tablet/mobile support)**
+- Modern, premium aesthetic with:
+  * Dark/professional color scheme with accent colors from brand
+  * Smooth gradient overlays
+  * Glass morphism effects for UI elements
+  * Micro-interactions on all interactive elements
+  * Loading transitions between sections
+
+## DATA STRUCTURE:
+- JSON file for unit data (block, unit number, size, status, company, price)
+- Easy to update without touching code
+- Google Maps API key integration
+- Video embed URLs
+
+## ANIMATIONS & EFFECTS:
+- Parallax scrolling effects
+- Fade/slide transitions between sections
+- Hover scale effects on interactive elements
+- Stagger animations for lists/grids
+- Smooth easing functions (ease-out-cubic)
+- Loading spinner/progress bar
+- Micro-interactions (button ripples, icon bounces)
+
+## BROWSER COMPATIBILITY:
+- Modern browsers (Chrome, Firefox, Safari, Edge)
+- Fallbacks for older browsers where possible
+
+Build this as a single-page application optimized for sales presentations in an office environment. The goal is to WOW clients while providing instant access to all project information. Make it fast, smooth, and impressive!
