@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { CheckCircle, Play, Pause } from 'lucide-react';
 import { gsap } from 'gsap';
+import { useTranslation } from 'react-i18next';
 
 export default function CompanySection() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -49,13 +51,13 @@ export default function CompanySection() {
     >
       <div className="max-w-7xl mx-auto px-8 w-full">
         <h2 className="text-5xl md:text-6xl font-black mb-12 text-center bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Şirketimiz
+          {t('company.title')}
         </h2>
         
         <div className="grid md:grid-cols-2 gap-12">
           {/* Company Evolution Timeline */}
           <div className="glass p-8 rounded-3xl">
-            <h3 className="text-3xl font-bold mb-8 text-primary">Şirket Evrimiziz</h3>
+            <h3 className="text-3xl font-bold mb-8 text-primary">{t('company.timeline.title')}</h3>
             
             <div className="space-y-8">
               {/* Step 1 */}
@@ -64,8 +66,8 @@ export default function CompanySection() {
                   <span className="text-background font-bold">1</span>
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold mb-2">İnnogy</h4>
-                  <p className="text-muted-foreground">Güçlü temeller üzerine kurulu enerji altyapısı</p>
+                  <h4 className="text-xl font-bold mb-2">{t('company.timeline.step1.title')}</h4>
+                  <p className="text-muted-foreground">{t('company.timeline.step1.description')}</p>
                 </div>
               </div>
               
@@ -82,8 +84,8 @@ export default function CompanySection() {
                   <span className="text-background font-bold">2</span>
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold mb-2">Net İnşaat + Nadir Gold</h4>
-                  <p className="text-muted-foreground">İnşaat ve finans sektörlerinde stratejik birleşme</p>
+                  <h4 className="text-xl font-bold mb-2">{t('company.timeline.step2.title')}</h4>
+                  <p className="text-muted-foreground">{t('company.timeline.step2.description')}</p>
                 </div>
               </div>
               
@@ -100,8 +102,8 @@ export default function CompanySection() {
                   <span className="text-background font-bold">3</span>
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold mb-2">Som Prefabrik</h4>
-                  <p className="text-muted-foreground">Modern prefabrik çözümlerle sektöre yön veren lider</p>
+                  <h4 className="text-xl font-bold mb-2">{t('company.timeline.step3.title')}</h4>
+                  <p className="text-muted-foreground">{t('company.timeline.step3.description')}</p>
                 </div>
               </div>
             </div>
@@ -109,7 +111,7 @@ export default function CompanySection() {
           
           {/* Company Video */}
           <div className="glass p-8 rounded-3xl">
-            <h3 className="text-3xl font-bold mb-8 text-primary">Tanıtım Videosu</h3>
+            <h3 className="text-3xl font-bold mb-8 text-primary">{t('company.video.title')}</h3>
             
             <div className="relative rounded-2xl overflow-hidden bg-muted aspect-video">
               <video 
@@ -122,7 +124,7 @@ export default function CompanySection() {
                 onPause={() => setIsVideoPlaying(false)}
               >
                 <source src={`${import.meta.env.VITE_VIDEO_URL || '#'}`} type="video/mp4" />
-                Tarayıcınız video etiketini desteklemiyor.
+                {t('common.error')}
               </video>
               
               {/* Play overlay */}
@@ -144,15 +146,15 @@ export default function CompanySection() {
             <div className="mt-6 space-y-4">
               <div className="flex items-center gap-3" data-testid="company-stat-experience">
                 <CheckCircle className="w-6 h-6 text-primary" />
-                <span className="text-muted-foreground">30+ Yıllık Sektör Tecrübesi</span>
+                <span className="text-muted-foreground">30+ {t('company.stats.experience')}</span>
               </div>
               <div className="flex items-center gap-3" data-testid="company-stat-projects">
                 <CheckCircle className="w-6 h-6 text-primary" />
-                <span className="text-muted-foreground">100+ Tamamlanmış Proje</span>
+                <span className="text-muted-foreground">100+ {t('company.stats.projects')}</span>
               </div>
               <div className="flex items-center gap-3" data-testid="company-stat-certification">
                 <CheckCircle className="w-6 h-6 text-primary" />
-                <span className="text-muted-foreground">ISO 9001 Kalite Sertifikası</span>
+                <span className="text-muted-foreground">ISO 9001 {t('company.stats.certification')}</span>
               </div>
             </div>
           </div>

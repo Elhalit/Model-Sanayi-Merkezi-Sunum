@@ -1,0 +1,198 @@
+{
+  "nav": {
+    "home": "Home",
+    "company": "Company",
+    "project": "Project",
+    "masterPlan": "Master Plan",
+    "floorPlans": "Floor Plans",
+    "location": "Location",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "KAPAKLΙ MODEL INDUSTRIAL CENTER",
+    "subtitle": "Add value to your business with 52,000 m² modern industrial facility",
+    "description": "Tekirdağ's most prestigious industrial center with 11 blocks and 86 independent units",
+    "cta": {
+      "primary": "Explore Now",
+      "secondary": "Schedule Visit"
+    },
+    "stats": {
+      "area": "Total Area",
+      "blocks": "Blocks",
+      "units": "Units",
+      "infrastructure": "Infrastructure"
+    },
+    "cards": {
+      "strategic": "Strategic Location",
+      "strategicDesc": "5 km to TEM Highway, 15 km to Ambarlı Port",
+      "modern": "Modern Design",
+      "modernDesc": "6.5 m ceiling height, wide loading areas",
+      "investment": "Investment Opportunity",
+      "investmentDesc": "Secure investment with high value appreciation potential",
+      "quality": "Quality Assurance",
+      "qualityDesc": "ISO 9001 certified, 30+ years of experience"
+    }
+  },
+  "company": {
+    "title": "Company",
+    "subtitle": "Over 30 Years of Experience",
+    "description": "We have been a pioneer in industrial buildings since 1990",
+    "timeline": {
+      "title": "Company Evolution",
+      "step1": {
+        "year": "1990",
+        "title": "İnnogy Turkey",
+        "description": "Started operations in Turkey as a German-based global energy company"
+      },
+      "step2": {
+        "year": "2010",
+        "title": "Net İnşaat & Nadir Gold Partnership",
+        "description": "Specialized in industrial buildings through strong local partnerships"
+      },
+      "step3": {
+        "year": "2024",
+        "title": "Som Prefabrik",
+        "description": "Building the facilities of the future with modern prefab technology"
+      }
+    },
+    "video": {
+      "title": "Promotional Video",
+      "play": "Play",
+      "pause": "Pause"
+    },
+    "stats": {
+      "experience": "Years of Experience",
+      "projects": "Completed Projects",
+      "certification": "Quality Certificate"
+    }
+  },
+  "project": {
+    "title": "Project Features",
+    "subtitle": "Modern Industrial Facility",
+    "description": "Kapaklı Model Industrial Center consists of 11 blocks and 86 independent units on 52,000 m²",
+    "stats": {
+      "area": "Total Covered Area",
+      "blocks": "Independent Blocks",
+      "units": "For Rent/Sale Units",
+      "infrastructure": "Infrastructure Ready"
+    },
+    "features": {
+      "title": "Key Features",
+      "security": {
+        "title": "24/7 Security",
+        "description": "Professional security team and camera system"
+      },
+      "parking": {
+        "title": "Large Parking",
+        "description": "Vehicle and truck parking areas"
+      },
+      "loading": {
+        "title": "Loading Ramps",
+        "description": "Modern loading area for each unit"
+      }
+    }
+  },
+  "masterPlan": {
+    "title": "Master Plan",
+    "subtitle": "Interactive Master Plan",
+    "description": "Click to explore units",
+    "search": {
+      "placeholder": "Search unit (e.g: M-1, L-2)...",
+      "noResults": "No results found"
+    },
+    "filters": {
+      "all": "All",
+      "available": "Available",
+      "sold": "Sold"
+    },
+    "controls": {
+      "zoomIn": "Zoom In",
+      "zoomOut": "Zoom Out",
+      "reset": "Reset"
+    },
+    "legend": {
+      "title": "Legend",
+      "available": "Available Units",
+      "sold": "Sold Units"
+    },
+    "modal": {
+      "title": "Unit Details",
+      "unitNumber": "Unit No",
+      "block": "Block",
+      "size": "Size",
+      "price": "Price",
+      "status": "Status",
+      "company": "Company",
+      "available": "Available",
+      "sold": "Sold",
+      "close": "Close",
+      "virtualTour": "3D Tour",
+      "schedule": "Schedule Visit",
+      "download": "Download Brochure"
+    }
+  },
+  "floorPlans": {
+    "title": "Floor Plans",
+    "subtitle": "Block Plans",
+    "description": "Review detailed floor plans",
+    "specs": {
+      "totalArea": "Total Area",
+      "ceilingHeight": "Ceiling Height",
+      "loadingDoor": "Loading Door"
+    },
+    "actions": {
+      "zoom": "Zoom",
+      "download": "Download"
+    }
+  },
+  "location": {
+    "title": "Location & Transportation",
+    "subtitle": "Strategic Location",
+    "description": "Easy access to Istanbul and surrounding provinces",
+    "advantages": {
+      "title": "Location Advantages",
+      "osb": "8 km to Tekirdağ OSB",
+      "tem": "5 km to TEM Highway",
+      "port": "15 km to Ambarlı Port",
+      "airport": "45 km to Istanbul Airport"
+    },
+    "mapTypes": {
+      "roadmap": "Map",
+      "satellite": "Satellite"
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Get In Touch",
+    "description": "Contact us for your questions",
+    "form": {
+      "name": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Your Message",
+      "submit": "Send",
+      "success": "Your message has been sent successfully",
+      "error": "An error occurred, please try again"
+    },
+    "info": {
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "hours": "Business Hours"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "download": "Download",
+    "viewAll": "View All",
+    "learnMore": "Learn More"
+  }
+}

@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { Shield, ArrowUpDown, Zap, MapPin } from 'lucide-react';
 import { gsap } from 'gsap';
+import { useTranslation } from 'react-i18next';
 import { useAnimations } from '@/hooks/useAnimations';
 
 export default function HeroSection() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const { animateOnScroll } = useAnimations();
 
@@ -66,11 +68,11 @@ export default function HeroSection() {
         <div id="hero-title" className="mb-12 opacity-0">
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
             <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              BİRBİRİNDEN ÖNEMLİ VE DEĞERLİ
+              {t('hero.title')}
             </span>
           </h1>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-muted-foreground">
-            SİZE ARTI DEĞER KATACAK FIRSATLARI İLE FARK YARATIN
+            {t('hero.subtitle')}
           </h2>
         </div>
         
@@ -80,32 +82,32 @@ export default function HeroSection() {
             <div className="w-16 h-16 mx-auto mb-4 bg-primary/20 rounded-full flex items-center justify-center">
               <Shield className="w-8 h-8 text-primary" />
             </div>
-            <h3 className="text-xl font-bold mb-2">7/24 Güvenlik</h3>
-            <p className="text-muted-foreground text-sm">Tam Güvenlik Sistemi</p>
+            <h3 className="text-xl font-bold mb-2">{t('hero.cards.strategic')}</h3>
+            <p className="text-muted-foreground text-sm">{t('hero.cards.strategicDesc')}</p>
           </div>
           
           <div className="glass p-6 rounded-2xl pulse-hover glow transition-all duration-300 hover:scale-105" data-testid="facility-parking">
             <div className="w-16 h-16 mx-auto mb-4 bg-accent/20 rounded-full flex items-center justify-center">
               <ArrowUpDown className="w-8 h-8 text-accent" />
             </div>
-            <h3 className="text-xl font-bold mb-2">Geniş Otopark</h3>
-            <p className="text-muted-foreground text-sm">Araç Park Alanları</p>
+            <h3 className="text-xl font-bold mb-2">{t('hero.cards.modern')}</h3>
+            <p className="text-muted-foreground text-sm">{t('hero.cards.modernDesc')}</p>
           </div>
           
           <div className="glass p-6 rounded-2xl pulse-hover glow transition-all duration-300 hover:scale-105" data-testid="facility-infrastructure">
             <div className="w-16 h-16 mx-auto mb-4 bg-success/20 rounded-full flex items-center justify-center">
               <Zap className="w-8 h-8 text-success" />
             </div>
-            <h3 className="text-xl font-bold mb-2">Altyapı</h3>
-            <p className="text-muted-foreground text-sm">Tam Altyapı Sistemi</p>
+            <h3 className="text-xl font-bold mb-2">{t('hero.cards.investment')}</h3>
+            <p className="text-muted-foreground text-sm">{t('hero.cards.investmentDesc')}</p>
           </div>
           
           <div className="glass p-6 rounded-2xl pulse-hover glow transition-all duration-300 hover:scale-105" data-testid="facility-location">
             <div className="w-16 h-16 mx-auto mb-4 bg-destructive/20 rounded-full flex items-center justify-center">
               <MapPin className="w-8 h-8 text-destructive" />
             </div>
-            <h3 className="text-xl font-bold mb-2">Stratejik Konum</h3>
-            <p className="text-muted-foreground text-sm">Ulaşım Avantajı</p>
+            <h3 className="text-xl font-bold mb-2">{t('hero.cards.quality')}</h3>
+            <p className="text-muted-foreground text-sm">{t('hero.cards.qualityDesc')}</p>
           </div>
         </div>
         
@@ -116,7 +118,7 @@ export default function HeroSection() {
                        transition-all duration-300 glow"
             data-testid="hero-cta-button"
           >
-            Keşfetmeye Başla
+            {t('hero.cta.primary')}
           </button>
         </div>
       </div>

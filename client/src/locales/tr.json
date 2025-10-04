@@ -1,0 +1,198 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "company": "Kurumsal",
+    "project": "Proje",
+    "masterPlan": "Vaziyet Planı",
+    "floorPlans": "Kat Planları",
+    "location": "Konum",
+    "contact": "İletişim"
+  },
+  "hero": {
+    "title": "KAPAKLΙ MODEL SANAYİ MERKEZİ",
+    "subtitle": "52.000 m² modern sanayi tesisi ile işinize değer katın",
+    "description": "11 blok, 86 bağımsız ünite ile Tekirdağ'ın en prestijli sanayi merkezi",
+    "cta": {
+      "primary": "Hemen İncele",
+      "secondary": "Randevu Al"
+    },
+    "stats": {
+      "area": "Toplam Alan",
+      "blocks": "Blok Sayısı",
+      "units": "Ünite Sayısı",
+      "infrastructure": "Alt Yapı"
+    },
+    "cards": {
+      "strategic": "Stratejik Konum",
+      "strategicDesc": "TEM'e 5 km, Ambarlı Limanı'na 15 km mesafede",
+      "modern": "Modern Tasarım",
+      "modernDesc": "6.5 m tavan yüksekliği, geniş yükleme alanları",
+      "investment": "Yatırım Fırsatı",
+      "investmentDesc": "Yüksek değer artışı potansiyeli ile güvenli yatırım",
+      "quality": "Kalite Güvencesi",
+      "qualityDesc": "ISO 9001 belgeli, 30+ yıllık tecrübe"
+    }
+  },
+  "company": {
+    "title": "Kurumsal",
+    "subtitle": "30 Yılı Aşkın Deneyim",
+    "description": "1990 yılından bu yana sanayi yapıları konusunda öncü firmayız",
+    "timeline": {
+      "title": "Şirket Evrimi",
+      "step1": {
+        "year": "1990",
+        "title": "İnnogy Türkiye",
+        "description": "Almanya menşeili global enerji şirketi olarak Türkiye'de faaliyete başladık"
+      },
+      "step2": {
+        "year": "2010",
+        "title": "Net İnşaat & Nadir Gold Ortaklığı",
+        "description": "Yerel güçlü ortaklıklar ile sanayi yapılarında uzmanlaştık"
+      },
+      "step3": {
+        "year": "2024",
+        "title": "Som Prefabrik",
+        "description": "Modern prefabrik teknolojisi ile geleceğin tesislerini inşa ediyoruz"
+      }
+    },
+    "video": {
+      "title": "Tanıtım Videosu",
+      "play": "Oynat",
+      "pause": "Duraklat"
+    },
+    "stats": {
+      "experience": "Yıllık Deneyim",
+      "projects": "Tamamlanan Proje",
+      "certification": "Kalite Belgesi"
+    }
+  },
+  "project": {
+    "title": "Proje Özellikleri",
+    "subtitle": "Modern Sanayi Tesisi",
+    "description": "Kapaklı Model Sanayi Merkezi, 52.000 m² alan üzerinde 11 blok ve 86 bağımsız üniteden oluşmaktadır",
+    "stats": {
+      "area": "Toplam Kapalı Alan",
+      "blocks": "Bağımsız Blok",
+      "units": "Kiralık/Satılık Ünite",
+      "infrastructure": "Altyapı Hazır"
+    },
+    "features": {
+      "title": "Öne Çıkan Özellikler",
+      "security": {
+        "title": "7/24 Güvenlik",
+        "description": "Profesyonel güvenlik ekibi ve kamera sistemi"
+      },
+      "parking": {
+        "title": "Geniş Otopark",
+        "description": "Araç ve TIR parkı alanları"
+      },
+      "loading": {
+        "title": "Yükleme Rampaları",
+        "description": "Her ünite için modern yükleme alanı"
+      }
+    }
+  },
+  "masterPlan": {
+    "title": "Vaziyet Planı",
+    "subtitle": "İnteraktif Master Plan",
+    "description": "Üniteleri incelemek için tıklayın",
+    "search": {
+      "placeholder": "Ünite ara (örn: M-1, L-2)...",
+      "noResults": "Sonuç bulunamadı"
+    },
+    "filters": {
+      "all": "Tümü",
+      "available": "Müsait",
+      "sold": "Satıldı"
+    },
+    "controls": {
+      "zoomIn": "Yakınlaştır",
+      "zoomOut": "Uzaklaştır",
+      "reset": "Sıfırla"
+    },
+    "legend": {
+      "title": "Açıklama",
+      "available": "Müsait Üniteler",
+      "sold": "Satılan Üniteler"
+    },
+    "modal": {
+      "title": "Ünite Detayları",
+      "unitNumber": "Ünite No",
+      "block": "Blok",
+      "size": "Alan",
+      "price": "Fiyat",
+      "status": "Durum",
+      "company": "Şirket",
+      "available": "Müsait",
+      "sold": "Satıldı",
+      "close": "Kapat",
+      "virtualTour": "3D Tur",
+      "schedule": "Randevu Al",
+      "download": "Broşür İndir"
+    }
+  },
+  "floorPlans": {
+    "title": "Kat Planları",
+    "subtitle": "Blok Planları",
+    "description": "Detaylı kat planlarını inceleyin",
+    "specs": {
+      "totalArea": "Toplam Alan",
+      "ceilingHeight": "Tavan Yüksekliği",
+      "loadingDoor": "Yükleme Kapısı"
+    },
+    "actions": {
+      "zoom": "Yakınlaştır",
+      "download": "İndir"
+    }
+  },
+  "location": {
+    "title": "Konum ve Ulaşım",
+    "subtitle": "Stratejik Lokasyon",
+    "description": "İstanbul ve çevre illere kolay ulaşım",
+    "advantages": {
+      "title": "Konum Avantajları",
+      "osb": "Tekirdağ OSB'ye 8 km",
+      "tem": "TEM Otoyolu'na 5 km",
+      "port": "Ambarlı Limanı'na 15 km",
+      "airport": "İstanbul Havalimanı'na 45 km"
+    },
+    "mapTypes": {
+      "roadmap": "Harita",
+      "satellite": "Uydu"
+    }
+  },
+  "contact": {
+    "title": "İletişim",
+    "subtitle": "Bize Ulaşın",
+    "description": "Sorularınız için bizimle iletişime geçin",
+    "form": {
+      "name": "Ad Soyad",
+      "email": "E-posta",
+      "phone": "Telefon",
+      "message": "Mesajınız",
+      "submit": "Gönder",
+      "success": "Mesajınız başarıyla gönderildi",
+      "error": "Bir hata oluştu, lütfen tekrar deneyin"
+    },
+    "info": {
+      "address": "Adres",
+      "phone": "Telefon",
+      "email": "E-posta",
+      "hours": "Çalışma Saatleri"
+    }
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Bir hata oluştu",
+    "retry": "Tekrar Dene",
+    "close": "Kapat",
+    "back": "Geri",
+    "next": "İleri",
+    "previous": "Önceki",
+    "search": "Ara",
+    "filter": "Filtrele",
+    "download": "İndir",
+    "viewAll": "Tümünü Gör",
+    "learnMore": "Detaylı Bilgi"
+  }
+}
