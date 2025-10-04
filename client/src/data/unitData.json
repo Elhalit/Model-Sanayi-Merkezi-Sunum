@@ -7,8 +7,8 @@
     "price": 2500000,
     "x": 50,
     "y": 50,
-    "width": 200,
-    "height": 150
+    "width": 120,
+    "height": 100
   },
   {
     "unitNumber": "M-2",
@@ -17,10 +17,78 @@
     "status": "sold",
     "price": 2800000,
     "companyName": "Teknik Metal A.Ş.",
-    "x": 270,
+    "x": 180,
     "y": 50,
-    "width": 200,
-    "height": 150
+    "width": 120,
+    "height": 100
+  },
+  {
+    "unitNumber": "M-3",
+    "blockName": "M",
+    "size": 290,
+    "status": "available",
+    "price": 2650000,
+    "x": 310,
+    "y": 50,
+    "width": 120,
+    "height": 100
+  },
+  {
+    "unitNumber": "M-4",
+    "blockName": "M",
+    "size": 275,
+    "status": "sold",
+    "price": 2450000,
+    "companyName": "Makina Sanay A.Ş.",
+    "x": 440,
+    "y": 50,
+    "width": 120,
+    "height": 100
+  },
+  {
+    "unitNumber": "M-5",
+    "blockName": "M",
+    "size": 285,
+    "status": "available",
+    "price": 2550000,
+    "x": 50,
+    "y": 160,
+    "width": 120,
+    "height": 100
+  },
+  {
+    "unitNumber": "M-6",
+    "blockName": "M",
+    "size": 295,
+    "status": "available",
+    "price": 2700000,
+    "x": 180,
+    "y": 160,
+    "width": 120,
+    "height": 100
+  },
+  {
+    "unitNumber": "M-7",
+    "blockName": "M",
+    "size": 305,
+    "status": "sold",
+    "price": 2850000,
+    "companyName": "Otomotiv Yedek Parça",
+    "x": 310,
+    "y": 160,
+    "width": 120,
+    "height": 100
+  },
+  {
+    "unitNumber": "M-8",
+    "blockName": "M",
+    "size": 270,
+    "status": "available",
+    "price": 2400000,
+    "x": 440,
+    "y": 160,
+    "width": 120,
+    "height": 100
   },
   {
     "unitNumber": "L-1",
@@ -28,10 +96,10 @@
     "size": 250,
     "status": "available",
     "price": 2200000,
-    "x": 650,
+    "x": 600,
     "y": 50,
-    "width": 180,
-    "height": 150
+    "width": 110,
+    "height": 100
   },
   {
     "unitNumber": "L-2",
@@ -40,10 +108,78 @@
     "status": "sold",
     "price": 2400000,
     "companyName": "Plastik San. Ltd.",
-    "x": 850,
+    "x": 720,
     "y": 50,
-    "width": 180,
-    "height": 150
+    "width": 110,
+    "height": 100
+  },
+  {
+    "unitNumber": "L-3",
+    "blockName": "L",
+    "size": 255,
+    "status": "available",
+    "price": 2300000,
+    "x": 840,
+    "y": 50,
+    "width": 110,
+    "height": 100
+  },
+  {
+    "unitNumber": "L-4",
+    "blockName": "L",
+    "size": 265,
+    "status": "sold",
+    "price": 2450000,
+    "companyName": "Kimya Ürünleri A.Ş.",
+    "x": 960,
+    "y": 50,
+    "width": 110,
+    "height": 100
+  },
+  {
+    "unitNumber": "L-5",
+    "blockName": "L",
+    "size": 245,
+    "status": "available",
+    "price": 2150000,
+    "x": 600,
+    "y": 160,
+    "width": 110,
+    "height": 100
+  },
+  {
+    "unitNumber": "L-6",
+    "blockName": "L",
+    "size": 258,
+    "status": "available",
+    "price": 2350000,
+    "x": 720,
+    "y": 160,
+    "width": 110,
+    "height": 100
+  },
+  {
+    "unitNumber": "L-7",
+    "blockName": "L",
+    "size": 262,
+    "status": "sold",
+    "price": 2420000,
+    "companyName": "Elektronik Üretim",
+    "x": 840,
+    "y": 160,
+    "width": 110,
+    "height": 100
+  },
+  {
+    "unitNumber": "L-8",
+    "blockName": "L",
+    "size": 248,
+    "status": "available",
+    "price": 2200000,
+    "x": 960,
+    "y": 160,
+    "width": 110,
+    "height": 100
   },
   {
     "unitNumber": "K-1",
@@ -51,10 +187,78 @@
     "size": 180,
     "status": "available",
     "price": 1600000,
-    "x": 1050,
+    "x": 1110,
     "y": 50,
-    "width": 100,
-    "height": 150
+    "width": 90,
+    "height": 95
+  },
+  {
+    "unitNumber": "K-2",
+    "blockName": "K",
+    "size": 185,
+    "status": "sold",
+    "price": 1650000,
+    "companyName": "Tekstil İmalat",
+    "x": 1210,
+    "y": 50,
+    "width": 90,
+    "height": 95
+  },
+  {
+    "unitNumber": "K-3",
+    "blockName": "K",
+    "size": 190,
+    "status": "available",
+    "price": 1700000,
+    "x": 1110,
+    "y": 155,
+    "width": 90,
+    "height": 95
+  },
+  {
+    "unitNumber": "K-4",
+    "blockName": "K",
+    "size": 175,
+    "status": "available",
+    "price": 1550000,
+    "x": 1210,
+    "y": 155,
+    "width": 90,
+    "height": 95
+  },
+  {
+    "unitNumber": "K-5",
+    "blockName": "K",
+    "size": 182,
+    "status": "sold",
+    "price": 1620000,
+    "companyName": "Kağıt Ambalaj",
+    "x": 1110,
+    "y": 260,
+    "width": 90,
+    "height": 95
+  },
+  {
+    "unitNumber": "K-6",
+    "blockName": "K",
+    "size": 188,
+    "status": "available",
+    "price": 1680000,
+    "x": 1210,
+    "y": 260,
+    "width": 90,
+    "height": 95
+  },
+  {
+    "unitNumber": "K-7",
+    "blockName": "K",
+    "size": 192,
+    "status": "available",
+    "price": 1720000,
+    "x": 1160,
+    "y": 365,
+    "width": 90,
+    "height": 95
   },
   {
     "unitNumber": "H-1",
@@ -64,9 +268,9 @@
     "price": 2000000,
     "companyName": "Oto Yedek Parça",
     "x": 50,
-    "y": 230,
-    "width": 150,
-    "height": 140
+    "y": 300,
+    "width": 110,
+    "height": 105
   },
   {
     "unitNumber": "H-2",
@@ -74,10 +278,78 @@
     "size": 230,
     "status": "available",
     "price": 2100000,
-    "x": 220,
-    "y": 230,
-    "width": 150,
-    "height": 140
+    "x": 170,
+    "y": 300,
+    "width": 110,
+    "height": 105
+  },
+  {
+    "unitNumber": "H-3",
+    "blockName": "H",
+    "size": 225,
+    "status": "sold",
+    "price": 2050000,
+    "companyName": "Endüstriyel Ekipman",
+    "x": 290,
+    "y": 300,
+    "width": 110,
+    "height": 105
+  },
+  {
+    "unitNumber": "H-4",
+    "blockName": "H",
+    "size": 235,
+    "status": "available",
+    "price": 2150000,
+    "x": 410,
+    "y": 300,
+    "width": 110,
+    "height": 105
+  },
+  {
+    "unitNumber": "H-5",
+    "blockName": "H",
+    "size": 215,
+    "status": "available",
+    "price": 1950000,
+    "x": 50,
+    "y": 415,
+    "width": 110,
+    "height": 105
+  },
+  {
+    "unitNumber": "H-6",
+    "blockName": "H",
+    "size": 228,
+    "status": "sold",
+    "price": 2080000,
+    "companyName": "Metal İşleme",
+    "x": 170,
+    "y": 415,
+    "width": 110,
+    "height": 105
+  },
+  {
+    "unitNumber": "H-7",
+    "blockName": "H",
+    "size": 222,
+    "status": "available",
+    "price": 2020000,
+    "x": 290,
+    "y": 415,
+    "width": 110,
+    "height": 105
+  },
+  {
+    "unitNumber": "H-8",
+    "blockName": "H",
+    "size": 232,
+    "status": "available",
+    "price": 2120000,
+    "x": 410,
+    "y": 415,
+    "width": 110,
+    "height": 105
   },
   {
     "unitNumber": "G-1",
@@ -85,10 +357,90 @@
     "size": 240,
     "status": "available",
     "price": 2200000,
-    "x": 400,
-    "y": 230,
-    "width": 170,
-    "height": 140
+    "x": 560,
+    "y": 300,
+    "width": 115,
+    "height": 105
+  },
+  {
+    "unitNumber": "G-2",
+    "blockName": "G",
+    "size": 245,
+    "status": "sold",
+    "price": 2250000,
+    "companyName": "Gıda Üretim A.Ş.",
+    "x": 685,
+    "y": 300,
+    "width": 115,
+    "height": 105
+  },
+  {
+    "unitNumber": "G-3",
+    "blockName": "G",
+    "size": 238,
+    "status": "available",
+    "price": 2180000,
+    "x": 810,
+    "y": 300,
+    "width": 115,
+    "height": 105
+  },
+  {
+    "unitNumber": "G-4",
+    "blockName": "G",
+    "size": 242,
+    "status": "available",
+    "price": 2220000,
+    "x": 935,
+    "y": 300,
+    "width": 115,
+    "height": 105
+  },
+  {
+    "unitNumber": "G-5",
+    "blockName": "G",
+    "size": 248,
+    "status": "sold",
+    "price": 2280000,
+    "companyName": "İlaç Deposu Ltd.",
+    "x": 560,
+    "y": 415,
+    "width": 115,
+    "height": 105
+  },
+  {
+    "unitNumber": "G-6",
+    "blockName": "G",
+    "size": 235,
+    "status": "available",
+    "price": 2150000,
+    "x": 685,
+    "y": 415,
+    "width": 115,
+    "height": 105
+  },
+  {
+    "unitNumber": "G-7",
+    "blockName": "G",
+    "size": 244,
+    "status": "available",
+    "price": 2240000,
+    "x": 810,
+    "y": 415,
+    "width": 115,
+    "height": 105
+  },
+  {
+    "unitNumber": "G-8",
+    "blockName": "G",
+    "size": 250,
+    "status": "sold",
+    "price": 2300000,
+    "companyName": "Kozmetik İthalat",
+    "x": 935,
+    "y": 415,
+    "width": 115,
+    "height": 105
   },
   {
     "unitNumber": "F-1",
@@ -97,10 +449,10 @@
     "status": "sold",
     "price": 3000000,
     "companyName": "Gıda Dağıtım A.Ş.",
-    "x": 650,
-    "y": 230,
-    "width": 200,
-    "height": 140
+    "x": 50,
+    "y": 560,
+    "width": 130,
+    "height": 110
   },
   {
     "unitNumber": "F-2",
@@ -108,10 +460,78 @@
     "size": 310,
     "status": "available",
     "price": 2900000,
-    "x": 870,
-    "y": 230,
-    "width": 200,
-    "height": 140
+    "x": 190,
+    "y": 560,
+    "width": 130,
+    "height": 110
+  },
+  {
+    "unitNumber": "F-3",
+    "blockName": "F",
+    "size": 315,
+    "status": "sold",
+    "price": 2950000,
+    "companyName": "Soğuk Hava Deposu",
+    "x": 330,
+    "y": 560,
+    "width": 130,
+    "height": 110
+  },
+  {
+    "unitNumber": "F-4",
+    "blockName": "F",
+    "size": 325,
+    "status": "available",
+    "price": 3050000,
+    "x": 470,
+    "y": 560,
+    "width": 130,
+    "height": 110
+  },
+  {
+    "unitNumber": "F-5",
+    "blockName": "F",
+    "size": 305,
+    "status": "available",
+    "price": 2850000,
+    "x": 50,
+    "y": 680,
+    "width": 130,
+    "height": 110
+  },
+  {
+    "unitNumber": "F-6",
+    "blockName": "F",
+    "size": 318,
+    "status": "sold",
+    "price": 2980000,
+    "companyName": "Lojistik Merkezi",
+    "x": 190,
+    "y": 680,
+    "width": 130,
+    "height": 110
+  },
+  {
+    "unitNumber": "F-7",
+    "blockName": "F",
+    "size": 312,
+    "status": "available",
+    "price": 2920000,
+    "x": 330,
+    "y": 680,
+    "width": 130,
+    "height": 110
+  },
+  {
+    "unitNumber": "F-8",
+    "blockName": "F",
+    "size": 322,
+    "status": "available",
+    "price": 3020000,
+    "x": 470,
+    "y": 680,
+    "width": 130,
+    "height": 110
   },
   {
     "unitNumber": "E-1",
@@ -119,10 +539,10 @@
     "size": 270,
     "status": "available",
     "price": 2500000,
-    "x": 50,
-    "y": 430,
-    "width": 180,
-    "height": 160
+    "x": 640,
+    "y": 560,
+    "width": 120,
+    "height": 110
   },
   {
     "unitNumber": "E-2",
@@ -131,10 +551,78 @@
     "status": "sold",
     "price": 2600000,
     "companyName": "Mobilya İmalatı",
-    "x": 250,
-    "y": 430,
-    "width": 180,
-    "height": 160
+    "x": 770,
+    "y": 560,
+    "width": 120,
+    "height": 110
+  },
+  {
+    "unitNumber": "E-3",
+    "blockName": "E",
+    "size": 275,
+    "status": "available",
+    "price": 2550000,
+    "x": 900,
+    "y": 560,
+    "width": 120,
+    "height": 110
+  },
+  {
+    "unitNumber": "E-4",
+    "blockName": "E",
+    "size": 285,
+    "status": "sold",
+    "price": 2650000,
+    "companyName": "Ambalaj Üretimi",
+    "x": 1030,
+    "y": 560,
+    "width": 120,
+    "height": 110
+  },
+  {
+    "unitNumber": "E-5",
+    "blockName": "E",
+    "size": 265,
+    "status": "available",
+    "price": 2450000,
+    "x": 640,
+    "y": 680,
+    "width": 120,
+    "height": 110
+  },
+  {
+    "unitNumber": "E-6",
+    "blockName": "E",
+    "size": 278,
+    "status": "available",
+    "price": 2580000,
+    "x": 770,
+    "y": 680,
+    "width": 120,
+    "height": 110
+  },
+  {
+    "unitNumber": "E-7",
+    "blockName": "E",
+    "size": 272,
+    "status": "sold",
+    "price": 2520000,
+    "companyName": "Ahşap İşleme",
+    "x": 900,
+    "y": 680,
+    "width": 120,
+    "height": 110
+  },
+  {
+    "unitNumber": "E-8",
+    "blockName": "E",
+    "size": 282,
+    "status": "available",
+    "price": 2620000,
+    "x": 1030,
+    "y": 680,
+    "width": 120,
+    "height": 110
   },
   {
     "unitNumber": "D-1",
@@ -142,10 +630,78 @@
     "size": 200,
     "status": "available",
     "price": 1800000,
-    "x": 450,
-    "y": 430,
-    "width": 120,
-    "height": 160
+    "x": 1190,
+    "y": 560,
+    "width": 100,
+    "height": 105
+  },
+  {
+    "unitNumber": "D-2",
+    "blockName": "D",
+    "size": 205,
+    "status": "sold",
+    "price": 1850000,
+    "companyName": "Küçük Sanayi A.Ş.",
+    "x": 1190,
+    "y": 675,
+    "width": 100,
+    "height": 105
+  },
+  {
+    "unitNumber": "D-3",
+    "blockName": "D",
+    "size": 198,
+    "status": "available",
+    "price": 1780000,
+    "x": 1300,
+    "y": 560,
+    "width": 100,
+    "height": 105
+  },
+  {
+    "unitNumber": "D-4",
+    "blockName": "D",
+    "size": 202,
+    "status": "available",
+    "price": 1820000,
+    "x": 1300,
+    "y": 675,
+    "width": 100,
+    "height": 105
+  },
+  {
+    "unitNumber": "D-5",
+    "blockName": "D",
+    "size": 208,
+    "status": "sold",
+    "price": 1880000,
+    "companyName": "Atelyeler Grubu",
+    "x": 1410,
+    "y": 560,
+    "width": 100,
+    "height": 105
+  },
+  {
+    "unitNumber": "D-6",
+    "blockName": "D",
+    "size": 195,
+    "status": "available",
+    "price": 1750000,
+    "x": 1410,
+    "y": 675,
+    "width": 100,
+    "height": 105
+  },
+  {
+    "unitNumber": "D-7",
+    "blockName": "D",
+    "size": 210,
+    "status": "available",
+    "price": 1900000,
+    "x": 1300,
+    "y": 790,
+    "width": 100,
+    "height": 105
   },
   {
     "unitNumber": "C-1",
@@ -154,10 +710,89 @@
     "status": "sold",
     "price": 2700000,
     "companyName": "İnşaat Malzemeleri",
-    "x": 650,
-    "y": 430,
-    "width": 190,
-    "height": 160
+    "x": 50,
+    "y": 830,
+    "width": 125,
+    "height": 115
+  },
+  {
+    "unitNumber": "C-2",
+    "blockName": "C",
+    "size": 285,
+    "status": "available",
+    "price": 2650000,
+    "x": 185,
+    "y": 830,
+    "width": 125,
+    "height": 115
+  },
+  {
+    "unitNumber": "C-3",
+    "blockName": "C",
+    "size": 295,
+    "status": "sold",
+    "price": 2750000,
+    "companyName": "Boya Kimyasalları",
+    "x": 320,
+    "y": 830,
+    "width": 125,
+    "height": 115
+  },
+  {
+    "unitNumber": "C-4",
+    "blockName": "C",
+    "size": 288,
+    "status": "available",
+    "price": 2680000,
+    "x": 455,
+    "y": 830,
+    "width": 125,
+    "height": 115
+  },
+  {
+    "unitNumber": "C-5",
+    "blockName": "C",
+    "size": 292,
+    "status": "available",
+    "price": 2720000,
+    "x": 50,
+    "y": 955,
+    "width": 125,
+    "height": 115
+  },
+  {
+    "unitNumber": "C-6",
+    "blockName": "C",
+    "size": 287,
+    "status": "sold",
+    "price": 2670000,
+    "companyName": "Yapı Marketleri",
+    "x": 185,
+    "y": 955,
+    "width": 125,
+    "height": 115
+  },
+  {
+    "unitNumber": "C-7",
+    "blockName": "C",
+    "size": 293,
+    "status": "available",
+    "price": 2730000,
+    "x": 320,
+    "y": 955,
+    "width": 125,
+    "height": 115
+  },
+  {
+    "unitNumber": "C-8",
+    "blockName": "C",
+    "size": 298,
+    "status": "available",
+    "price": 2780000,
+    "x": 455,
+    "y": 955,
+    "width": 125,
+    "height": 115
   },
   {
     "unitNumber": "B-1",
@@ -165,10 +800,90 @@
     "size": 260,
     "status": "available",
     "price": 2400000,
-    "x": 860,
-    "y": 430,
-    "width": 160,
-    "height": 160
+    "x": 620,
+    "y": 830,
+    "width": 115,
+    "height": 115
+  },
+  {
+    "unitNumber": "B-2",
+    "blockName": "B",
+    "size": 265,
+    "status": "sold",
+    "price": 2450000,
+    "companyName": "Elektrik Panoları",
+    "x": 745,
+    "y": 830,
+    "width": 115,
+    "height": 115
+  },
+  {
+    "unitNumber": "B-3",
+    "blockName": "B",
+    "size": 258,
+    "status": "available",
+    "price": 2380000,
+    "x": 870,
+    "y": 830,
+    "width": 115,
+    "height": 115
+  },
+  {
+    "unitNumber": "B-4",
+    "blockName": "B",
+    "size": 262,
+    "status": "available",
+    "price": 2420000,
+    "x": 995,
+    "y": 830,
+    "width": 115,
+    "height": 115
+  },
+  {
+    "unitNumber": "B-5",
+    "blockName": "B",
+    "size": 268,
+    "status": "sold",
+    "price": 2480000,
+    "companyName": "Otomasyon Sistemleri",
+    "x": 620,
+    "y": 955,
+    "width": 115,
+    "height": 115
+  },
+  {
+    "unitNumber": "B-6",
+    "blockName": "B",
+    "size": 255,
+    "status": "available",
+    "price": 2350000,
+    "x": 745,
+    "y": 955,
+    "width": 115,
+    "height": 115
+  },
+  {
+    "unitNumber": "B-7",
+    "blockName": "B",
+    "size": 264,
+    "status": "available",
+    "price": 2440000,
+    "x": 870,
+    "y": 955,
+    "width": 115,
+    "height": 115
+  },
+  {
+    "unitNumber": "B-8",
+    "blockName": "B",
+    "size": 270,
+    "status": "sold",
+    "price": 2500000,
+    "companyName": "Klima Soğutma",
+    "x": 995,
+    "y": 955,
+    "width": 115,
+    "height": 115
   },
   {
     "unitNumber": "A-1",
@@ -176,9 +891,89 @@
     "size": 190,
     "status": "available",
     "price": 1700000,
-    "x": 1040,
-    "y": 430,
-    "width": 110,
-    "height": 160
+    "x": 1150,
+    "y": 830,
+    "width": 95,
+    "height": 110
+  },
+  {
+    "unitNumber": "A-2",
+    "blockName": "A",
+    "size": 195,
+    "status": "sold",
+    "price": 1750000,
+    "companyName": "Tasarım Ofisi",
+    "x": 1255,
+    "y": 830,
+    "width": 95,
+    "height": 110
+  },
+  {
+    "unitNumber": "A-3",
+    "blockName": "A",
+    "size": 188,
+    "status": "available",
+    "price": 1680000,
+    "x": 1360,
+    "y": 830,
+    "width": 95,
+    "height": 110
+  },
+  {
+    "unitNumber": "A-4",
+    "blockName": "A",
+    "size": 192,
+    "status": "available",
+    "price": 1720000,
+    "x": 1150,
+    "y": 950,
+    "width": 95,
+    "height": 110
+  },
+  {
+    "unitNumber": "A-5",
+    "blockName": "A",
+    "size": 198,
+    "status": "sold",
+    "price": 1780000,
+    "companyName": "Danışmanlık Ltd.",
+    "x": 1255,
+    "y": 950,
+    "width": 95,
+    "height": 110
+  },
+  {
+    "unitNumber": "A-6",
+    "blockName": "A",
+    "size": 185,
+    "status": "available",
+    "price": 1650000,
+    "x": 1360,
+    "y": 950,
+    "width": 95,
+    "height": 110
+  },
+  {
+    "unitNumber": "A-7",
+    "blockName": "A",
+    "size": 193,
+    "status": "available",
+    "price": 1730000,
+    "x": 1202,
+    "y": 1070,
+    "width": 95,
+    "height": 110
+  },
+  {
+    "unitNumber": "A-8",
+    "blockName": "A",
+    "size": 197,
+    "status": "sold",
+    "price": 1770000,
+    "companyName": "Teknoloji Geliştirme",
+    "x": 1307,
+    "y": 1070,
+    "width": 95,
+    "height": 110
   }
 ]
