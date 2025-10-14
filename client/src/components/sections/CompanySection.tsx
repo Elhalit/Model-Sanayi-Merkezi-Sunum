@@ -50,7 +50,7 @@ export default function CompanySection() {
       data-testid="company-section"
     >
       <div className="max-w-7xl mx-auto px-8 w-full">
-        <h2 className="text-5xl md:text-6xl font-black mb-12 text-center bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+        <h2 className="text-5xl md:text-6xl font-black mb-12 text-center bg-gradient-to-r from-orange-500 to-orange-400 bg-clip-text text-transparent">
           {t('company.title')}
         </h2>
         

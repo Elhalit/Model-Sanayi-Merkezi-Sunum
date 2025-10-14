@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Building2, Layers, Users } from 'lucide-react';
+import { Building2, Zap, Shield, Truck, Users, Camera, Gauge, Settings } from 'lucide-react';
 import { gsap } from 'gsap';
 
 export default function ProjectSection() {
@@ -10,12 +10,6 @@ export default function ProjectSection() {
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            // Animate statistics with count-up effect
-            document.querySelectorAll('.stat-number').forEach((stat) => {
-              const target = parseInt(stat.getAttribute('data-count') || '0');
-              animateCounter(stat as HTMLElement, 0, target, 2000);
-            });
-            
             // Animate features
             gsap.fromTo('.project-feature',
               { opacity: 0, y: 30 },
@@ -24,7 +18,7 @@ export default function ProjectSection() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.3 }
     );
 
     if (sectionRef.current) {
@@ -34,91 +28,217 @@ export default function ProjectSection() {
     return () => observer.disconnect();
   }, []);
 
-  const animateCounter = (element: HTMLElement, start: number, end: number, duration: number) => {
-    const range = end - start;
-    const increment = range / (duration / 16);
-    let current = start;
-    
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= end) {
-        current = end;
-        clearInterval(timer);
-      }
-      element.textContent = Math.floor(current).toLocaleString('tr-TR');
-    }, 16);
-  };
-
   return (
-    <section ref={sectionRef} className="section" data-testid="project-section">
-      {/* Background Image with Parallax */}
-      <div className="parallax-bg">
-        <img
-          src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&h=1200"
-          alt="Kapaklı Model Sanayi Merkezi Facility"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/80" />
-      </div>
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-8">
-        <h2 className="text-5xl md:text-6xl font-black mb-16 text-center bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Kapaklı Model Sanayi Merkezi
-        </h2>
+    <section ref={sectionRef} className="section bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" data-testid="project-section">
+      <div className="w-full h-full px-4 py-4 overflow-y-auto">
         
-        {/* Statistics Grid */}
-        <div className="grid md:grid-cols-4 gap-8 mb-16">
-          <div className="glass p-8 rounded-2xl text-center glow hover:scale-105 transition-all duration-300" data-testid="stat-total-area">
-            <div className="text-5xl font-black text-primary mb-3 stat-number" data-count="52000">0</div>
-            <div className="text-xl font-bold mb-2">m²</div>
-            <div className="text-muted-foreground">Toplam Alan</div>
+        {/* Hero Section - Full Width with Images */}
+        <div className="w-full mb-8">
+          <div className="flex items-stretch justify-between gap-2 mb-6">
+            {/* Left Image */}
+            <div className="flex-shrink-0 w-[35%]">
+              <img 
+                src="/sanayi1.png" 
+                alt="Sanayi Merkezi Görünüm 1" 
+                className="w-full h-full rounded-xl shadow-2xl object-cover min-h-[32rem] max-h-[45rem]"
+              />
+            </div>
+            
+            {/* Center Text */}
+            <div className="flex-1 text-center px-2 flex flex-col justify-center">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black leading-tight bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mb-4">
+                BİR SANAYİ<br />
+                SİTESİNDEKİ<br />
+                TÜM BEKLENTİNİZİ<br />
+                KARŞILAMAK İÇİN<br />
+                TASARLANDI
+              </h1>
+            </div>
+            
+            {/* Right Image */}
+            <div className="flex-shrink-0 w-[35%]">
+              <img 
+                src="/sanayi2.png" 
+                alt="Sanayi Merkezi Görünüm 2" 
+                className="w-full h-full rounded-xl shadow-2xl object-cover min-h-[32rem] max-h-[45rem]"
+              />
+            </div>
           </div>
           
-          <div className="glass p-8 rounded-2xl text-center glow hover:scale-105 transition-all duration-300" data-testid="stat-blocks">
-            <div className="text-5xl font-black text-accent mb-3 stat-number" data-count="11">0</div>
-            <div className="text-xl font-bold mb-2">Blok</div>
-            <div className="text-muted-foreground">İşyeri Blokları</div>
-          </div>
-          
-          <div className="glass p-8 rounded-2xl text-center glow hover:scale-105 transition-all duration-300" data-testid="stat-units">
-            <div className="text-5xl font-black text-success mb-3 stat-number" data-count="86">0</div>
-            <div className="text-xl font-bold mb-2">Ünite</div>
-            <div className="text-muted-foreground">Bağımsız Bölüm</div>
-          </div>
-          
-          <div className="glass p-8 rounded-2xl text-center glow hover:scale-105 transition-all duration-300" data-testid="stat-infrastructure">
-            <div className="text-5xl font-black text-destructive mb-3 stat-number" data-count="100">0</div>
-            <div className="text-xl font-bold mb-2">%</div>
-            <div className="text-muted-foreground">Tam Altyapı</div>
+          <div className="text-center mb-6">
+            <p className="text-sm md:text-base text-muted-foreground max-w-5xl mx-auto leading-relaxed mb-4">
+              Sanayinin kalbi, Çerkezköy'e komşu, hızla gelişmekte olan Kapaklı ilçesinde, imalat 
+              anlayışını kusursuzca yansıtan, modüler yapısıyla her talebe cevap verebilen, modern 
+              çizgisiyle Model Sanayi Merkezi şimdi keşfedilmeye hazır.
+            </p>
+            
+            <div className="text-lg md:text-xl font-bold text-primary mb-4">
+              BİRBİRİNDEN ÖNEMLİ VE DEĞERLİ, SİZE ARTI DEĞER KATACAK FIRSATLARI İLE FARK YARATIN.
+            </div>
           </div>
         </div>
-        
-        {/* Key Features */}
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="glass p-6 rounded-2xl hover:scale-105 transition-all duration-300 project-feature opacity-0" data-testid="feature-prefab">
-            <div className="w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center mb-4">
-              <Building2 className="w-8 h-8 text-primary" />
-            </div>
-            <h3 className="text-xl font-bold mb-2">Modern Prefabrik</h3>
-            <p className="text-muted-foreground">Depreme dayanıklı çelik konstrüksiyon</p>
+
+        {/* Features Grid - Full Width */}
+        <div className="w-full grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-8">
+          <div className="glass p-3 rounded-lg text-center project-feature opacity-0">
+            <Gauge className="w-6 h-6 text-primary mx-auto mb-1" />
+            <h4 className="text-xs font-bold">Zemin Taşıma Kapasitesi</h4>
           </div>
           
-          <div className="glass p-6 rounded-2xl hover:scale-105 transition-all duration-300 project-feature opacity-0" data-testid="feature-flexible">
-            <div className="w-14 h-14 bg-accent/20 rounded-xl flex items-center justify-center mb-4">
-              <Layers className="w-8 h-8 text-accent" />
-            </div>
-            <h3 className="text-xl font-bold mb-2">Esnek Alanlar</h3>
-            <p className="text-muted-foreground">İhtiyaca göre düzenlenebilir iç mekanlar</p>
+          <div className="glass p-3 rounded-lg text-center project-feature opacity-0">
+            <Building2 className="w-6 h-6 text-accent mx-auto mb-1" />
+            <h4 className="text-xs font-bold">8-12 metre Kat Yüksekliği</h4>
           </div>
           
-          <div className="glass p-6 rounded-2xl hover:scale-105 transition-all duration-300 project-feature opacity-0" data-testid="feature-social">
-            <div className="w-14 h-14 bg-success/20 rounded-xl flex items-center justify-center mb-4">
-              <Users className="w-8 h-8 text-success" />
-            </div>
-            <h3 className="text-xl font-bold mb-2">Sosyal Alanlar</h3>
-            <p className="text-muted-foreground">Kafeterya, toplantı odaları ve dinlenme alanları</p>
+          <div className="glass p-3 rounded-lg text-center project-feature opacity-0">
+            <Truck className="w-6 h-6 text-success mx-auto mb-1" />
+            <h4 className="text-xs font-bold">Her İşletmeye Düz Araç Girişi</h4>
+          </div>
+          
+          <div className="glass p-3 rounded-lg text-center project-feature opacity-0">
+            <Zap className="w-6 h-6 text-warning mx-auto mb-1" />
+            <h4 className="text-xs font-bold">Sanayi Elektriği</h4>
+          </div>
+          
+          <div className="glass p-3 rounded-lg text-center project-feature opacity-0">
+            <Shield className="w-6 h-6 text-destructive mx-auto mb-1" />
+            <h4 className="text-xs font-bold">Yangına Dayanıklı Cephe Panelleri</h4>
+          </div>
+          
+          <div className="glass p-3 rounded-lg text-center project-feature opacity-0">
+            <Shield className="w-6 h-6 text-primary mx-auto mb-1" />
+            <h4 className="text-xs font-bold">Yangına Dayanıklı Çatı Kaplaması</h4>
+          </div>
+          
+          <div className="glass p-3 rounded-lg text-center project-feature opacity-0">
+            <Settings className="w-6 h-6 text-accent mx-auto mb-1" />
+            <h4 className="text-xs font-bold">Kantar Esnek Kullanım Alanı</h4>
+          </div>
+          
+          <div className="glass p-3 rounded-lg text-center project-feature opacity-0">
+            <Truck className="w-6 h-6 text-success mx-auto mb-1" />
+            <h4 className="text-xs font-bold">Otopark</h4>
+          </div>
+          
+          <div className="glass p-3 rounded-lg text-center project-feature opacity-0">
+            <Building2 className="w-6 h-6 text-warning mx-auto mb-1" />
+            <h4 className="text-xs font-bold">Kanalizasyon</h4>
+          </div>
+          
+          <div className="glass p-3 rounded-lg text-center project-feature opacity-0">
+            <Camera className="w-6 h-6 text-destructive mx-auto mb-1" />
+            <h4 className="text-xs font-bold">Kameralı Güvenlik</h4>
+          </div>
+          
+          <div className="glass p-3 rounded-lg text-center project-feature opacity-0">
+            <Zap className="w-6 h-6 text-primary mx-auto mb-1" />
+            <h4 className="text-xs font-bold">Paratoner</h4>
+          </div>
+          
+          <div className="glass p-3 rounded-lg text-center project-feature opacity-0">
+            <Users className="w-6 h-6 text-accent mx-auto mb-1" />
+            <h4 className="text-xs font-bold">Sosyal Alanlar</h4>
           </div>
         </div>
+
+        {/* Employment Section - Full Width */}
+        <div className="w-full grid md:grid-cols-2 gap-6 mb-8">
+          <div className="glass p-6 rounded-xl">
+            <h2 className="text-2xl md:text-3xl font-black text-primary mb-3">
+              YÜKSEK İSTİHDAM İMKANI İLE GÜCÜ HİSSEDECEKSİNİZ
+            </h2>
+            <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-3">
+              Nüfusu 300.000 kişinin üzerinde olan Kapalı ve Çerkezköy ilçelerinde nüfus 
+              artışının ortalama yıllık %10 oranında olduğu gözlemlenmektedir.
+            </p>
+            <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+              Bu nüfusun yaklaşık %50'si 25 - 45 yaş aralığındaki üreten nüfus olduğu belirlenmiştir.
+            </p>
+          </div>
+          
+          <div className="glass p-6 rounded-xl">
+            <h2 className="text-2xl md:text-3xl font-black text-accent mb-3">
+              İŞİNİ BÜYÜTMEK İSTEYENLERE, VAZGEÇEMEYECEKLERİ İMKANLAR
+            </h2>
+            <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-3">
+              Konumu, konsepti ve mimari yapısıyla Model Sanayi Merkezi, işletmelere 
+              100 m²'den 11.000 m²'ye kadar alternatifler sunan, 8 bloktan oluşan bir projedir.
+            </p>
+            <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+              İsteğinize bağlı olarak iç tasarımı tamamlanmış veya işinize uygun olarak kendinizin 
+              tasarlayabileceği, ister imalat, ister depolama, isterseniz de ofis olarak 
+              kullanabileceğiniz alanlar.
+            </p>
+          </div>
+        </div>
+
+        {/* Modular System */}
+        <div className="w-full glass p-8 rounded-2xl mb-12">
+          <h2 className="text-4xl font-black text-center mb-8 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            BÜYÜTÜLEBİLİR İŞ MODELİNE UYGUN MODÜLER SİSTEM, YÜKSEK TAVAN VE TIR GİREBİLİR ALANI
+          </h2>
+          <div className="flex justify-center space-x-12">
+            <div className="text-center">
+              <div className="text-4xl font-black text-primary">9,50 m</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-black text-accent">8,00 m</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-black text-success">12,00 m</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Industry Zones */}
+        <div className="w-full mb-12">
+          <h2 className="text-3xl font-black text-center mb-8 text-primary">
+            DÜNYA TİCARETİNE ULAŞMAK HİÇ BU KADAR KOLAY OLMADI
+          </h2>
+          <p className="text-center text-lg mb-8 text-muted-foreground">
+            SEKTÖRLERİNDE LİDER KURULUŞLARA ULAŞMA VE ÇALIŞTIĞINIZ FİRMALARLA TİCARETİNİZİ GENİŞLETME FIRSATINI YAKALAYIN!
+          </p>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="glass p-6 rounded-xl text-center">
+              <div className="text-3xl font-black text-primary mb-2">176</div>
+              <div className="text-sm">FİRMA</div>
+              <div className="text-xs text-muted-foreground mt-2">VELİMEŞE ORGANİZE SANAYİ BÖLGESİ</div>
+            </div>
+            
+            <div className="glass p-6 rounded-xl text-center">
+              <div className="text-3xl font-black text-accent mb-2">21</div>
+              <div className="text-sm">FİRMA</div>
+              <div className="text-xs text-muted-foreground mt-2">YALIBOYU ORGANİZE SANAYİ BÖLGESİ</div>
+            </div>
+            
+            <div className="glass p-6 rounded-xl text-center">
+              <div className="text-3xl font-black text-success mb-2">190</div>
+              <div className="text-sm">FİRMA</div>
+              <div className="text-xs text-muted-foreground mt-2">ERGENE ORGANİZE SANAYİ BÖLGESİ</div>
+            </div>
+            
+            <div className="glass p-6 rounded-xl text-center">
+              <div className="text-3xl font-black text-warning mb-2">312</div>
+              <div className="text-sm">FİRMA</div>
+              <div className="text-xs text-muted-foreground mt-2">ÇERKEZKÖY ORGANİZE SANAYİ BÖLGE</div>
+            </div>
+            
+            <div className="glass p-6 rounded-xl text-center">
+              <div className="text-3xl font-black text-destructive mb-2">31</div>
+              <div className="text-sm">FİRMA</div>
+              <div className="text-xs text-muted-foreground mt-2">KAPAKLI ORGANİZE SANAYİ BÖLGESİ</div>
+            </div>
+            
+            <div className="glass p-6 rounded-xl text-center">
+              <div className="text-3xl font-black text-primary mb-2">72</div>
+              <div className="text-sm">FİRMA</div>
+              <div className="text-xs text-muted-foreground mt-2">VELİKÖY ORGANİZE SANAYİ BÖLGESİ</div>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </section>
   );

@@ -44,6 +44,12 @@ export default {
         success: {
           DEFAULT: "var(--success)",
         },
+        orange: {
+          DEFAULT: "#ff5300",
+          500: "#ff5300",
+          600: "#e64800",
+          400: "#ff6b1a",
+        },
         border: "var(--border)",
         input: "var(--input)",
         ring: "var(--ring)",

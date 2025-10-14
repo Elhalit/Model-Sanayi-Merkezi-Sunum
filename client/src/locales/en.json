@@ -33,6 +33,53 @@
       "qualityDesc": "ISO 9001 certified, 30+ years of experience"
     }
   },
+  "partnership": {
+    "title": "Strategic Partnership",
+    "subtitle": "Our strong partnership established in 2017",
+    "description": "Bringing together the expertise of three industry-leading companies to provide excellent service to our customers",
+    "timeline": {
+      "title": "Our Partnership Story",
+      "founding": "İNNO Real Estate Investment Inc. established",
+      "nadir": "Nadir Metal Refinery",
+      "net": "NET Construction & SOM Prefab"
+    },
+    "companies": {
+      "nadir": {
+        "title": "Nadir Metal Refinery",
+        "since": "Since 1967",
+        "features": [
+          "Top 100 in ISO 500 list for 8 years",
+          "LBMA accreditation (first in Turkey)",
+          "Leader in precious metal refining",
+          "Ranked 43rd in 2019"
+        ]
+      },
+      "net": {
+        "title": "NET Construction",
+        "since": "Since 1996",
+        "features": [
+          "Building design and consulting",
+          "Industrial facilities specialist",
+          "20+ years of experience",
+          "Customer-focused solutions"
+        ]
+      },
+      "som": {
+        "title": "SOM Prefab",
+        "since": "Ali YAMAN company",
+        "features": [
+          "Precast concrete structure production",
+          "High-tech systems",
+          "National/international standards",
+          "Project materials manufacturer"
+        ]
+      }
+    },
+    "success": {
+      "title": "Formula for Success",
+      "description": "Projects are implemented with optimal solutions without compromising on excellence, speed, innovation and safety, with the priority of achieving maximum customer satisfaction."
+    }
+  },
   "company": {
     "title": "Company",
     "subtitle": "Over 30 Years of Experience",

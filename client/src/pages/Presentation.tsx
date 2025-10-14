@@ -1,11 +1,15 @@
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/sections/HeroSection';
-import CompanySection from '@/components/sections/CompanySection';
+import PartnershipSection from '@/components/sections/PartnershipSection';
 import ProjectSection from '@/components/sections/ProjectSection';
-import LocationSection from '@/components/sections/LocationSection';
+import StrategicLocationSection from '@/components/sections/StrategicLocationSection';
 import MasterPlanSection from '@/components/sections/MasterPlanSection';
 import FloorPlansSection from '@/components/sections/FloorPlansSection';
+import FloorPlansSection2 from '@/components/sections/FloorPlansSection2';
+import FloorPlansSection3 from '@/components/sections/FloorPlansSection3';
+import FloorPlansSection4 from '@/components/sections/FloorPlansSection4';
+import FloorPlansSection5 from '@/components/sections/FloorPlansSection5';
 import UnitModal from '@/components/UnitModal';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { useHorizontalScroll } from '@/hooks/useHorizontalScroll';
@@ -17,7 +21,7 @@ export default function Presentation() {
     // Add keyboard navigation
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') navigateToSection(Math.max(0, currentSection - 1));
-      if (e.key === 'ArrowRight') navigateToSection(Math.min(5, currentSection + 1));
+      if (e.key === 'ArrowRight') navigateToSection(Math.min(9, currentSection + 1));
       if (e.key === 'Escape' && document.fullscreenElement) {
         document.exitFullscreen();
       }
@@ -44,7 +48,7 @@ export default function Presentation() {
       <Navigation 
         currentSection={currentSection}
         onNavigate={navigateToSection}
-        totalSections={6}
+        totalSections={10}
       />
 
       {/* Main Content Container */}
@@ -54,11 +58,15 @@ export default function Presentation() {
         data-testid="presentation-container"
       >
         <HeroSection />
-        <CompanySection />
+        <PartnershipSection />
         <ProjectSection />
-        <LocationSection />
+        <StrategicLocationSection />
         <MasterPlanSection />
         <FloorPlansSection />
+        <FloorPlansSection2 />
+        <FloorPlansSection3 />
+        <FloorPlansSection4 />
+        <FloorPlansSection5 />
       </div>
 
       {/* Unit Detail Modal */}

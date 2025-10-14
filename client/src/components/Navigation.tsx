@@ -9,11 +9,15 @@ interface NavigationProps {
 
 const sectionNames = [
   'Giriş',
-  'Şirketimiz', 
+  'Ortaklık',
   'Projemiz',
-  'Lokasyon',
+  'Stratejik Lokasyon',
   'Vaziyet Planı',
-  'Kat Planları'
+  'Kat Planları - 1. Etap',
+  'Kat Planları - 2. Etap',
+  'Kat Planları - 3. Etap',
+  'Kat Planları - 4. Etap',
+  'Kat Planları - 5. Etap'
 ];
 
 export default function Navigation({ currentSection, onNavigate, totalSections }: NavigationProps) {
@@ -56,10 +60,10 @@ export default function Navigation({ currentSection, onNavigate, totalSections }
         ))}
       </div>
 
-      {/* Arrow Navigation */}
+      {/* Arrow Navigation - Moved to Bottom */}
       {currentSection > 0 && (
         <button
-          className="fixed left-8 top-1/2 transform -translate-y-1/2 z-50
+          className="fixed left-8 bottom-8 z-50
                      glass w-15 h-15 rounded-full flex items-center justify-center
                      text-primary hover:bg-primary/20 hover:scale-110
                      transition-all duration-300 glow"
@@ -72,10 +76,10 @@ export default function Navigation({ currentSection, onNavigate, totalSections }
 
       {currentSection < totalSections - 1 && (
         <button
-          className="fixed right-8 top-1/2 transform -translate-y-1/2 z-50
+          className="fixed right-8 bottom-8 z-50
                      glass w-15 h-15 rounded-full flex items-center justify-center
                      text-primary hover:bg-primary/20 hover:scale-110
-                     transition-all duration-300 glow mr-20"
+                     transition-all duration-300 glow"
           onClick={() => onNavigate(currentSection + 1)}
           data-testid="nav-next"
         >

@@ -215,6 +215,105 @@
     animation: countUp 0.6s ease forwards;
   }
 
+  /* Partnership Section Animations */
+  @keyframes dash {
+    0% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -10; }
+  }
+
+  @keyframes floatUp {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes rotateGlow {
+    0% { filter: drop-shadow(0 0 5px hsl(43, 74%, 52%)); }
+    50% { filter: drop-shadow(0 0 20px hsl(187, 92%, 44%)); }
+    100% { filter: drop-shadow(0 0 5px hsl(43, 74%, 52%)); }
+  }
+
+  @keyframes constellationPulse {
+    0%, 100% { 
+      transform: scale(1);
+      filter: drop-shadow(0 0 10px currentColor);
+    }
+    50% { 
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 25px currentColor);
+    }
+  }
+
+  @keyframes energyFlow {
+    0% { stroke-dasharray: 0 100; }
+    50% { stroke-dasharray: 50 100; }
+    100% { stroke-dasharray: 100 100; }
+  }
+
+  @keyframes sparkTrail {
+    0% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.5); }
+  }
+
+  /* Constellation specific styles */
+  .constellation-node {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .constellation-node:hover {
+    animation: constellationPulse 2s ease-in-out infinite;
+  }
+
+  .connection-line {
+    animation: energyFlow 3s linear infinite;
+    filter: drop-shadow(0 0 3px currentColor);
+  }
+
+  .connection-spark {
+    animation: sparkTrail 2s ease-in-out infinite;
+  }
+
+  .partnership-center {
+    animation: floatUp 3s ease-in-out infinite;
+  }
+
+  .company-card:hover {
+    animation: rotateGlow 2s ease-in-out infinite;
+  }
+
+  .partnership-diagram svg {
+    overflow: visible;
+  }
+
+  /* Glassmorphism enhancement */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Particle floating animation */
+  @keyframes particleFloat {
+    0% { 
+      transform: translateY(100vh) translateX(0px) rotate(0deg);
+      opacity: 0;
+    }
+    10% { opacity: 0.3; }
+    90% { opacity: 0.3; }
+    100% { 
+      transform: translateY(-100vh) translateX(50px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .particle {
+    animation: particleFloat linear infinite;
+    pointer-events: none;
+  }
+
   /* Hide scrollbar but keep functionality */
   body::-webkit-scrollbar {
     display: none;
@@ -224,4 +323,73 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+}
+
+/* ProjectLocationsMap Styles */
+.custom-marker-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.custom-marker-icon:hover {
+  transform: scale(1.1);
+}
+
+.popup-content {
+  padding: 16px;
+  min-width: 250px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.popup-title {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  line-height: 1.3;
+}
+
+.popup-details p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.4;
+}
+
+.popup-address {
+  color: #6b7280;
+}
+
+.popup-phone {
+  color: #374151;
+}
+
+.popup-website a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.popup-website a:hover {
+  text-decoration: underline;
+}
+
+/* Mapbox GL JS map container styling */
+.mapboxgl-map {
+  background-color: #1e293b !important;
+  border-radius: 12px;
+}
+
+.mapboxgl-canvas-container {
+  background-color: #1e293b !important;
+}
+
+.mapboxgl-canvas {
+  background-color: #1e293b !important;
 }

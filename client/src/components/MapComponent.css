@@ -1,0 +1,289 @@
+﻿/* MapComponent.css - Scoped styles for the map component */
+
+.mapbox-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  min-height: 400px;
+}
+
+/* Ensure the mapbox map fills the container */
+.mapboxgl-map {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: inherit;
+}
+
+.mapboxgl-canvas {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Custom Marker Styles */
+.map-marker {
+  transition: transform 0.2s ease;
+  transform-origin: center bottom;
+}
+
+.map-marker:hover {
+  transform: scale(1.1);
+}
+
+.marker-icon {
+  width: 100%;
+  height: 100%;
+}
+
+/* Marker Background Colors */
+.port-bg {
+  fill: #06b6d4;
+  stroke: #0891b2;
+  stroke-width: 2;
+}
+
+.train-bg {
+  fill: #3b82f6;
+  stroke: #2563eb;
+  stroke-width: 2;
+}
+
+.industrial-bg {
+  fill: #10b981;
+  stroke: #059669;
+  stroke-width: 2;
+}
+
+.customs-bg {
+  fill: #ef4444;
+  stroke: #dc2626;
+  stroke-width: 2;
+}
+
+.project-bg {
+  fill: #8b5cf6;
+  stroke: #7c3aed;
+  stroke-width: 2;
+}
+
+.default-bg {
+  fill: #6b7280;
+  stroke: #4b5563;
+  stroke-width: 2;
+}
+
+/* Project marker special animation */
+.project-pulse {
+  fill: none;
+  stroke: #8b5cf6;
+  stroke-width: 2;
+  opacity: 0.6;
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Train marker animation */
+.train-marker::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -15px;
+  width: 8px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.7);
+  animation: speed-lines 1s infinite;
+}
+
+@keyframes speed-lines {
+  0% { opacity: 0; transform: translateX(0); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(10px); }
+}
+
+/* Custom Popup Styles */
+.mapboxgl-popup {
+  max-width: 300px;
+}
+
+.mapboxgl-popup-content {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  padding: 0;
+  color: white;
+}
+
+.mapboxgl-popup-close-button {
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 50%;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  width: 24px;
+  height: 24px;
+  right: 8px;
+  top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.mapboxgl-popup-close-button:hover {
+  background: rgba(139, 92, 246, 0.4);
+  transform: scale(1.1);
+}
+
+.mapboxgl-popup-tip {
+  border-top-color: #1f2937;
+}
+
+/* Popup Content */
+.popup-content {
+  padding: 20px;
+}
+
+.popup-title {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #f3f4f6;
+  line-height: 1.3;
+}
+
+.popup-description {
+  margin: 0 0 12px 0;
+  font-size: 13px;
+  color: #d1d5db;
+  line-height: 1.4;
+}
+
+.popup-type {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.type-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.type-badge.port {
+  background: rgba(6, 182, 212, 0.2);
+  color: #67e8f9;
+  border: 1px solid rgba(6, 182, 212, 0.4);
+}
+
+.type-badge.train {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.type-badge.industrial,
+.type-badge.osb {
+  background: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.type-badge.customs {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.type-badge.project {
+  background: rgba(139, 92, 246, 0.2);
+  color: #c4b5fd;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+}
+
+/* Navigation Controls */
+.mapboxgl-ctrl-group {
+  background: rgba(31, 41, 55, 0.9);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.mapboxgl-ctrl-group button {
+  background: transparent;
+  border: none;
+  color: #f3f4f6;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.mapboxgl-ctrl-group button:hover {
+  background: rgba(139, 92, 246, 0.2);
+  color: #c4b5fd;
+}
+
+.mapboxgl-ctrl-group button:not(:last-child) {
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+/* Hide default Mapbox branding */
+.mapboxgl-ctrl-bottom-left,
+.mapboxgl-ctrl-bottom-right {
+  display: none;
+}
+
+/* Fallback map animation */
+@keyframes mapBackground {
+  0%, 100% { 
+    background-position: 0% 50%, 0% 0%, 100% 100%; 
+  }
+  50% { 
+    background-position: 100% 50%, 100% 100%, 0% 0%; 
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .popup-content {
+    padding: 16px;
+  }
+  
+  .popup-title {
+    font-size: 14px;
+  }
+  
+  .popup-description {
+    font-size: 12px;
+  }
+  
+  .map-marker {
+    transform: scale(0.9);
+  }
+  
+  .map-marker:hover {
+    transform: scale(1.0);
+  }
+}

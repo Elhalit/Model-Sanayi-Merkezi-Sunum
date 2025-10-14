@@ -1,19 +1,17 @@
-import { useState, useRef, useEffect } from 'react';
+﻿import { useState, useRef, useEffect } from 'react';
 import { Download, ZoomIn, Users, Building, TrendingUp, Search, Filter } from 'lucide-react';
 import { parseCSV, getBlockSummary, getAllBlocks, parseFirmInfoCSV, getFirmInfoForUnit, type FloorPlanUnit, type FirmInfo } from '@/lib/csvParser';
 
 const floorPlanImages = {
-  A: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=900',
-  B: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=900',
-  C: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=900',
-  D: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=900',
-  E: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=900'
+  F: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=900',
+  G: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=900',
+  H: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=900'
 } as const;
 
 type FilterType = 'all' | 'available' | 'sold' | 'reserved' | 'with-firms';
 
-export default function FloorPlansSection() {
-  const [activeBlock, setActiveBlock] = useState<string>('A');
+export default function FloorPlansSection2() {
+  const [activeBlock, setActiveBlock] = useState<string>('F');
   const [units, setUnits] = useState<FloorPlanUnit[]>([]);
   const [firms, setFirms] = useState<FirmInfo[]>([]);
   const [availableBlocks, setAvailableBlocks] = useState<string[]>([]);
@@ -27,9 +25,9 @@ export default function FloorPlansSection() {
     const loadFloorPlanData = async () => {
       try {
         // Load units data
-        const unitsResponse = await fetch('/1.etab - 1.etab.csv');
+        const unitsResponse = await fetch('/2.etab - 2.etab.csv');
         const unitsContent = await unitsResponse.text();
-        const parsedUnits = parseCSV(unitsContent, '1');
+        const parsedUnits = parseCSV(unitsContent, '2');
         setUnits(parsedUnits);
         
         // Load firm information
@@ -53,8 +51,8 @@ export default function FloorPlansSection() {
 
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = floorPlanImages[activeBlock as keyof typeof floorPlanImages] || floorPlanImages.A;
-    link.download = `${activeBlock}-blok-kat-plani.jpg`;
+    link.href = floorPlanImages[activeBlock as keyof typeof floorPlanImages] || floorPlanImages.F;
+    link.download = `${activeBlock}-blok-kat-plani-2etap.jpg`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -79,7 +77,7 @@ export default function FloorPlansSection() {
     if (filter === 'all') {
       matchesFilter = true;
     } else if (filter === 'with-firms') {
-      matchesFilter = getFirmInfoForUnit(firms, unit.block, unit.unitNumber, '1') !== null;
+      matchesFilter = getFirmInfoForUnit(firms, unit.block, unit.unitNumber, '2') !== null;
     } else {
       matchesFilter = unit.status === filter;
     }
@@ -88,11 +86,11 @@ export default function FloorPlansSection() {
   });
 
   return (
-    <section className="section bg-gradient-to-br from-background via-muted to-background" data-testid="floorplans-section">
+    <section className="section bg-gradient-to-br from-background via-muted to-background" data-testid="floorplans-section-2">
       <div className="w-full h-full flex flex-col px-0">
         <div className="px-8">
           <h2 className="text-5xl md:text-6xl font-black mb-8 text-center bg-gradient-to-r from-orange-500 to-orange-400 bg-clip-text text-transparent">
-            Kat Planları - 1. Etap
+            Kat Planları - 2. Etap
           </h2>
           
           {/* Block Tabs */}
@@ -169,7 +167,9 @@ export default function FloorPlansSection() {
               <div className="text-sm text-muted-foreground">Rezerve</div>
             </div>
           </div>
-        </div>        {/* Interactive Unit Grid */}
+        </div>
+
+        {/* Interactive Unit Grid */}
         <div className="flex-1 glass rounded-3xl overflow-hidden relative">
           <div className="w-full h-full p-8">
             <div className="w-full h-full relative">
@@ -232,7 +232,7 @@ export default function FloorPlansSection() {
                           `} />
                           
                           {/* Firm Indicator */}
-                          {getFirmInfoForUnit(firms, unit.block, unit.unitNumber, '1') && (
+                          {getFirmInfoForUnit(firms, unit.block, unit.unitNumber, '2') && (
                             <div className="absolute -top-1 -left-1 w-4 h-4 bg-accent rounded-full flex items-center justify-center">
                               <span className="text-xs">🏢</span>
                             </div>
@@ -248,7 +248,7 @@ export default function FloorPlansSection() {
               <div className="fixed top-1/2 left-4 transform -translate-y-1/2 glass p-4 rounded-lg space-y-6 z-50">
                 {/* Info Panel */}
                 <div>
-                  <h3 className="font-semibold text-orange-500 mb-2">{activeBlock} Blok - 1. Etap</h3>
+                  <h3 className="font-semibold text-orange-500 mb-2">{activeBlock} Blok - 2. Etap</h3>
                   <div className="text-sm text-muted-foreground mb-2">
                     Toplam {currentBlockUnits.length} ünite
                   </div>
@@ -323,7 +323,7 @@ export default function FloorPlansSection() {
                       
                       {/* Firm Information */}
                       {(() => {
-                        const firmInfo = getFirmInfoForUnit(firms, hoveredUnit.block, hoveredUnit.unitNumber, '1');
+                        const firmInfo = getFirmInfoForUnit(firms, hoveredUnit.block, hoveredUnit.unitNumber, '2');
                         return firmInfo ? (
                           <div className="border-t pt-3 mt-3">
                             <div className="text-sm font-semibold text-orange-500 mb-2">

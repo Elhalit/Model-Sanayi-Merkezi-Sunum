@@ -33,6 +33,53 @@
       "qualityDesc": "ISO 9001 belgeli, 30+ yıllık tecrübe"
     }
   },
+  "partnership": {
+    "title": "Stratejik Ortaklık",
+    "subtitle": "2017 yılında kurulan güçlü ortaklığımız",
+    "description": "Sektörde liderlik eden üç şirketin birikimini bir araya getirerek müşterilerimize mükemmel hizmet sunmayı hedeflemektedir",
+    "timeline": {
+      "title": "Ortaklık Hikayemiz",
+      "founding": "İNNO Gayrimenkul Yatırım A.Ş. kuruldu",
+      "nadir": "Nadir Metal Rafineri",
+      "net": "NET İnşaat & SOM Prefabrik"
+    },
+    "companies": {
+      "nadir": {
+        "title": "Nadir Metal Rafineri",
+        "since": "1967'den bu yana",
+        "features": [
+          "ISO 500 listesinde 8 yıldır ilk 100'de",
+          "LBMA akreditasyonu (Türkiye'de ilk)",
+          "Kıymetli metal rafinerisinde lider",
+          "2019'da 43. sırada yer aldı"
+        ]
+      },
+      "net": {
+        "title": "NET İnşaat",
+        "since": "1996'dan bu yana",
+        "features": [
+          "Yapı projelendirme ve danışmanlık",
+          "Endüstriyel tesisler uzmanı",
+          "20+ yıllık tecrübe",
+          "Müşteri odaklı çözümler"
+        ]
+      },
+      "som": {
+        "title": "SOM Prefabrik",
+        "since": "Ali YAMAN şirketi",
+        "features": [
+          "Prefabrik betonarme yapı üretimi",
+          "Yüksek teknolojik sistemler",
+          "Ulusal/uluslararası standartlar",
+          "Proje malzemelerinin üreticisi"
+        ]
+      }
+    },
+    "success": {
+      "title": "Başarının Formülü",
+      "description": "Müşteri memnuniyetinin en üst düzeyde gerçekleşmesi önceliği ile üzerinde çalışılan projeler; mükemmellik, hız, yenilik ve güvenlikten ödün vermeden optimum çözümler üretilerek hayata geçirilmektedir."
+    }
+  },
   "company": {
     "title": "Kurumsal",
     "subtitle": "30 Yılı Aşkın Deneyim",
