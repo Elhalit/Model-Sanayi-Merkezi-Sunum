@@ -11,7 +11,6 @@ import FloorPlansSection3 from '@/components/sections/FloorPlansSection3';
 import FloorPlansSection4 from '@/components/sections/FloorPlansSection4';
 import FloorPlansSection5 from '@/components/sections/FloorPlansSection5';
 import UnitModal from '@/components/UnitModal';
-import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { useHorizontalScroll } from '@/hooks/useHorizontalScroll';
 
 export default function Presentation() {
@@ -40,9 +39,6 @@ export default function Presentation() {
           style={{ width: `${progress}%` }}
         />
       </div>
-
-      {/* Language Switcher */}
-      <LanguageSwitcher />
 
       {/* Navigation */}
       <Navigation 

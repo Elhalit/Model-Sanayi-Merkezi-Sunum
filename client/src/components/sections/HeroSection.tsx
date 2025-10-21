@@ -22,41 +22,20 @@ export default function HeroSection() {
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, 
         '-=0.5'
-      )
-      .fromTo('#hero-cta', 
-        { opacity: 0, scale: 0.8 },
-        { opacity: 1, scale: 1, duration: 1, ease: 'back.out(1.7)' }, 
-        '-=0.3'
       );
     }
   }, []);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = sectionRef.current?.getBoundingClientRect();
-    if (!rect) return;
-
-    const xPos = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
-    const yPos = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
-    
-    gsap.to('.parallax-bg', {
-      x: xPos,
-      y: yPos,
-      duration: 0.5,
-      ease: 'power2.out'
-    });
-  };
 
   return (
     <section 
       ref={sectionRef}
       className="section"
-      onMouseMove={handleMouseMove}
       data-testid="hero-section"
     >
-      {/* Background Image with Parallax */}
-      <div className="parallax-bg">
+      {/* Background Image */}
+      <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&h=1200"
+          src="/intro.png"
           alt="Kapaklı Model Sanayi Merkezi Aerial View"
           className="w-full h-full object-cover"
         />
@@ -66,12 +45,16 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-8 text-center">
         {/* Main Headline */}
         <div id="hero-title" className="mb-12 opacity-0">
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 leading-tight">
+            <span style={{
+              background: 'linear-gradient(to right, #ff5300, #ff6b1a)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}>
               {t('hero.title')}
             </span>
           </h1>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-muted-foreground">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-muted-foreground">
             {t('hero.subtitle')}
           </h2>
         </div>
@@ -82,44 +65,33 @@ export default function HeroSection() {
             <div className="w-16 h-16 mx-auto mb-4 bg-primary/20 rounded-full flex items-center justify-center">
               <Shield className="w-8 h-8 text-primary" />
             </div>
-            <h3 className="text-xl font-bold mb-2">{t('hero.cards.strategic')}</h3>
-            <p className="text-muted-foreground text-sm">{t('hero.cards.strategicDesc')}</p>
+            <h3 className="text-base md:text-lg font-bold mb-2">{t('hero.cards.strategic')}</h3>
+            <p className="text-muted-foreground text-sm md:text-base">{t('hero.cards.strategicDesc')}</p>
           </div>
           
           <div className="glass p-6 rounded-2xl pulse-hover glow transition-all duration-300 hover:scale-105" data-testid="facility-parking">
             <div className="w-16 h-16 mx-auto mb-4 bg-accent/20 rounded-full flex items-center justify-center">
               <ArrowUpDown className="w-8 h-8 text-accent" />
             </div>
-            <h3 className="text-xl font-bold mb-2">{t('hero.cards.modern')}</h3>
-            <p className="text-muted-foreground text-sm">{t('hero.cards.modernDesc')}</p>
+            <h3 className="text-base md:text-lg font-bold mb-2">{t('hero.cards.modern')}</h3>
+            <p className="text-muted-foreground text-sm md:text-base">{t('hero.cards.modernDesc')}</p>
           </div>
           
           <div className="glass p-6 rounded-2xl pulse-hover glow transition-all duration-300 hover:scale-105" data-testid="facility-infrastructure">
             <div className="w-16 h-16 mx-auto mb-4 bg-success/20 rounded-full flex items-center justify-center">
               <Zap className="w-8 h-8 text-success" />
             </div>
-            <h3 className="text-xl font-bold mb-2">{t('hero.cards.investment')}</h3>
-            <p className="text-muted-foreground text-sm">{t('hero.cards.investmentDesc')}</p>
+            <h3 className="text-base md:text-lg font-bold mb-2">{t('hero.cards.investment')}</h3>
+            <p className="text-muted-foreground text-sm md:text-base">{t('hero.cards.investmentDesc')}</p>
           </div>
           
           <div className="glass p-6 rounded-2xl pulse-hover glow transition-all duration-300 hover:scale-105" data-testid="facility-location">
             <div className="w-16 h-16 mx-auto mb-4 bg-destructive/20 rounded-full flex items-center justify-center">
               <MapPin className="w-8 h-8 text-destructive" />
             </div>
-            <h3 className="text-xl font-bold mb-2">{t('hero.cards.quality')}</h3>
-            <p className="text-muted-foreground text-sm">{t('hero.cards.qualityDesc')}</p>
+            <h3 className="text-base md:text-lg font-bold mb-2">{t('hero.cards.quality')}</h3>
+            <p className="text-muted-foreground text-sm md:text-base">{t('hero.cards.qualityDesc')}</p>
           </div>
-        </div>
-        
-        <div id="hero-cta" className="mt-16 opacity-0">
-          <button 
-            className="glass px-12 py-4 rounded-full text-xl font-bold text-primary 
-                       border-2 border-primary hover:bg-primary hover:text-background 
-                       transition-all duration-300 glow"
-            data-testid="hero-cta-button"
-          >
-            {t('hero.cta.primary')}
-          </button>
         </div>
       </div>
     </section>

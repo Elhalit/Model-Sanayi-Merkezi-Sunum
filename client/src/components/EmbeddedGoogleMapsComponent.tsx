@@ -1,4 +1,5 @@
 ﻿import React, { useState } from 'react';
+import { GoogleMap, LoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
 
 interface Location {
   id: number;
@@ -7,7 +8,60 @@ interface Location {
   description: string;
   coordinates: { lat: number; lng: number };
   distance: string;
-  embedUrl: string;
+}
+
+interface EmbeddedGoogleMapsComponentProps {
+  showAllLocations?: boolean;
+}
+
+// Add CSS to hide watermark
+const mapStyles = `
+  /* Hide all Google Maps attribution and development text */
+  .gm-style > div:last-child > div {
+    display: none !important;
+  }
+  
+  .gm-style-cc {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+  
+  .gm-style .gm-style-cc {
+    display: none !important;
+  }
+  
+  /* Hide all span elements that might contain watermark text */
+  .gm-style span {
+    font-size: 0 !important;
+  }
+  
+  /* Specifically target development text divs */
+  div[style*="font-size: 11px"] {
+    display: none !important;
+  }
+  
+  /* Hide Google branding at bottom */
+  .gm-logo-link {
+    display: none !important;
+  }
+  
+  /* Hide all text that might be watermark */
+  .gm-style div span[style*="Arial"] {
+    display: none !important;
+  }
+  
+  /* Alternative approach - hide all overlays */
+  .gm-style > div:nth-child(1) > div:nth-child(5) {
+    display: none !important;
+  }
+`;
+
+// Inject CSS
+if (typeof document !== 'undefined') {
+  const style = document.createElement('style');
+  style.textContent = mapStyles;
+  document.head.appendChild(style);
 }
 
 const locations: Location[] = [
@@ -16,69 +70,93 @@ const locations: Location[] = [
     title: "KAPAKLI MODEL SANAYİ MERKEZİ",
     type: "factory",
     description: "Ana proje lokasyonu - Modern sanayi merkezi",
-    coordinates: { lat: 41.269682897335, lng: 27.970630606847152 },
-    distance: "0 KM",
-    embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11995.201372790423!2d27.970630606847152!3d41.269682897335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b527a6f17d7c8f%3A0x51f0853b3f7ae3da!2sModel%20Sanayi%20Merkezi%20Kapakl%C4%B1!5e0!3m2!1sen!2str!4v1760394716687!5m2!1sen!2str"
+    coordinates: { lat: 41.2797282, lng: 27.9278201 },
+    distance: "0 KM"
   },
   {
     id: 2,
     title: "Asyaport Liman A.Ş.",
     type: "port",
     description: "Uluslararası konteyner limanı",
-    coordinates: { lat: 40.93436081897144, lng: 27.508699722172217 },
-    distance: "75 KM",
-    embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20870.86199674222!2d27.508699722172217!3d40.93436081897144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b466b020a3e2cf%3A0x45b4865c79736395!2sAsyaport%20Liman%20A.%C5%9E.!5e0!3m2!1sen!2str!4v1760394928105!5m2!1sen!2str"
+    coordinates: { lat: 40.9014284, lng: 27.4673351 },
+    distance: "75 KM"
   },
   {
     id: 3,
     title: "Çerkezköy Organize Sanayi Bölge Müdürlüğü",
     type: "industrial",
     description: "Çerkezköy OSB yönetim merkezi",
-    coordinates: { lat: 41.31398720054284, lng: 27.976457577293424 },
-    distance: "3 KM",
-    embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.76446888158!2d27.976457577293424!3d41.31398720054284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b52898afcc6bc9%3A0xd421745158cbd4fa!2zw4dlcmtlemvDtnkgT3JnYW5pemUgU2FuYXlpIELDtmxnZSBNw7xkw7xybMO8xJ_DvA!5e0!3m2!1sen!2str!4v1760394984627!5m2!1sen!2str"
+    coordinates: { lat: 41.3139832, lng: 27.9790325 },
+    distance: "3 KM"
   },
   {
     id: 4,
     title: "KOSB - KAPAKLI ORGANİZE SANAYİ BÖLGESİ",
     type: "osb",
     description: "Kapaklı Organize Sanayi Bölgesi",
-    coordinates: { lat: 41.289516396747885, lng: 27.943797150480712 },
-    distance: "1 KM",
-    embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5995.77834900955!2d27.943797150480712!3d41.289516396747885!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b527b1c8762547%3A0x4681d851bb6fff1d!2sMimar%20Sinan%2C%20Baran%20Sk.%20KAPAKLI%20OSB%20NO%3A5%20K%3A3%2C%2059510%20Kapakl%C4%B1%2FTekirda%C4%9F!5e0!3m2!1sen!2str!4v1760395021319!5m2!1sen!2str"
+    coordinates: { lat: 41.289509, lng: 27.948947 },
+    distance: "1 KM"
   },
   {
     id: 5,
     title: "Çerkezköy Garı (Yüksek Hızlı Tren)",
     type: "train",
     description: "Yüksek hızlı tren istasyonu",
-    coordinates: { lat: 41.28460805227061, lng: 27.958268351465446 },
-    distance: "1 KM",
-    embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28523.034678769793!2d27.958268351465446!3d41.28460805227061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b527a6f17d7c8f%3A0x51f0853b3f7ae3da!2sModel%20Sanayi%20Merkezi%20Kapakl%C4%B1!5e0!3m2!1sen!2str!4v1760394830766!5m2!1sen!2str"
+    coordinates: { lat: 41.279138, lng: 28.009901 },
+    distance: "1 KM"
   }
 ];
 
-const EmbeddedGoogleMapsComponent: React.FC = () => {
-  const [selectedLocation, setSelectedLocation] = useState<Location>(locations[0]);
-  const [showMap, setShowMap] = useState(true);
+const EmbeddedGoogleMapsComponent: React.FC<EmbeddedGoogleMapsComponentProps> = ({ showAllLocations = true }) => {
+  const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+  const [googleMaps, setGoogleMaps] = useState<any>(null);
 
-  // Calculate relative position based on coordinate bounds
-  const getMarkerPosition = (location: Location) => {
-    // Define bounds for the region (approximate)
-    const bounds = {
-      north: 41.35,
-      south: 40.9,
-      east: 28.1,
-      west: 27.4
-    };
+  const mapContainerStyle = {
+    width: '100%',
+    height: '100%'
+  };
 
-    const x = ((location.coordinates.lng - bounds.west) / (bounds.east - bounds.west)) * 100;
-    const y = ((bounds.north - location.coordinates.lat) / (bounds.north - bounds.south)) * 100;
+  const center = {
+    lat: 41.15,
+    lng: 27.8
+  };
 
-    return {
-      left: `${Math.max(5, Math.min(95, x))}%`,
-      top: `${Math.max(5, Math.min(95, y))}%`
-    };
+  const mapOptions = {
+    zoom: 9,
+    mapTypeId: 'satellite',
+    streetViewControl: false,
+    mapTypeControl: false,
+    fullscreenControl: false,
+    zoomControl: false,
+    gestureHandling: 'greedy',
+    disableDefaultUI: false,
+    scrollwheel: true,
+    styles: [
+      {
+        featureType: 'administrative',
+        elementType: 'labels.text',
+        stylers: [
+          { visibility: 'on' },
+          { color: '#ffffff' },
+          { weight: '1' }
+        ]
+      },
+      {
+        featureType: 'locality',
+        elementType: 'labels.text',
+        stylers: [
+          { visibility: 'on' },
+          { color: '#ffffff' }
+        ]
+      },
+      {
+        featureType: 'water',
+        elementType: 'labels',
+        stylers: [
+          { visibility: 'on' }
+        ]
+      }
+    ]
   };
 
   const getLocationColor = (type: string) => {
@@ -92,115 +170,97 @@ const EmbeddedGoogleMapsComponent: React.FC = () => {
     }
   };
 
-  const getLocationIcon = (type: string) => {
-    switch (type) {
-      case 'factory': return '🏭';
-      case 'port': return '🚢';
-      case 'industrial': return '🏢';
-      case 'osb': return '🏗️';
-      case 'train': return '🚄';
-      default: return '📍';
-    }
+  const createCustomIcon = (type: string) => {
+    const color = getLocationColor(type);
+    if (!googleMaps) return undefined;
+    
+    // Create pin-style markers instead of circles
+    return {
+      url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
+        <svg width="50" height="60" viewBox="0 0 50 60" xmlns="http://www.w3.org/2000/svg">
+          <!-- Pin shape -->
+          <path d="M 25 5 C 14 5, 5 14, 5 25 C 5 40, 25 58, 25 58 C 25 58, 45 40, 45 25 C 45 14, 36 5, 25 5 Z" fill="${color}" stroke="white" stroke-width="2"/>
+          <!-- Inner circle -->
+          <circle cx="25" cy="25" r="10" fill="white" opacity="0.9"/>
+          <!-- Icon -->
+          <circle cx="25" cy="25" r="6" fill="${color}"/>
+        </svg>
+      `)}`,
+      scaledSize: new googleMaps.Size(50, 60),
+      anchor: new googleMaps.Point(25, 60),
+      labelOrigin: new googleMaps.Point(25, 20)
+    };
   };
 
   return (
-    <div className="w-full h-full flex flex-col">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-primary/90 to-accent/90 p-4 rounded-t-lg">
-        <div className="flex items-center justify-between">
-          <div>
-            <h3 className="text-white font-bold text-lg">KAPAKLI MODEL SANAYİ MERKEZİ</h3>
-            <p className="text-white/80 text-sm">İnteraktif işaretçilere tıklayın</p>
-          </div>
-          <button
-            onClick={() => setShowMap(!showMap)}
-            className="px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all text-sm"
+    <div className="w-full h-full flex flex-col relative">
+      <div className="flex-1 relative">
+        <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY || ''}>
+          <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            center={center}
+            zoom={mapOptions.zoom}
+            options={mapOptions}
+            onLoad={map => {
+              setGoogleMaps(window.google.maps);
+              
+              // Add overlay to cover watermark areas
+              const overlay = document.createElement('div');
+              overlay.style.cssText = `
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 60px;
+                background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3));
+                pointer-events: none;
+                z-index: 999;
+              `;
+              const mapContainer = document.querySelector('[role="region"]')?.parentElement;
+              if (mapContainer) {
+                mapContainer.appendChild(overlay);
+              }
+            }}
           >
-            {showMap ? 'Detayları Göster' : 'Haritayı Göster'}
-          </button>
-        </div>
-      </div>
-
-      <div className="flex-1 flex">
-        {/* Full Width Panel - Location Details or Embedded Map */}
-        <div className="w-full bg-white flex flex-col">
-          {showMap ? (
-            /* Embedded Google Maps */
-            <div className="flex-1 relative">
-              <iframe
-                src={selectedLocation.embedUrl}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title={selectedLocation.title}
+            {/* Render all location markers */}
+            {locations.map((location) => (
+              <MarkerF
+                key={location.id}
+                position={location.coordinates}
+                icon={googleMaps ? createCustomIcon(location.type) : undefined}
+                onClick={() => setSelectedLocation(location)}
               />
-            </div>
-          ) : (
-            /* Location Information */
-            <div className="flex-1 p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div 
-                  className="w-12 h-12 rounded-full flex items-center justify-center text-white text-2xl"
-                  style={{ backgroundColor: getLocationColor(selectedLocation.type) }}
-                >
-                  {getLocationIcon(selectedLocation.type)}
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800">{selectedLocation.title}</h3>
-                  <p className="text-gray-600">{selectedLocation.description}</p>
-                </div>
-              </div>
+            ))}
 
-              <div className="space-y-4">
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-600">Mesafe:</span>
-                    <span className="text-2xl font-bold" style={{ color: getLocationColor(selectedLocation.type) }}>
-                      {selectedLocation.distance}
-                    </span>
+            {/* Info Window for selected location */}
+            {selectedLocation && (
+              <InfoWindowF
+                position={selectedLocation.coordinates}
+                onCloseClick={() => setSelectedLocation(null)}
+              >
+                <div className="p-3 max-w-xs bg-white rounded-xl shadow-lg border border-gray-200">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div 
+                      className="w-8 h-8 rounded-full flex items-center justify-center text-white text-lg"
+                      style={{ backgroundColor: getLocationColor(selectedLocation.type) }}
+                    >
+                      {selectedLocation.type === 'train' && '🚄'}
+                      {selectedLocation.type === 'port' && '🚢'}
+                      {selectedLocation.type === 'factory' && '🏭'}
+                      {selectedLocation.type === 'osb' && '🏗️'}
+                      {selectedLocation.type === 'industrial' && '🏢'}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-800 text-sm">{selectedLocation.title}</h4>
+                      <p className="text-gray-600 text-xs">{selectedLocation.distance}</p>
+                    </div>
                   </div>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-800 mb-2">Konum Detayları</h4>
                   <p className="text-gray-600 text-sm">{selectedLocation.description}</p>
                 </div>
-
-                <button
-                  onClick={() => setShowMap(true)}
-                  className="w-full py-3 bg-gradient-to-r from-primary to-accent text-white rounded-lg font-bold hover:shadow-lg transition-all"
-                >
-                  Google Maps'te Görüntüle
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Location List */}
-      <div className="bg-gray-100 p-4 rounded-b-lg">
-        <div className="flex gap-2 overflow-x-auto">
-          {locations.map((location) => (
-            <button
-              key={location.id}
-              onClick={() => setSelectedLocation(location)}
-              className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                selectedLocation.id === location.id
-                  ? 'text-white shadow-lg'
-                  : 'bg-white text-gray-600 hover:bg-gray-200'
-              }`}
-              style={{
-                backgroundColor: selectedLocation.id === location.id ? getLocationColor(location.type) : undefined
-              }}
-            >
-              {getLocationIcon(location.type)} {location.title.split(' ')[0]}...
-            </button>
-          ))}
-        </div>
+              </InfoWindowF>
+            )}
+          </GoogleMap>
+        </LoadScript>
       </div>
     </div>
   );

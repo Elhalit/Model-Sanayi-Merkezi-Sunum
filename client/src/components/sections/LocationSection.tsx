@@ -13,7 +13,7 @@ export default function LocationSection() {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
   const [mapInitialized, setMapInitialized] = useState(false);
-  const [viewType, setViewType] = useState<'roadmap' | 'satellite'>('roadmap');
+  const [viewType, setViewType] = useState<'roadmap' | 'satellite'>('satellite');
 
   useEffect(() => {
     // Check if API key is available
@@ -176,8 +176,8 @@ export default function LocationSection() {
           {/* Location Advantages Overlay */}
           <div className="absolute top-4 left-4 right-4 flex flex-wrap gap-3 z-10">
             <div className="glass px-6 py-3 rounded-full flex items-center gap-3 glow" data-testid="location-osb">
-              <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
-                <Building2 className="w-6 h-6 text-primary" />
+              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                <Building2 className="w-6 h-6 text-white" />
               </div>
               <div>
                 <div className="font-bold">OSB Yakınlığı</div>
@@ -186,8 +186,8 @@ export default function LocationSection() {
             </div>
             
             <div className="glass px-6 py-3 rounded-full flex items-center gap-3 glow" data-testid="location-highway">
-              <div className="w-10 h-10 bg-accent/20 rounded-full flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-accent" />
+              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                <TrendingUp className="w-6 h-6 text-white" />
               </div>
               <div>
                 <div className="font-bold">Otoyol Bağlantısı</div>
@@ -196,8 +196,8 @@ export default function LocationSection() {
             </div>
             
             <div className="glass px-6 py-3 rounded-full flex items-center gap-3 glow" data-testid="location-port">
-              <div className="w-10 h-10 bg-success/20 rounded-full flex items-center justify-center">
-                <Clock className="w-6 h-6 text-success" />
+              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                <Clock className="w-6 h-6 text-white" />
               </div>
               <div>
                 <div className="font-bold">Liman</div>
@@ -206,8 +206,8 @@ export default function LocationSection() {
             </div>
             
             <div className="glass px-6 py-3 rounded-full flex items-center gap-3 glow" data-testid="location-airport">
-              <div className="w-10 h-10 bg-destructive/20 rounded-full flex items-center justify-center">
-                <Plane className="w-6 h-6 text-destructive" />
+              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                <Plane className="w-6 h-6 text-white" />
               </div>
               <div>
                 <div className="font-bold">Havalimanı</div>
@@ -220,8 +220,11 @@ export default function LocationSection() {
           <div className="absolute bottom-4 right-4 flex gap-2 z-10">
             <button 
               className={`glass px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
-                viewType === 'roadmap' ? 'bg-primary/20 text-primary' : 'hover:bg-primary/20'
+                viewType === 'roadmap' ? 'text-white' : 'hover:bg-white/10'
               }`}
+              style={viewType === 'roadmap' ? {
+                background: 'linear-gradient(to right, #ff5300, #ff6b1a, #ff5300)'
+              } : {}}
               onClick={() => switchMapView('roadmap')}
               data-testid="map-view-roadmap"
             >
@@ -229,8 +232,11 @@ export default function LocationSection() {
             </button>
             <button 
               className={`glass px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
-                viewType === 'satellite' ? 'bg-primary/20 text-primary' : 'hover:bg-primary/20'
+                viewType === 'satellite' ? 'text-white' : 'hover:bg-white/10'
               }`}
+              style={viewType === 'satellite' ? {
+                background: 'linear-gradient(to right, #ff5300, #ff6b1a, #ff5300)'
+              } : {}}
               onClick={() => switchMapView('satellite')}
               data-testid="map-view-satellite"
             >

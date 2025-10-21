@@ -121,6 +121,19 @@
     will-change: transform;
   }
 
+  /* Responsive image handling */
+  @media (max-width: 768px) {
+    .parallax-bg img {
+      object-fit: contain !important;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .parallax-bg img {
+      object-fit: cover !important;
+    }
+  }
+
   /* Unit Status Colors */
   .unit-available {
     fill: var(--success);
@@ -392,4 +405,31 @@
 
 .mapboxgl-canvas {
   background-color: #1e293b !important;
+}
+
+/* Project Section Responsive Images */
+.project-section img {
+  max-width: 100%;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block;
+}
+
+/* Ensure images never get cropped in project section */
+@media (max-width: 640px) {
+  .project-section img {
+    max-height: 300px !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .project-section img {
+    max-height: 400px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .project-section img {
+    max-height: 500px !important;
+  }
 }

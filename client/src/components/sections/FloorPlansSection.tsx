@@ -88,10 +88,26 @@ export default function FloorPlansSection() {
   });
 
   return (
-    <section className="section bg-gradient-to-br from-background via-muted to-background" data-testid="floorplans-section">
-      <div className="w-full h-full flex flex-col px-0">
+    <section 
+      className="section bg-gradient-to-br from-background via-muted to-background relative"
+      style={{
+        backgroundImage: 'url(/intro.png)',
+        backgroundSize: 'contain',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+      data-testid="floorplans-section"
+    >
+      {/* Background overlay for better readability */}
+      <div className="absolute inset-0 bg-black/50"></div>
+      
+      <div className="w-full h-full flex flex-col px-0 relative z-10">
         <div className="px-8">
-          <h2 className="text-5xl md:text-6xl font-black mb-8 text-center bg-gradient-to-r from-orange-500 to-orange-400 bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl font-black mb-8 text-center" style={{
+            background: 'linear-gradient(to right, #ff5300, #ff6b1a)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}>
             Kat Planları - 1. Etap
           </h2>
           

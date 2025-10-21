@@ -89,7 +89,11 @@ export default function FloorPlansSection3() {
     <section className="section bg-gradient-to-br from-background via-muted to-background" data-testid="floorplans-section-3">
       <div className="w-full h-full flex flex-col px-0">
         <div className="px-8">
-          <h2 className="text-5xl md:text-6xl font-black mb-8 text-center bg-gradient-to-r from-orange-500 to-orange-400 bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl font-black mb-8 text-center" style={{
+            background: 'linear-gradient(to right, #ff5300, #ff6b1a)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}>
             Kat Planları - 3. Etap
           </h2>
           

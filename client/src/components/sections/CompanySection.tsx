@@ -43,6 +43,29 @@ export default function CompanySection() {
     }
   };
 
+  const companies = [
+    {
+      name: "Som Prefabrik İnşaat AŞ.",
+      description: "Betonarme Yapı",
+      year: 1990,
+    },
+    {
+      name: "Nadir Metal Rafineri",
+      description: "1967",
+      year: 1967,
+    },
+    {
+      name: "İNNO Gayrimenkul Yatırım A.Ş.",
+      description: "2017",
+      year: 2017,
+    },
+    {
+      name: "NET İnşaat Danışmanlık Mühendislik A.Ş.",
+      description: "1996",
+      year: 1996,
+    },
+  ];
+
   return (
     <section 
       ref={sectionRef}
@@ -70,41 +93,6 @@ export default function CompanySection() {
                   <p className="text-muted-foreground">{t('company.timeline.step1.description')}</p>
                 </div>
               </div>
-              
-              {/* Arrow */}
-              <div className="flex justify-center">
-                <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-                </svg>
-              </div>
-              
-              {/* Step 2 */}
-              <div className="flex items-start gap-4 company-step opacity-0" data-testid="evolution-step-2">
-                <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center flex-shrink-0 glow">
-                  <span className="text-background font-bold">2</span>
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold mb-2">{t('company.timeline.step2.title')}</h4>
-                  <p className="text-muted-foreground">{t('company.timeline.step2.description')}</p>
-                </div>
-              </div>
-              
-              {/* Arrow */}
-              <div className="flex justify-center">
-                <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
-                </svg>
-              </div>
-              
-              {/* Step 3 */}
-              <div className="flex items-start gap-4 company-step opacity-0" data-testid="evolution-step-3">
-                <div className="w-12 h-12 bg-success rounded-full flex items-center justify-center flex-shrink-0 glow">
-                  <span className="text-background font-bold">3</span>
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold mb-2">{t('company.timeline.step3.title')}</h4>
-                  <p className="text-muted-foreground">{t('company.timeline.step3.description')}</p>
-                </div>
               </div>
             </div>
           </div>
@@ -112,11 +100,10 @@ export default function CompanySection() {
           {/* Company Video */}
           <div className="glass p-8 rounded-3xl">
             <h3 className="text-3xl font-bold mb-8 text-primary">{t('company.video.title')}</h3>
-            
             <div className="relative rounded-2xl overflow-hidden bg-muted aspect-video">
               <video 
                 ref={videoRef}
-                className="w-full h-full object-cover" 
+                className="w-full h-full object-contain sm:object-cover" 
                 muted 
                 poster="https://images.unsplash.com/photo-1590496793907-4b36d2fd9f0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450"
                 data-testid="company-video"
@@ -126,7 +113,6 @@ export default function CompanySection() {
                 <source src={`${import.meta.env.VITE_VIDEO_URL || '#'}`} type="video/mp4" />
                 {t('common.error')}
               </video>
-              
               {/* Play overlay */}
               <div 
                 className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-all cursor-pointer" 
@@ -142,7 +128,6 @@ export default function CompanySection() {
                 </div>
               </div>
             </div>
-            
             <div className="mt-6 space-y-4">
               <div className="flex items-center gap-3" data-testid="company-stat-experience">
                 <CheckCircle className="w-6 h-6 text-primary" />
@@ -158,8 +143,37 @@ export default function CompanySection() {
               </div>
             </div>
           </div>
+
+          {/* Company Logos & Names Slider */}
+          <div className="mt-12">
+            <h3 className="text-2xl font-bold mb-6 text-center text-primary">Ortaklarımız</h3>
+            <div className="flex flex-wrap justify-center gap-8">
+              {companies.map((company, idx) => {
+                let logoSrc = '';
+                if (company.name.includes('Nadir Metal')) logoSrc = '/nadirmetal.jpeg';
+                if (company.name.includes('İNNO')) logoSrc = '/İnno-GY-Logo.png';
+                if (company.name.includes('NET')) logoSrc = '/Net-logo.png';
+                if (company.name.includes('Som')) logoSrc = '/Som-Prefabrik-Logo.png';
+                return (
+                  <div key={company.name} className="flex flex-col items-center w-40">
+                    <div className="w-20 h-20 mb-3">
+                      <img
+                        src={logoSrc}
+                        alt={company.name + ' logo'}
+                        className="w-20 h-20 object-cover rounded-full border-none bg-white shadow"
+                        style={{ background: 'white' }}
+                      />
+                    </div>
+                    <div className="text-center">
+                      <div className="font-bold text-base text-gray-900 mb-1">{company.name}</div>
+                      <div className="text-sm text-gray-600">{company.description}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </section>
-  );
 }
