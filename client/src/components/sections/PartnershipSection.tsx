@@ -9,6 +9,7 @@ export default function PartnershipSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const constellationRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const somVideoRef = useRef<HTMLVideoElement>(null);
   const { animateOnScroll } = useAnimations();
   const [selectedCompany, setSelectedCompany] = useState<string | null>(null);
 
@@ -70,6 +71,18 @@ export default function PartnershipSection() {
       { x: '100%' },
       { x: '0%', duration: 0.8, ease: 'power3.out' }
     );
+
+    // Start Som video from 40 seconds if Som is selected
+    if (companyId === 'som') {
+      setTimeout(() => {
+        if (somVideoRef.current) {
+          somVideoRef.current.currentTime = 40;
+          somVideoRef.current.play().catch(err => {
+            console.log('Video autoplay prevented:', err);
+          });
+        }
+      }, 100);
+    }
   };
 
   const closeDetailPanel = () => {
@@ -105,7 +118,7 @@ export default function PartnershipSection() {
         projects: [],
         color: 'from-gray-600 to-gray-800',
         icon: Hammer,
-        logo: '/İnno-GY-Logo.png',
+        logo: '/inno-logo.png',
         story: "2017 yılında Abdullah TÜTÜNCÜ (Nadir Metal Rafineri) ve Ali YAMAN (NET İnşaat Danışmanlık Mühendislik A.Ş.) ortaklığı ile kurulan İNNO Gayrimenkul Yatırım A.Ş. birçok projenin altına başarıyla imza atmaktadır.",
         videoUrl: undefined
       },
@@ -140,7 +153,7 @@ export default function PartnershipSection() {
         icon: Factory,
         logo: '/Som-Prefabrik-Logo.png',
         story: "Prefabrik Betonarme Yapı sektöründe, müşterilerimizin gereksinimleri ile beklentilerinin karşılanması ve aşılmasına yönelik olarak üretim, satış ve satış sonrası hizmetlerde faaliyet göstermektedir.",
-        videoUrl: "/som-video.mp4"
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" // Placeholder video URL - replace with actual SOM video
       }
     };
     return companies[companyId as keyof typeof companies];
@@ -167,53 +180,65 @@ export default function PartnershipSection() {
         </h2>
       </div>
 
-      <div className="relative z-10 h-full flex">
-        {/* Left Side - Header Section */}
-        <div className="w-1/3 flex flex-col justify-center px-8 py-16 space-y-12">
-          <div id="partnership-title" className="opacity-0">
-            <div className="flex items-center mb-6">
-              <Handshake className="w-12 h-12 mr-4 animate-pulse" style={{ color: '#ff5300' }} />
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-black" style={{ 
-                background: 'linear-gradient(to right, #ff5300, #ff6b1a, #ff5300)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
-              }}>
-                Stratejik Ortaklık
-              </h1>
+      <div className="relative z-10 h-full w-full flex items-center justify-center">
+        {/* Centered Container for both companies */}
+        <div className="flex items-center justify-center gap-24">
+          {/* Left Side - İnno Logo and About */}
+          <div 
+            className="w-[420px] flex flex-col justify-center items-center px-6 py-16 space-y-8 cursor-pointer hover:bg-white/5 transition-all duration-300 rounded-lg"
+            onClick={() => handleNodeClick('inno')}
+          >
+            <div className="w-48 h-48 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center p-4">
+              <img 
+                src="/inno-logo.png" 
+                alt="İNNO Gayrimenkul Yatırım Logo" 
+                className="w-full h-full object-contain"
+                style={{ background: 'transparent', border: 'none' }}
+                onError={(e) => {
+                  console.error('Failed to load İnno logo, trying alternative path');
+                  const target = e.target as HTMLImageElement;
+                  if (target.src.includes('inno-logo.png')) {
+                    target.src = '/İnno-GY-Logo.png';
+                  } else {
+                    target.style.display = 'none';
+                    target.nextElementSibling?.classList.remove('hidden');
+                  }
+                }}
+              />
+              <Hammer className="w-16 h-16 text-white hidden" />
             </div>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8">
-              2017 yılında kurulan güçlü ortaklığımız Sektörde liderlik eden üç şirketin birikimini bir araya getirerek müşterilerimize mükemmel hizmet sunmayı hedeflemektedir
-            </p>
+            <div className="text-center max-w-xl">
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-4">İNNO Gayrimenkul Yatırım A.Ş.</h3>
+              <p className="text-base md:text-lg text-white/80 leading-relaxed">
+                Sektördeki 30.yılını dolduran İnno Gayrimenkul fizibilite çalışmalarını önceden tamamladığı stratejik lokasyonlarda ülke sanayisine katkı sunmak ve gayrimenkul sektörünü ileri taşımak için endüstriyel tesis, imalathane, depolama ve lojistik alanları inşa etmektedir.
+              </p>
+            </div>
           </div>
-          
-          {/* Success Statement - Left Side */}
-          <div className="company-info opacity-0">
-            <div className="flex items-center mb-6">
-              <Award className="w-12 h-12 mr-4 animate-pulse" style={{ color: '#ff5300' }} />
-              <h3 className="text-2xl md:text-3xl lg:text-4xl font-black" style={{ 
-                background: 'linear-gradient(to right, #ff5300, #ff6b1a, #ff5300)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
-              }}>
-                Başarının Formülü
-              </h3>
+
+          {/* Right Side - Som Logo and About */}
+          <div 
+            className="w-[420px] flex flex-col justify-center items-center px-6 py-16 space-y-8 cursor-pointer hover:bg-white/5 transition-all duration-300 rounded-lg"
+            onClick={() => handleNodeClick('som')}
+          >
+            <div className="w-48 h-48 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center p-4">
+              <img 
+                src="/Som-Prefabrik-Logo.png" 
+                alt="Som Prefabrik Logo" 
+                className="w-full h-full object-contain"
+                style={{ background: 'transparent', border: 'none' }}
+              />
             </div>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-              Müşteri memnuniyetinin en üst düzeyde gerçekleşmesi önceliği ile üzerinde çalışılan projeler; mükemmellik, hız, yenilik ve güvenlikten ödün vermeden optimum çözümler üretilerek hayata geçirilmektedir.
-            </p>
+            <div className="text-center max-w-xl">
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Som Prefabrik İnşaat A.Ş.</h3>
+              <p className="text-base md:text-lg text-white/80 leading-relaxed">
+                Kurulduğu günden bu yana, güvenli, hızlı ve ekonomik prefabrikasyon çözümleri sunma hedefiyle faaliyet göstermektedir. Üretim süreçlerinin her aşamasında uluslararası kalite standartlarına, ileri mühendislik ilkelerine ve çevreye duyarlı üretim anlayışına bağlı kalarak çalışır.
+              </p>
+            </div>
           </div>
         </div>
-
-        {/* Right Side - Constellation Container */}
-        <div className="w-2/3 flex items-center justify-center px-4 relative">
-          <div 
-            ref={constellationRef}
-            className="constellation-container relative w-full h-full"
-          >
-            {/* Connection Lines using SVG for better responsiveness */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 100 100" preserveAspectRatio="none">
+          {/* Constellation removed - replaced with simple two-column layout */}
+          <div style={{ display: 'none' }}>
+            <svg style={{ display: 'none' }}>
               <defs>
                 <linearGradient id="energyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.8" />
@@ -389,11 +414,10 @@ export default function PartnershipSection() {
                 </div>
               </div>
             </div>
-           </div>
-        </div>
+          </div>
       </div>
 
-            {/* Detail Panel */}
+      {/* Detail Panel */}
       {selectedCompany && (
         <div 
           id="detail-panel"
@@ -436,13 +460,8 @@ export default function PartnershipSection() {
                 </div>
                 
                 <div>
-                  <h3 className="text-lg md:text-xl font-semibold mb-2">Kuruluş</h3>
-                  <p className="text-sm md:text-base text-muted-foreground">{getCompanyData(selectedCompany)?.since}</p>
-                </div>
-                
-                <div>
-                  <h3 className="text-lg md:text-xl font-semibold mb-4">Hikaye</h3>
-                  <div className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6 max-h-64 overflow-y-auto">
+                  <h3 className="text-lg md:text-xl font-semibold mb-4">Hakkımızda</h3>
+                  <div className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6 max-h-96 overflow-y-auto">
                     {getCompanyData(selectedCompany)?.story.split('\n\n').map((paragraph, index) => (
                       <p key={index} className="mb-4 last:mb-0">
                         {paragraph}
@@ -452,35 +471,20 @@ export default function PartnershipSection() {
                 </div>
 
                 {/* Show video for SOM */}
-                {selectedCompany === 'som' && getCompanyData(selectedCompany)?.videoUrl && (
+                {selectedCompany === 'som' && (
                   <div>
                     <h3 className="text-lg md:text-xl font-semibold mb-4">Tanıtım Videosu</h3>
-                    <div className="aspect-video rounded-lg overflow-hidden">
+                    <div className="aspect-video rounded-lg overflow-hidden bg-black">
                       <video
-                        ref={videoRef}
+                        ref={somVideoRef}
                         width="100%"
                         height="100%"
-                        src={getCompanyData(selectedCompany)?.videoUrl}
                         controls
                         className="w-full h-full"
-                      />
-                    </div>
-                  </div>
-                )}
-                
-                {/* Show Projects for NET */}
-                {selectedCompany === 'net' && getCompanyData(selectedCompany)?.projects && getCompanyData(selectedCompany)?.projects.length > 0 && (
-                  <div>
-                    <h3 className="text-lg md:text-xl font-semibold mb-4">Gerçekleştirilen Projeler</h3>
-                    <div className="grid grid-cols-2 gap-3 max-h-64 overflow-y-auto">
-                      {getCompanyData(selectedCompany)?.projects.map((project, index) => (
-                        <div key={index} className="glass p-3 rounded-lg hover:bg-muted/50 transition-colors">
-                          <div className="flex items-start space-x-2">
-                            <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <span className="text-sm text-muted-foreground">{project}</span>
-                          </div>
-                        </div>
-                      ))}
+                      >
+                        <source src="/som-video.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
                     </div>
                   </div>
                 )}

@@ -48,7 +48,7 @@ export default function StrategicLocationSection() {
         
         {/* Compact Title */}
         <div className="text-center mb-6">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-black leading-tight mb-2" style={{
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight mb-2" style={{
             background: 'linear-gradient(to right, #ff5300, #ff6b1a, #ff5300)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
@@ -64,7 +64,7 @@ export default function StrategicLocationSection() {
         {/* Main Content - Location Advantages and Map */}
         <div className="w-full h-[75vh] flex gap-4">
           
-          {/* Far Left Side - Location Advantages - Smaller */}
+          {/* Far Left Side - Location Advantages */}
           <div className="w-64 flex-shrink-0 flex flex-col">
             <h2 className="text-xl font-black text-center mb-4" style={{
               background: 'linear-gradient(to right, #ff5300, #ff6b1a, #ff5300)',

@@ -68,23 +68,41 @@ export default function MasterPlanSection() {
 
   return (
     <section className="section bg-gradient-to-br from-background via-card to-background" data-testid="masterplan-section">
-      <div className="max-w-7xl mx-auto px-8 w-full h-full flex flex-col">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-orange-500 to-orange-400 bg-clip-text text-transparent">
-            Vaziyet Planı
-          </h2>
+      <div className="w-full h-full flex">
+        {/* Left side - Title and Info */}
+        <div className="w-1/4 px-8 flex flex-col py-8">
+          {/* Header */}
+          <div className="mb-8">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight" style={{
+              background: 'linear-gradient(to right, #ff5300, #ff6b1a, #ff5300)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
+              Vaziyet Planı
+            </h2>
+          </div>
           
-          {/* Info Badge */}
-          <div className="glass px-4 py-2 rounded-lg">
-            <span className="text-sm font-medium text-muted-foreground">
-              Master Plan Layout
-            </span>
+          {/* Additional Info - Centered */}
+          <div className="flex-1 flex flex-col justify-center space-y-4">
+            <div className="glass p-4 rounded-xl">
+              <h3 className="font-semibold text-primary mb-2 text-sm">Toplam Arsa Alanı</h3>
+              <p className="text-xl font-bold">130.000 m²</p>
+            </div>
+            <div className="glass p-4 rounded-xl">
+              <h3 className="font-semibold text-primary mb-2 text-sm">Toplam İnşaat Alanı</h3>
+              <p className="text-xl font-bold">Teyit Edilecek</p>
+            </div>
+            <div className="glass p-4 rounded-xl">
+              <h3 className="font-semibold text-primary mb-2 text-sm">İşyeri Sayısı</h3>
+              <p className="text-xl font-bold">312</p>
+            </div>
           </div>
         </div>
         
-        {/* Master Plan Image Container */}
-        <div className={`flex-1 glass rounded-3xl overflow-hidden relative ${isFullscreen ? 'fixed inset-0 z-50 rounded-none' : ''}`}>
+        {/* Right side - Master Plan Image */}
+        <div className="flex-1 pr-8 py-8">
+          <div className={`w-full h-full glass rounded-3xl overflow-hidden relative ${isFullscreen ? 'fixed inset-0 z-50 rounded-none' : ''}`}>
           <div 
             className={`w-full h-full relative ${zoomLevel > 1 ? 'cursor-grab' : 'cursor-zoom-in'} ${isPanning ? 'cursor-grabbing' : ''}`}
             onMouseDown={handleMouseDown}
@@ -190,21 +208,6 @@ export default function MasterPlanSection() {
             </div>
           )}
         </div>
-
-        {/* Additional Info */}
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="glass p-4 rounded-xl text-center">
-            <h3 className="font-semibold text-primary mb-2">Toplam Alan</h3>
-            <p className="text-2xl font-bold">125,000 m²</p>
-          </div>
-          <div className="glass p-4 rounded-xl text-center">
-            <h3 className="font-semibold text-primary mb-2">Yeşil Alan</h3>
-            <p className="text-2xl font-bold">65%</p>
-          </div>
-          <div className="glass p-4 rounded-xl text-center">
-            <h3 className="font-semibold text-primary mb-2">Blok Sayısı</h3>
-            <p className="text-2xl font-bold">12 Blok</p>
-          </div>
         </div>
       </div>
 

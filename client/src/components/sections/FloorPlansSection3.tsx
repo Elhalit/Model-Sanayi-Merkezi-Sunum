@@ -68,6 +68,31 @@ export default function FloorPlansSection3() {
   const blockSummary = getBlockSummary(units, activeBlock);
   const currentBlockUnits = units.filter(unit => unit.block === activeBlock);
   
+  // Sort units: arrange in columns, bottom to top (1-5 per column)
+  const sortedUnits = [...currentBlockUnits].sort((a, b) => {
+    const numA = parseInt(a.unitNumber);
+    const numB = parseInt(b.unitNumber);
+    return numA - numB;
+  });
+  
+  // Calculate grid dimensions - 6 units per column (bottom to top)
+  const unitsPerColumn = 6;
+  const numColumns = Math.max(1, Math.ceil(sortedUnits.length / unitsPerColumn));
+  
+  // Rearrange units to display bottom-to-top in columns
+  const arrangedUnits: FloorPlanUnit[] = [];
+  for (let col = 0; col < numColumns; col++) {
+    const columnUnits: FloorPlanUnit[] = [];
+    for (let row = 0; row < unitsPerColumn; row++) {
+      const index = col * unitsPerColumn + row;
+      if (index < sortedUnits.length) {
+        columnUnits.push(sortedUnits[index]);
+      }
+    }
+    // Reverse to show bottom to top
+    arrangedUnits.push(...columnUnits.reverse());
+  }
+  
   // Filter units based on search and filter
   const filteredUnits = currentBlockUnits.filter(unit => {
     const matchesSearch = searchTerm === '' || 
@@ -86,13 +111,14 @@ export default function FloorPlansSection3() {
   });
 
   return (
-    <section className="section bg-gradient-to-br from-background via-muted to-background" data-testid="floorplans-section-3">
-      <div className="w-full h-full flex flex-col px-0">
+    <section className="section bg-slate-800 relative" data-testid="floorplans-section-3">
+      <div className="w-full h-full flex flex-col px-0 relative z-10">
         <div className="px-8">
-          <h2 className="text-5xl md:text-6xl font-black mb-8 text-center" style={{
-            background: 'linear-gradient(to right, #ff5300, #ff6b1a)',
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 text-center" style={{
+            background: 'linear-gradient(to right, #ff5300, #ff6b1a, #ff5300)',
             WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
           }}>
             Kat Planları - 3. Etap
           </h2>
@@ -178,15 +204,19 @@ export default function FloorPlansSection3() {
           <div className="w-full h-full p-8">
             <div className="w-full h-full relative">
               
-              {/* Grid Container */}
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="grid gap-2 p-4" style={{
-                  gridTemplateColumns: `repeat(${Math.ceil(Math.sqrt(currentBlockUnits.length))}, minmax(120px, 1fr))`,
-                  maxWidth: '100%',
-                  maxHeight: '90%'
+              {/* Grid Container - Horizontal Rectangular Layout */}
+              <div className="w-full h-full flex items-center justify-center px-4">
+                <div className="grid gap-3" style={{
+                  gridTemplateColumns: `repeat(${numColumns}, minmax(140px, 180px))`,
+                  gridTemplateRows: `repeat(${unitsPerColumn}, minmax(60px, 80px))`,
+                  maxWidth: '95%',
+                  maxHeight: '85%'
                 }}>
-                  {currentBlockUnits.map((unit) => {
+                  {arrangedUnits.map((unit, index) => {
                     const isFiltered = filteredUnits.includes(unit);
+                    const col = Math.floor(index / unitsPerColumn);
+                    const row = index % unitsPerColumn;
+                    
                     return (
                       <div
                         key={`${unit.block}-${unit.unitNumber}`}
@@ -195,32 +225,35 @@ export default function FloorPlansSection3() {
                           ${isFiltered ? 'opacity-100 scale-100' : 'opacity-30 scale-95'}
                           hover:scale-105 hover:z-10
                         `}
+                        style={{
+                          gridColumn: col + 1,
+                          gridRow: row + 1
+                        }}
                         onMouseEnter={() => setHoveredUnit(unit)}
                         onMouseLeave={() => setHoveredUnit(null)}
                         onClick={() => {
-                          // Handle unit click - could open modal or show details
                           console.log('Selected unit:', unit);
                         }}
                       >
-                        {/* Unit Box */}
+                        {/* Unit Box - Horizontal Rectangle */}
                         <div className={`
-                          w-full h-24 rounded-lg border-2 transition-all duration-300
-                          flex flex-col items-center justify-center text-center p-2 relative
+                          w-full h-full rounded-lg border-2 transition-all duration-300
+                          flex items-center justify-between px-4 py-2 relative
                           ${unit.status === 'sold' 
-                            ? 'bg-destructive/20 border-destructive hover:bg-destructive/30 text-destructive-foreground' 
+                            ? 'bg-destructive/20 border-destructive hover:bg-destructive/30' 
                             : unit.status === 'reserved'
-                            ? 'bg-warning/20 border-warning hover:bg-warning/30 text-warning-foreground'
-                            : 'bg-success/20 border-success hover:bg-success/30 text-success-foreground'
+                            ? 'bg-warning/20 border-warning hover:bg-warning/30'
+                            : 'bg-success/20 border-success hover:bg-success/30'
                           }
                           ${!isFiltered ? 'grayscale' : ''}
                         `}>
-                          {/* Unit Number */}
-                          <div className="font-bold text-lg leading-tight">
+                          {/* Left side - Unit Number */}
+                          <div className="font-bold text-xl">
                             {unit.unitNumber}
                           </div>
                           
-                          {/* Unit Area */}
-                          <div className="text-xs opacity-80 leading-tight">
+                          {/* Right side - Area */}
+                          <div className="text-sm font-medium opacity-90">
                             {unit.netArea}m²
                           </div>
                           

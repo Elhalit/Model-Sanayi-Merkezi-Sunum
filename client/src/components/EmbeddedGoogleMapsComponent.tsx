@@ -8,6 +8,7 @@ interface Location {
   description: string;
   coordinates: { lat: number; lng: number };
   distance: string;
+  icon?: string;
 }
 
 interface EmbeddedGoogleMapsComponentProps {
@@ -31,13 +32,17 @@ const mapStyles = `
     display: none !important;
   }
   
-  /* Hide all span elements that might contain watermark text */
-  .gm-style span {
-    font-size: 0 !important;
+  /* Hide development purposes only watermark */
+  .gm-style div[style*="font-family: Roboto"],
+  .gm-style div[style*="font-size: 11px"],
+  .gm-style div[style*="font-size: 10px"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
   }
   
-  /* Specifically target development text divs */
-  div[style*="font-size: 11px"] {
+  /* Hide watermark container */
+  .gm-style > div:nth-child(1) > div:last-child {
     display: none !important;
   }
   
@@ -46,13 +51,22 @@ const mapStyles = `
     display: none !important;
   }
   
-  /* Hide all text that might be watermark */
-  .gm-style div span[style*="Arial"] {
+  /* Target specific watermark divs */
+  .gm-style div[draggable="false"][style*="position: absolute"][style*="z-index"] {
+    font-size: 0 !important;
+  }
+  
+  .gm-style div[draggable="false"] > div > div {
     display: none !important;
   }
   
-  /* Alternative approach - hide all overlays */
-  .gm-style > div:nth-child(1) > div:nth-child(5) {
+  /* Hide control elements that may contain text */
+  .gm-style > div > div:not([class]) {
+    font-size: 0 !important;
+  }
+  
+  /* Additional watermark hiding */
+  .gm-style-moc {
     display: none !important;
   }
 `;
@@ -71,44 +85,50 @@ const locations: Location[] = [
     type: "factory",
     description: "Ana proje lokasyonu - Modern sanayi merkezi",
     coordinates: { lat: 41.2797282, lng: 27.9278201 },
-    distance: "0 KM"
+    distance: "0 KM",
+    icon: "🏭"
   },
   {
     id: 2,
-    title: "Asyaport Liman A.Ş.",
+    title: "ASYAPORT LİMAN",
     type: "port",
     description: "Uluslararası konteyner limanı",
     coordinates: { lat: 40.9014284, lng: 27.4673351 },
-    distance: "75 KM"
+    distance: "75 KM",
+    icon: "🚢"
   },
   {
     id: 3,
-    title: "Çerkezköy Organize Sanayi Bölge Müdürlüğü",
+    title: "GÜMRÜK MÜDÜRLÜĞÜ",
     type: "industrial",
     description: "Çerkezköy OSB yönetim merkezi",
     coordinates: { lat: 41.3139832, lng: 27.9790325 },
-    distance: "3 KM"
+    distance: "8 KM",
+    icon: "🏢"
   },
   {
     id: 4,
-    title: "KOSB - KAPAKLI ORGANİZE SANAYİ BÖLGESİ",
+    title: "KOSB - KAPAKLI OSB",
     type: "osb",
     description: "Kapaklı Organize Sanayi Bölgesi",
     coordinates: { lat: 41.289509, lng: 27.948947 },
-    distance: "1 KM"
+    distance: "1 KM",
+    icon: "🏗️"
   },
   {
     id: 5,
-    title: "Çerkezköy Garı (Yüksek Hızlı Tren)",
+    title: "YÜKSEK HIZLI TREN",
     type: "train",
     description: "Yüksek hızlı tren istasyonu",
     coordinates: { lat: 41.279138, lng: 28.009901 },
-    distance: "1 KM"
+    distance: "1 KM",
+    icon: "🚄"
   }
 ];
 
 const EmbeddedGoogleMapsComponent: React.FC<EmbeddedGoogleMapsComponentProps> = ({ showAllLocations = true }) => {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+  const [openInfoWindows, setOpenInfoWindows] = useState<Set<number>>(new Set(locations.map(l => l.id)));
   const [googleMaps, setGoogleMaps] = useState<any>(null);
 
   const mapContainerStyle = {
@@ -193,8 +213,9 @@ const EmbeddedGoogleMapsComponent: React.FC<EmbeddedGoogleMapsComponentProps> = 
   };
 
   return (
-    <div className="w-full h-full flex flex-col relative">
-      <div className="flex-1 relative">
+    <div className="w-full h-full flex flex-row relative">
+      {/* Map Container */}
+      <div className="w-full relative">
         <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY || ''}>
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
@@ -205,21 +226,29 @@ const EmbeddedGoogleMapsComponent: React.FC<EmbeddedGoogleMapsComponentProps> = 
               setGoogleMaps(window.google.maps);
               
               // Add overlay to cover watermark areas
-              const overlay = document.createElement('div');
-              overlay.style.cssText = `
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                height: 60px;
-                background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3));
-                pointer-events: none;
-                z-index: 999;
-              `;
-              const mapContainer = document.querySelector('[role="region"]')?.parentElement;
-              if (mapContainer) {
-                mapContainer.appendChild(overlay);
-              }
+              setTimeout(() => {
+                const overlay = document.createElement('div');
+                overlay.style.cssText = `
+                  position: absolute;
+                  bottom: 0;
+                  left: 0;
+                  right: 0;
+                  height: 80px;
+                  background: linear-gradient(to bottom, transparent, rgba(15, 23, 42, 0.9));
+                  pointer-events: none;
+                  z-index: 9999;
+                `;
+                const mapContainer = document.querySelector('[role="region"]')?.parentElement;
+                if (mapContainer) {
+                  mapContainer.appendChild(overlay);
+                }
+                
+                // Hide all potential watermark elements
+                const watermarkElements = document.querySelectorAll('.gm-style div[style*="font-size"]');
+                watermarkElements.forEach(el => {
+                  (el as HTMLElement).style.display = 'none';
+                });
+              }, 500);
             }}
           >
             {/* Render all location markers */}
@@ -228,34 +257,95 @@ const EmbeddedGoogleMapsComponent: React.FC<EmbeddedGoogleMapsComponentProps> = 
                 key={location.id}
                 position={location.coordinates}
                 icon={googleMaps ? createCustomIcon(location.type) : undefined}
-                onClick={() => setSelectedLocation(location)}
+                onClick={() => {
+                  setOpenInfoWindows(prev => new Set(prev).add(location.id));
+                }}
               />
             ))}
 
-            {/* Info Window for selected location */}
+            {/* Show location info cards that are open */}
+            {locations.map((location) => (
+              openInfoWindows.has(location.id) && !selectedLocation && location.id !== 1 && (
+                <InfoWindowF
+                  key={`info-${location.id}`}
+                  position={location.coordinates}
+                  options={{ 
+                    disableAutoPan: true,
+                    pixelOffset: googleMaps ? new window.google.maps.Size(0, 0) : undefined
+                  }}
+                  onCloseClick={() => {
+                    setOpenInfoWindows(prev => {
+                      const newSet = new Set(prev);
+                      newSet.delete(location.id);
+                      return newSet;
+                    });
+                  }}
+                >
+                  <div 
+                    className="p-4 max-w-xs bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg border border-gray-200 cursor-pointer hover:shadow-xl hover:scale-105 transition-all"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedLocation(location);
+                    }}
+                    style={{ minWidth: '240px' }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="text-3xl">{location.icon}</span>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-gray-900 text-sm">{location.title}</h4>
+                        <p className="text-orange-600 font-semibold text-xs">{location.distance}</p>
+                      </div>
+                    </div>
+                  </div>
+                </InfoWindowF>
+              )
+            ))}
+
+            {/* Expanded detail card when location is selected */}
             {selectedLocation && (
               <InfoWindowF
                 position={selectedLocation.coordinates}
                 onCloseClick={() => setSelectedLocation(null)}
+                options={{ 
+                  disableAutoPan: true,
+                  pixelOffset: googleMaps ? new window.google.maps.Size(0, 0) : undefined
+                }}
               >
-                <div className="p-3 max-w-xs bg-white rounded-xl shadow-lg border border-gray-200">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div 
-                      className="w-8 h-8 rounded-full flex items-center justify-center text-white text-lg"
-                      style={{ backgroundColor: getLocationColor(selectedLocation.type) }}
-                    >
-                      {selectedLocation.type === 'train' && '🚄'}
-                      {selectedLocation.type === 'port' && '🚢'}
-                      {selectedLocation.type === 'factory' && '🏭'}
-                      {selectedLocation.type === 'osb' && '🏗️'}
-                      {selectedLocation.type === 'industrial' && '🏢'}
+                <div className="p-6 bg-gradient-to-br from-white via-gray-50 to-blue-50 rounded-xl shadow-2xl border-2 border-orange-500 w-96">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="flex items-center gap-3">
+                      <span className="text-5xl">{selectedLocation.icon}</span>
+                      <div>
+                        <h3 className="font-bold text-lg text-gray-900">{selectedLocation.title}</h3>
+                        <p className="text-orange-600 font-semibold text-sm">{selectedLocation.distance}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-bold text-gray-800 text-sm">{selectedLocation.title}</h4>
-                      <p className="text-gray-600 text-xs">{selectedLocation.distance}</p>
+                    <button
+                      onClick={() => setSelectedLocation(null)}
+                      className="text-gray-400 hover:text-gray-600 text-2xl font-bold leading-none"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  
+                  <div className="border-t border-gray-200 pt-4 mt-4">
+                    <p className="text-gray-700 text-sm leading-relaxed mb-4">{selectedLocation.description}</p>
+                    
+                    <div className="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-lg space-y-2">
+                      <div>
+                        <p className="text-xs text-gray-600">
+                          <span className="font-semibold text-gray-900">Lokasyon:</span>
+                        </p>
+                        <p className="text-sm text-gray-800">{selectedLocation.title}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-600">
+                          <span className="font-semibold text-gray-900">Mesafe:</span>
+                        </p>
+                        <p className="text-sm text-orange-600 font-semibold">{selectedLocation.distance}</p>
+                      </div>
                     </div>
                   </div>
-                  <p className="text-gray-600 text-sm">{selectedLocation.description}</p>
                 </div>
               </InfoWindowF>
             )}

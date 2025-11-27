@@ -1,34 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
-import { Building2, TrendingUp, Clock, Plane } from 'lucide-react';
-
-declare global {
-  interface Window {
-    google: any;
-    initMap: () => void;
-  }
-}
+/**
+ * DEPRECATED: This file is no longer used.
+ * Use StrategicLocationSection instead.
+ * This file can be safely deleted.
+ */
 
 export default function LocationSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<any>(null);
-  const [mapInitialized, setMapInitialized] = useState(false);
-  const [viewType, setViewType] = useState<'roadmap' | 'satellite'>('satellite');
-
-  useEffect(() => {
-    // Check if API key is available
-    if (import.meta.env.VITE_GOOGLE_MAPS_API_KEY && import.meta.env.VITE_GOOGLE_MAPS_API_KEY !== 'YOUR_API_KEY') {
-      const loadGoogleMaps = () => {
-        if (!window.google && !document.getElementById('google-maps-script')) {
-          const script = document.createElement('script');
-          script.id = 'google-maps-script';
-          script.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}&callback=initMap&loading=async`;
-          script.async = true;
-          script.defer = true;
-          
-          window.initMap = initializeMap;
-          document.head.appendChild(script);
-        } else if (window.google && !mapInitialized) {
+  return null;
+}
           initializeMap();
         }
       };

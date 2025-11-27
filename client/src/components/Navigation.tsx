@@ -11,6 +11,7 @@ const sectionNames = [
   'Giriş',
   'Ortaklık',
   'Projemiz',
+  'Istatistikler',
   'Stratejik Lokasyon',
   'Vaziyet Planı',
   'Kat Planları - 1. Etap',

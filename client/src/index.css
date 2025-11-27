@@ -103,8 +103,6 @@
     min-width: 100vw;
     height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
     overflow: hidden;
   }
@@ -407,29 +405,85 @@
   background-color: #1e293b !important;
 }
 
-/* Project Section Responsive Images */
-.project-section img {
-  max-width: 100%;
-  height: auto !important;
-  object-fit: contain !important;
+/* Project Section - Full width images */
+.project-section .section-image {
+  width: 100vw;
+  object-fit: cover;
   display: block;
 }
 
-/* Ensure images never get cropped in project section */
-@media (max-width: 640px) {
-  .project-section img {
-    max-height: 300px !important;
-  }
+.project-content-panel {
+  width: 22%;
+  height: 100%;
+  background-color: #111a2c;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  overflow-y: auto;
 }
 
-@media (min-width: 641px) and (max-width: 1023px) {
-  .project-section img {
-    max-height: 400px !important;
-  }
+.project-content-panel h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #f97316;
 }
 
-@media (min-width: 1024px) {
-  .project-section img {
-    max-height: 500px !important;
-  }
+.project-content-panel h2 {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.project-features {
+  margin-top: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-features h3 {
+  color: #f97316;
+  margin-bottom: 1rem;
+}
+
+.project-features ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.project-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.project-feature .bullet {
+  color: #f97316;
+  font-weight: bold;
+}
+
+.project-image-panel {
+  width: 78%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  position: relative;
+}
+
+.project-full-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
 }

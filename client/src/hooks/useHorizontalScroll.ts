@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 
 export function useHorizontalScroll() {
   const [currentSection, setCurrentSection] = useState(0);
-  const totalSections = 10;
+  const totalSections = 11;
 
   const navigateToSection = useCallback((section: number) => {
     if (section >= 0 && section < totalSections) {

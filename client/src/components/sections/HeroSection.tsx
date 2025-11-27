@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { Shield, ArrowUpDown, Zap, MapPin } from 'lucide-react';
 import { gsap } from 'gsap';
 import { useTranslation } from 'react-i18next';
 import { useAnimations } from '@/hooks/useAnimations';
@@ -29,7 +28,7 @@ export default function HeroSection() {
   return (
     <section 
       ref={sectionRef}
-      className="section"
+      className="section relative"
       data-testid="hero-section"
     >
       {/* Background Image */}
@@ -37,60 +36,139 @@ export default function HeroSection() {
         <img
           src="/intro.png"
           alt="Kapaklı Model Sanayi Merkezi Aerial View"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-center"
+          loading="eager"
+          fetchpriority="high"
+          style={{ objectPosition: 'center 40%' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
       </div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-8 text-center">
-        {/* Main Headline */}
-        <div id="hero-title" className="mb-12 opacity-0">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 leading-tight">
+      <div className="relative z-10 max-w-7xl mx-auto px-8">
+        {/* Main Title */}
+        <div id="hero-title" className="mb-12 opacity-0 text-center pt-20">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-6 leading-tight">
             <span style={{
               background: 'linear-gradient(to right, #ff5300, #ff6b1a)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'
             }}>
-              {t('hero.title')}
+              MODEL SANAYİ MERKEZİ KAPAKLI
             </span>
           </h1>
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-muted-foreground">
-            {t('hero.subtitle')}
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-16">
+            Modern Sanayi Tesisi ile İşinize Değer Katın
           </h2>
         </div>
         
-        {/* Facility Icons */}
-        <div id="hero-facilities" className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 opacity-0">
-          <div className="glass p-6 rounded-2xl pulse-hover glow transition-all duration-300 hover:scale-105" data-testid="facility-security">
-            <div className="w-16 h-16 mx-auto mb-4 bg-primary/20 rounded-full flex items-center justify-center">
-              <Shield className="w-8 h-8 text-primary" />
-            </div>
-            <h3 className="text-base md:text-lg font-bold mb-2">{t('hero.cards.strategic')}</h3>
-            <p className="text-muted-foreground text-sm md:text-base">{t('hero.cards.strategicDesc')}</p>
+        {/* Content Grid */}
+        <div id="hero-facilities" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 opacity-0">
+          {/* Stratejik Konum */}
+          <div className="bg-black/40 p-6 rounded-2xl border border-white/10">
+            <h3 className="text-xl font-bold mb-4" style={{
+              background: 'linear-gradient(to right, #ff5300, #ff6b1a)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}>Stratejik Konum</h3>
+            <ul className="space-y-2 text-white">
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>Yüksek Hızlı Tren 250 M</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>Çerkezköy OSB 3 KM</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>TEM Otoyolu 9 KM</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>Çorlu Havalimanı 30 KM</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>Asyaport Limanı 65 KM</span>
+              </li>
+            </ul>
           </div>
-          
-          <div className="glass p-6 rounded-2xl pulse-hover glow transition-all duration-300 hover:scale-105" data-testid="facility-parking">
-            <div className="w-16 h-16 mx-auto mb-4 bg-accent/20 rounded-full flex items-center justify-center">
-              <ArrowUpDown className="w-8 h-8 text-accent" />
-            </div>
-            <h3 className="text-base md:text-lg font-bold mb-2">{t('hero.cards.modern')}</h3>
-            <p className="text-muted-foreground text-sm md:text-base">{t('hero.cards.modernDesc')}</p>
+
+          {/* Genel Bilgiler */}
+          <div className="bg-black/40 p-6 rounded-2xl border border-white/10">
+            <h3 className="text-xl font-bold mb-4" style={{
+              background: 'linear-gradient(to right, #ff5300, #ff6b1a)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}>Genel Bilgiler</h3>
+            <ul className="space-y-2 text-white">
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>130.000 m² Arsa Alanı</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>5 Etap</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>312 Bağımsız İşyeri</span>
+              </li>
+            </ul>
           </div>
-          
-          <div className="glass p-6 rounded-2xl pulse-hover glow transition-all duration-300 hover:scale-105" data-testid="facility-infrastructure">
-            <div className="w-16 h-16 mx-auto mb-4 bg-success/20 rounded-full flex items-center justify-center">
-              <Zap className="w-8 h-8 text-success" />
-            </div>
-            <h3 className="text-base md:text-lg font-bold mb-2">{t('hero.cards.investment')}</h3>
-            <p className="text-muted-foreground text-sm md:text-base">{t('hero.cards.investmentDesc')}</p>
+
+          {/* Sanayi Sitesi İmkanları */}
+          <div className="bg-black/40 p-6 rounded-2xl border border-white/10">
+            <h3 className="text-xl font-bold mb-4" style={{
+              background: 'linear-gradient(to right, #ff5300, #ff6b1a)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}>Sanayi Sitesi İmkanları</h3>
+            <ul className="space-y-2 text-white">
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>Zeminde 5 Ton Taşıma Kapasitesi (m²)</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>Yüksek Kapasiteli Sanayi Elektriği</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>60 Ton Kantar Kapasitesi</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>7/24 Güvenlik Hizmetleri</span>
+              </li>
+            </ul>
           </div>
-          
-          <div className="glass p-6 rounded-2xl pulse-hover glow transition-all duration-300 hover:scale-105" data-testid="facility-location">
-            <div className="w-16 h-16 mx-auto mb-4 bg-destructive/20 rounded-full flex items-center justify-center">
-              <MapPin className="w-8 h-8 text-destructive" />
-            </div>
-            <h3 className="text-base md:text-lg font-bold mb-2">{t('hero.cards.quality')}</h3>
-            <p className="text-muted-foreground text-sm md:text-base">{t('hero.cards.qualityDesc')}</p>
+
+          {/* İşyeri Özellikleri */}
+          <div className="bg-black/40 p-6 rounded-2xl border border-white/10">
+            <h3 className="text-xl font-bold mb-4" style={{
+              background: 'linear-gradient(to right, #ff5300, #ff6b1a)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}>İşyeri Özellikleri</h3>
+            <ul className="space-y-2 text-white">
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>12 Metre Tavan Yüksekliği</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>5 Metre Ticari Araç Giriş Cephesi</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>Yangına Dayanıklı Cephe ve Çatı Panelleri</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>Uluslararası Standartta Yangın Söndürme Tesisatları</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

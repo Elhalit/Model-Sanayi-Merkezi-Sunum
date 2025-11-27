@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/sections/HeroSection';
 import PartnershipSection from '@/components/sections/PartnershipSection';
 import ProjectSection from '@/components/sections/ProjectSection';
+import StatisticsSection from '@/components/sections/StatisticsSection';
 import StrategicLocationSection from '@/components/sections/StrategicLocationSection';
 import MasterPlanSection from '@/components/sections/MasterPlanSection';
 import FloorPlansSection from '@/components/sections/FloorPlansSection';
@@ -20,7 +21,7 @@ export default function Presentation() {
     // Add keyboard navigation
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') navigateToSection(Math.max(0, currentSection - 1));
-      if (e.key === 'ArrowRight') navigateToSection(Math.min(9, currentSection + 1));
+      if (e.key === 'ArrowRight') navigateToSection(Math.min(10, currentSection + 1));
       if (e.key === 'Escape' && document.fullscreenElement) {
         document.exitFullscreen();
       }
@@ -44,7 +45,7 @@ export default function Presentation() {
       <Navigation 
         currentSection={currentSection}
         onNavigate={navigateToSection}
-        totalSections={10}
+        totalSections={11}
       />
 
       {/* Main Content Container */}
@@ -56,6 +57,7 @@ export default function Presentation() {
         <HeroSection />
         <PartnershipSection />
         <ProjectSection />
+        <StatisticsSection />
         <StrategicLocationSection />
         <MasterPlanSection />
         <FloorPlansSection />
