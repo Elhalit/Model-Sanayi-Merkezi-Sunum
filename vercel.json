@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "alias": ["model-sanayi-merkezi-sunum.vercel.app"],
   "builds": [
     {
       "src": "package.json",
