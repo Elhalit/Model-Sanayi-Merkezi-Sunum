@@ -81,7 +81,7 @@ export default function PartnershipSection() {
             console.log('Video autoplay prevented:', err);
           });
         }
-      }, 100);
+      }, 900); // Increased delay to match panel animation (800ms) + buffer
     }
   };
 
