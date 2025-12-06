@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useAnimations } from '@/hooks/useAnimations';
 
@@ -12,164 +13,125 @@ export default function HeroSection() {
     if (sectionRef.current) {
       // Initial animations
       const tl = gsap.timeline();
-      
-      tl.fromTo('#hero-title', 
-        { opacity: 0, y: 50 },
+
+      // Combined animation for the header block since they are now grouped vertically
+      tl.fromTo('#hero-header',
+        { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
       )
-      .fromTo('#hero-facilities', 
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, 
-        '-=0.5'
-      );
+        .fromTo('.hero-card',
+          { opacity: 0, y: 30, scale: 0.9 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.2, ease: 'power3.out' },
+          '-=0.5'
+        );
     }
   }, []);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
-      className="section relative"
+      className="section relative flex flex-col items-center justify-start h-screen min-h-screen pt-6 pb-0"
       data-testid="hero-section"
     >
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img
-          src="/intro.png"
-          alt="Kapaklı Model Sanayi Merkezi Aerial View"
-          className="w-full h-full object-cover object-center"
-          loading="eager"
-          fetchpriority="high"
-          style={{ objectPosition: 'center 40%' }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
+      {/* Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
+
+      {/* Header - Matching ProjectSection Standard */}
+      <div id="hero-header" className="relative z-10 text-center mb-8 opacity-0 w-full shrink-0">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-black mb-2 py-2" style={{
+          background: 'linear-gradient(to right, #ff5300, #ff6b1a, #ff5300)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text'
+        }}>
+          MODEL SANAYİ MERKEZİ KAPAKLI
+        </h1>
+        <h2 className="text-base md:text-lg font-semibold max-w-4xl mx-auto text-white">
+          Modern Sanayi Tesisi ile İşinize Değer Katın
+        </h2>
       </div>
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-8">
-        {/* Main Title */}
-        <div id="hero-title" className="mb-12 opacity-0 text-center pt-20">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-6 leading-tight">
-            <span style={{
-              background: 'linear-gradient(to right, #ff5300, #ff6b1a)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}>
-              MODEL SANAYİ MERKEZİ KAPAKLI
-            </span>
-          </h1>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-16">
-            Modern Sanayi Tesisi ile İşinize Değer Katın
-          </h2>
-        </div>
-        
+
+      <div className="relative z-10 max-w-7xl mx-auto px-8 w-full flex-1 flex items-center justify-center min-h-0">
+
         {/* Content Grid */}
-        <div id="hero-facilities" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 opacity-0">
+        <div id="hero-facilities" className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
           {/* Stratejik Konum */}
-          <div className="bg-black/40 p-6 rounded-2xl border border-white/10">
-            <h3 className="text-xl font-bold mb-4" style={{
+          <motion.div
+            className="hero-card opacity-0 rounded-2xl border backdrop-blur-md p-8 h-full flex flex-col items-center justify-center"
+            style={{
+              borderColor: '#ff6b1a40',
+              background: 'linear-gradient(145deg, rgba(2,6,23,0.8), rgba(15,23,42,0.8))',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
+            }}
+            whileHover={{ y: -5, transition: { duration: 0.3 } }}
+          >
+            <h3 className="text-2xl font-black mb-6 uppercase text-center tracking-wide" style={{
               background: 'linear-gradient(to right, #ff5300, #ff6b1a)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'
-            }}>Stratejik Konum</h3>
-            <ul className="space-y-2 text-white">
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Yüksek Hızlı Tren 250 M</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Çerkezköy OSB 3 KM</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>TEM Otoyolu 9 KM</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Çorlu Havalimanı 30 KM</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Asyaport Limanı 65 KM</span>
-              </li>
+            }}>STRATEJİK KONUM</h3>
+            <ul className="space-y-3 text-white text-center w-full">
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Avrupa Serbest Bölge</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Kuzey Marmara Otoyolu</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>TEM Otoyolu</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Yüksek Hızlı Tren</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>BALO Yük Treni</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Çorlu Havalimanı</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Asyaport Limanı</li>
             </ul>
-          </div>
+          </motion.div>
 
-          {/* Genel Bilgiler */}
-          <div className="bg-black/40 p-6 rounded-2xl border border-white/10">
-            <h3 className="text-xl font-bold mb-4" style={{
+          {/* Gümrükleme */}
+          <motion.div
+            className="hero-card opacity-0 rounded-2xl border backdrop-blur-md p-8 h-full flex flex-col items-center justify-center"
+            style={{
+              borderColor: '#ff6b1a40',
+              background: 'linear-gradient(145deg, rgba(2,6,23,0.8), rgba(15,23,42,0.8))',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
+            }}
+            whileHover={{ y: -5, transition: { duration: 0.3 } }}
+          >
+            <h3 className="text-2xl font-black mb-6 uppercase text-center tracking-wide" style={{
               background: 'linear-gradient(to right, #ff5300, #ff6b1a)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'
-            }}>Genel Bilgiler</h3>
-            <ul className="space-y-2 text-white">
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>130.000 m² Arsa Alanı</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>5 Etap</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>312 Bağımsız İşyeri</span>
-              </li>
+            }}>GÜMRÜKLEME</h3>
+            <ul className="space-y-3 text-white text-center w-full">
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Çerkezköy Gümrük Müdürlüğü</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Tekirdağ Gümrük Müdürlüğü</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Dereköy Gümrük Kapısı</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Pazarkule Gümrük Kapısı</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Kapıkule Gümrük Kapısı</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Hamzabeyli Gümrük Kapısı</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>İpsala Gümrük Kapısı</li>
             </ul>
-          </div>
+          </motion.div>
 
-          {/* Sanayi Sitesi İmkanları */}
-          <div className="bg-black/40 p-6 rounded-2xl border border-white/10">
-            <h3 className="text-xl font-bold mb-4" style={{
+          {/* Yakındaki OSB'ler */}
+          <motion.div
+            className="hero-card opacity-0 rounded-2xl border backdrop-blur-md p-8 h-full flex flex-col items-center justify-center"
+            style={{
+              borderColor: '#ff6b1a40',
+              background: 'linear-gradient(145deg, rgba(2,6,23,0.8), rgba(15,23,42,0.8))',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
+            }}
+            whileHover={{ y: -5, transition: { duration: 0.3 } }}
+          >
+            <h3 className="text-2xl font-black mb-6 uppercase text-center tracking-wide" style={{
               background: 'linear-gradient(to right, #ff5300, #ff6b1a)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'
-            }}>Sanayi Sitesi İmkanları</h3>
-            <ul className="space-y-2 text-white">
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Zeminde 5 Ton Taşıma Kapasitesi (m²)</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Yüksek Kapasiteli Sanayi Elektriği</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>60 Ton Kantar Kapasitesi</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>7/24 Güvenlik Hizmetleri</span>
-              </li>
+            }}>YAKINDAKİ OSB'LER</h3>
+            <ul className="space-y-3 text-white text-center w-full">
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Çerkezköy OSB</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Velimeşe OSB</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Veliköy OSB</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Ergene OSB</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Çorlu OSB</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Kapaklı OSB</li>
+              <li className="text-lg font-medium"><span className="text-[#ff6b1a] mr-2">•</span>Yalıboyu OSB</li>
             </ul>
-          </div>
-
-          {/* İşyeri Özellikleri */}
-          <div className="bg-black/40 p-6 rounded-2xl border border-white/10">
-            <h3 className="text-xl font-bold mb-4" style={{
-              background: 'linear-gradient(to right, #ff5300, #ff6b1a)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}>İşyeri Özellikleri</h3>
-            <ul className="space-y-2 text-white">
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>12 Metre Tavan Yüksekliği</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>5 Metre Ticari Araç Giriş Cephesi</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Yangına Dayanıklı Cephe ve Çatı Panelleri</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Uluslararası Standartta Yangın Söndürme Tesisatları</span>
-              </li>
-            </ul>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

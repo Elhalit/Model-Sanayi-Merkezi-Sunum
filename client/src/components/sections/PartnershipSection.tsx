@@ -9,7 +9,7 @@ export default function PartnershipSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const constellationRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const somVideoRef = useRef<HTMLVideoElement>(null);
+
   const { animateOnScroll } = useAnimations();
   const [selectedCompany, setSelectedCompany] = useState<string | null>(null);
 
@@ -20,7 +20,7 @@ export default function PartnershipSection() {
       gsap.set('.company-info', { opacity: 1, y: 0 });
 
       // Initial title animation
-      gsap.fromTo('#partnership-title', 
+      gsap.fromTo('#partnership-title',
         { opacity: 0, y: 100, scale: 0.8 },
         { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power3.out', delay: 0.3 }
       );
@@ -57,37 +57,27 @@ export default function PartnershipSection() {
 
   const handleNodeClick = (companyId: string) => {
     setSelectedCompany(companyId);
-    
+
     // Zoom out constellation
     gsap.to('.constellation-container', {
       scale: 0.7,
-      x: '-20%',
+      x: '20%',
       duration: 0.8,
       ease: 'power3.out'
     });
-    
+
     // Show detail panel
-    gsap.fromTo('#detail-panel', 
-      { x: '100%' },
+    gsap.fromTo('#detail-panel',
+      { x: '-100%' },
       { x: '0%', duration: 0.8, ease: 'power3.out' }
     );
 
-    // Start Som video from 40 seconds if Som is selected
-    if (companyId === 'som') {
-      setTimeout(() => {
-        if (somVideoRef.current) {
-          somVideoRef.current.currentTime = 40;
-          somVideoRef.current.play().catch(err => {
-            console.log('Video autoplay prevented:', err);
-          });
-        }
-      }, 900); // Increased delay to match panel animation (800ms) + buffer
-    }
+
   };
 
   const closeDetailPanel = () => {
     setSelectedCompany(null);
-    
+
     // Reset constellation position
     gsap.to('.constellation-container', {
       scale: 1,
@@ -95,10 +85,10 @@ export default function PartnershipSection() {
       duration: 0.8,
       ease: 'power3.out'
     });
-    
+
     // Hide detail panel
     gsap.to('#detail-panel', {
-      x: '100%',
+      x: '-100%',
       duration: 0.8,
       ease: 'power3.out'
     });
@@ -151,7 +141,7 @@ export default function PartnershipSection() {
         projects: [],
         color: 'from-gray-600 to-gray-800',
         icon: Factory,
-        logo: '/Som-Prefabrik-Logo.png',
+        logo: '/som.png',
         story: "Prefabrik Betonarme Yapı sektöründe, müşterilerimizin gereksinimleri ile beklentilerinin karşılanması ve aşılmasına yönelik olarak üretim, satış ve satış sonrası hizmetlerde faaliyet göstermektedir.",
         videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" // Placeholder video URL - replace with actual SOM video
       }
@@ -160,7 +150,7 @@ export default function PartnershipSection() {
   };
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="section relative overflow-hidden"
       data-testid="partnership-section"
@@ -170,7 +160,7 @@ export default function PartnershipSection() {
 
       {/* Hakkımızda Title - Absolute Left */}
       <div className="absolute top-8 left-8 z-30">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black" style={{ 
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black py-2" style={{
           background: 'linear-gradient(to right, #ff5300, #ff6b1a, #ff5300)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
@@ -181,274 +171,273 @@ export default function PartnershipSection() {
       </div>
 
       <div className="relative z-10 h-full w-full flex items-center justify-center">
-        {/* Centered Container for both companies */}
-        <div className="flex items-center justify-center gap-24">
-          {/* Left Side - İnno Logo and About */}
-          <div 
-            className="w-[420px] flex flex-col justify-center items-center px-6 py-16 space-y-8 cursor-pointer hover:bg-white/5 transition-all duration-300 rounded-lg"
-            onClick={() => handleNodeClick('inno')}
+        {/* Main INNO Section - Full Width */}
+        <div className="w-full px-8">
+          <div
+            className="flex flex-row items-center gap-8 px-8 py-16"
           >
-            <div className="w-48 h-48 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center p-4">
-              <img 
-                src="/inno-logo.png" 
-                alt="İNNO Gayrimenkul Yatırım Logo" 
+            {/* INNO Logo */}
+            <div className="shrink-0 w-80 h-64 flex items-center justify-center">
+              <img
+                src="/innogy_new.png"
+                alt="İNNO Gayrimenkul Yatırım Logo"
                 className="w-full h-full object-contain"
                 style={{ background: 'transparent', border: 'none' }}
                 onError={(e) => {
-                  console.error('Failed to load İnno logo, trying alternative path');
+                  console.error('Failed to load İnno logo');
                   const target = e.target as HTMLImageElement;
-                  if (target.src.includes('inno-logo.png')) {
-                    target.src = '/İnno-GY-Logo.png';
-                  } else {
-                    target.style.display = 'none';
-                    target.nextElementSibling?.classList.remove('hidden');
-                  }
+                  target.style.display = 'none';
+                  target.nextElementSibling?.classList.remove('hidden');
                 }}
               />
-              <Hammer className="w-16 h-16 text-white hidden" />
+              <Hammer className="w-10 h-10 text-white hidden" />
             </div>
-            <div className="text-center max-w-xl">
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-4">İNNO Gayrimenkul Yatırım A.Ş.</h3>
-              <p className="text-base md:text-lg text-white/80 leading-relaxed">
-                Sektördeki 30.yılını dolduran İnno Gayrimenkul fizibilite çalışmalarını önceden tamamladığı stratejik lokasyonlarda ülke sanayisine katkı sunmak ve gayrimenkul sektörünü ileri taşımak için endüstriyel tesis, imalathane, depolama ve lojistik alanları inşa etmektedir.
-              </p>
-            </div>
-          </div>
 
-          {/* Right Side - Som Logo and About */}
-          <div 
-            className="w-[420px] flex flex-col justify-center items-center px-6 py-16 space-y-8 cursor-pointer hover:bg-white/5 transition-all duration-300 rounded-lg"
-            onClick={() => handleNodeClick('som')}
-          >
-            <div className="w-48 h-48 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center p-4">
-              <img 
-                src="/Som-Prefabrik-Logo.png" 
-                alt="Som Prefabrik Logo" 
-                className="w-full h-full object-contain"
-                style={{ background: 'transparent', border: 'none' }}
-              />
-            </div>
-            <div className="text-center max-w-xl">
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Som Prefabrik İnşaat A.Ş.</h3>
-              <p className="text-base md:text-lg text-white/80 leading-relaxed">
-                Kurulduğu günden bu yana, güvenli, hızlı ve ekonomik prefabrikasyon çözümleri sunma hedefiyle faaliyet göstermektedir. Üretim süreçlerinin her aşamasında uluslararası kalite standartlarına, ileri mühendislik ilkelerine ve çevreye duyarlı üretim anlayışına bağlı kalarak çalışır.
+            {/* INNO Description */}
+            <div className="flex-1">
+              <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">İNNO Gayrimenkul Yatırım A.Ş.</h3>
+              <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
+                Sektördeki 30. yılını dolduran İnno Gayrimenkul, fizibilite çalışmalarını önceden tamamladığı stratejik lokasyonlarda ülke sanayisine katkı sunmak ve gayrimenkul sektörünü ileri taşımak için endüstriyel tesis, imalathane, depolama ve lojistik alanları inşa etmektedir.{' '}
+                <span
+                  className="font-bold cursor-pointer hover:scale-105 inline-block transition-transform"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNodeClick('som');
+                  }}
+                  style={{
+                    background: 'linear-gradient(to right, #ff5300, #ff6b1a, #ff5300)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    textDecoration: 'underline',
+                    textDecorationColor: '#ff5300'
+                  }}
+                >
+                  Üretimdeki gücümüz
+                </span>
+                {' '}ile sektörde fark yaratmaya devam ediyoruz.
               </p>
             </div>
           </div>
         </div>
-          {/* Constellation removed - replaced with simple two-column layout */}
-          <div style={{ display: 'none' }}>
-            <svg style={{ display: 'none' }}>
-              <defs>
-                <linearGradient id="energyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.8" />
-                  <stop offset="50%" stopColor="#f59e0b" stopOpacity="1" />
-                  <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.8" />
-                </linearGradient>
-                
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="0.5" result="coloredBlur"/>
-                  <feMerge> 
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-              </defs>
-              
-              {/* Nadir to INNO - NEW: starts from bottom-right of Nadir, ends at top-left of INNO */}
-              <path 
-                d="M 20 30 Q 35 40 50 50" 
-                stroke="url(#energyGradient)" 
-                strokeWidth="0.4" 
-                fill="none"
-                filter="url(#glow)"
-                className="opacity-80"
-                strokeDasharray="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                vectorEffect="non-scaling-stroke"
-              />
-              
-              {/* NET to INNO - NEW: starts from bottom-left of NET, ends at top-right of INNO */}
-              <path 
-                d="M 80 30 Q 65 40 50 50" 
-                stroke="url(#energyGradient)" 
-                strokeWidth="0.4" 
-                fill="none"
-                filter="url(#glow)"
-                className="opacity-80"
-                strokeDasharray="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                vectorEffect="non-scaling-stroke"
-              />
-              
-              {/* SOM to NET - NEW: vertical line from SOM to NET */}
-              <path 
-                d="M 80 70 L 80 30" 
-                stroke="url(#energyGradient)" 
-                strokeWidth="0.4" 
-                fill="none"
-                filter="url(#glow)"
-                className="opacity-80"
-                strokeDasharray="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                vectorEffect="non-scaling-stroke"
-              />
-            </svg>
+        {/* Constellation removed - replaced with simple two-column layout */}
+        <div style={{ display: 'none' }}>
+          <svg style={{ display: 'none' }}>
+            <defs>
+              <linearGradient id="energyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#f59e0b" stopOpacity="1" />
+                <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.8" />
+              </linearGradient>
 
-            {/* Central Node - INNO Gayrimenkul */}
-            <div 
-              id="inno"
-              className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 ${selectedCompany ? 'pointer-events-none' : 'cursor-pointer'}`}
-              onClick={() => handleNodeClick('inno')}
-            >
-              <div className="relative flex flex-col items-center">
-                <div className="w-36 h-36 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center p-2">
-                  <img 
-                    src="/İnno-GY-Logo.png" 
-                    alt="İNNO Gayrimenkul Yatırım Logo" 
-                    className="w-full h-full object-contain"
-                    style={{ background: 'transparent', border: 'none' }}
-                    onError={(e) => {
-                      // Fallback to icon if image fails to load
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      target.nextElementSibling?.classList.remove('hidden');
-                    }}
-                  />
-                  <Hammer className="w-10 h-10 text-gray-400 hidden" />
-                </div>
-                <div className="text-center mt-3">
-                  <h3 className="text-sm md:text-base font-bold text-white leading-tight">İNNO Gayrimenkul Yatırım A.Ş.</h3>
-                  <p className="text-xs md:text-sm text-white/80 mt-1">2017</p>
-                </div>
-              </div>
-            </div>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="0.5" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
 
-            {/* Partner Nodes */}
-            {/* Nadir Metal Rafineri */}
-            <div 
-              id="nadir"
-              className={`constellation-node partner-node absolute z-10 ${selectedCompany ? 'pointer-events-none' : 'cursor-pointer'}`}
-              style={{ top: '15%', left: '8%' }}
-              onClick={() => handleNodeClick('nadir')}
-            >
-              <div className="relative flex flex-col items-center">
-                <div className="w-28 h-28 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center p-2">
-                  <img 
-                    src="/nadirmetal.jpeg" 
-                    alt="Nadir Metal Rafineri Logo" 
-                    className="w-full h-full object-contain rounded-full"
-                    style={{ background: 'transparent', border: 'none' }}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      target.nextElementSibling?.classList.remove('hidden');
-                    }}
-                  />
-                  <Award className="w-10 h-10 text-gray-400 hidden" />
-                </div>
-                <div className="text-center mt-2">
-                  <span className="text-xs md:text-sm font-bold text-white leading-tight block">Nadir Metal Rafineri</span>
-                  <span className="text-xs text-white/80 block mt-1">1967</span>
-                </div>
+            {/* Nadir to INNO - NEW: starts from bottom-right of Nadir, ends at top-left of INNO */}
+            <path
+              d="M 20 30 Q 35 40 50 50"
+              stroke="url(#energyGradient)"
+              strokeWidth="0.4"
+              fill="none"
+              filter="url(#glow)"
+              className="opacity-80"
+              strokeDasharray="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              vectorEffect="non-scaling-stroke"
+            />
+
+            {/* NET to INNO - NEW: starts from bottom-left of NET, ends at top-right of INNO */}
+            <path
+              d="M 80 30 Q 65 40 50 50"
+              stroke="url(#energyGradient)"
+              strokeWidth="0.4"
+              fill="none"
+              filter="url(#glow)"
+              className="opacity-80"
+              strokeDasharray="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              vectorEffect="non-scaling-stroke"
+            />
+
+            {/* SOM to NET - NEW: vertical line from SOM to NET */}
+            <path
+              d="M 80 70 L 80 30"
+              stroke="url(#energyGradient)"
+              strokeWidth="0.4"
+              fill="none"
+              filter="url(#glow)"
+              className="opacity-80"
+              strokeDasharray="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              vectorEffect="non-scaling-stroke"
+            />
+          </svg>
+
+          {/* Central Node - INNO Gayrimenkul */}
+          <div
+            id="inno"
+            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 ${selectedCompany ? 'pointer-events-none' : 'cursor-pointer'}`}
+            onClick={() => handleNodeClick('inno')}
+          >
+            <div className="relative flex flex-col items-center">
+              <div className="w-36 h-36 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center p-2">
+                <img
+                  src="/İnno-GY-Logo.png"
+                  alt="İNNO Gayrimenkul Yatırım Logo"
+                  className="w-full h-full object-contain"
+                  style={{ background: 'transparent', border: 'none' }}
+                  onError={(e) => {
+                    // Fallback to icon if image fails to load
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    target.nextElementSibling?.classList.remove('hidden');
+                  }}
+                />
+                <Hammer className="w-10 h-10 text-gray-400 hidden" />
               </div>
-            </div>
-  
-            {/* NET İnşaat */}
-            <div 
-              id="net"
-              className={`constellation-node partner-node absolute z-10 ${selectedCompany ? 'pointer-events-none' : 'cursor-pointer'}`}
-              style={{ top: '15%', right: '8%' }}
-              onClick={() => handleNodeClick('net')}
-            >
-              <div className="relative flex flex-col items-center">
-                <div className="w-28 h-28 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center p-2">
-                  <img 
-                    src="/Net-logo.png" 
-                    alt="NET İnşaat Danışmanlık Mühendislik Logo" 
-                    className="w-full h-full object-contain rounded-full"
-                    style={{ background: 'transparent', border: 'none' }}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      target.nextElementSibling?.classList.remove('hidden');
-                    }}
-                  />
-                  <Building2 className="w-10 h-10 text-gray-400 hidden" />
-                </div>
-                <div className="text-center mt-2">
-                  <span className="text-xs md:text-sm font-bold text-white leading-tight block">NET İnşaat Danışmanlık Mühendislik A.Ş.</span>
-                  <span className="text-xs text-white/80 block mt-1">1996</span>
-                </div>
-              </div>
-            </div>
-  
-            {/* SOM Prefabrik */}
-            <div 
-              id="som"
-              className={`constellation-node partner-node absolute z-10 ${selectedCompany ? 'pointer-events-none' : 'cursor-pointer'}`}
-              style={{ bottom: '15%', right: '8%' }}
-              onClick={() => handleNodeClick('som')}
-            >
-              <div className="relative flex flex-col items-center">
-                <div className="w-28 h-28 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center p-2">
-                  <img 
-                    src="/Som-Prefabrik-Logo.png" 
-                    alt="SOM Prefabrik Betonarme Logo" 
-                    className="w-full h-full object-contain rounded-full"
-                    style={{ background: 'transparent', border: 'none' }}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      target.nextElementSibling?.classList.remove('hidden');
-                    }}
-                  />
-                  <Factory className="w-10 h-10 text-gray-400 hidden" />
-                </div>
-                <div className="text-center mt-2">
-                  <span className="text-xs md:text-sm font-bold text-white leading-tight block">Som Prefabrik İnşaat A.Ş.</span>
-                  <span className="text-xs text-white/80 block mt-1">Betonarme Yapı</span>
-                </div>
+              <div className="text-center mt-3">
+                <h3 className="text-sm md:text-base font-bold text-white leading-tight">İNNO Gayrimenkul Yatırım A.Ş.</h3>
+                <p className="text-xs md:text-sm text-white/80 mt-1">2017</p>
               </div>
             </div>
           </div>
+
+          {/* Partner Nodes */}
+          {/* Nadir Metal Rafineri */}
+          <div
+            id="nadir"
+            className={`constellation-node partner-node absolute z-10 ${selectedCompany ? 'pointer-events-none' : 'cursor-pointer'}`}
+            style={{ top: '15%', left: '8%' }}
+            onClick={() => handleNodeClick('nadir')}
+          >
+            <div className="relative flex flex-col items-center">
+              <div className="w-28 h-28 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center p-2">
+                <img
+                  src="/nadirmetal.jpeg"
+                  alt="Nadir Metal Rafineri Logo"
+                  className="w-full h-full object-contain rounded-full"
+                  style={{ background: 'transparent', border: 'none' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    target.nextElementSibling?.classList.remove('hidden');
+                  }}
+                />
+                <Award className="w-10 h-10 text-gray-400 hidden" />
+              </div>
+              <div className="text-center mt-2">
+                <span className="text-xs md:text-sm font-bold text-white leading-tight block">Nadir Metal Rafineri</span>
+                <span className="text-xs text-white/80 block mt-1">1967</span>
+              </div>
+            </div>
+          </div>
+
+          {/* NET İnşaat */}
+          <div
+            id="net"
+            className={`constellation-node partner-node absolute z-10 ${selectedCompany ? 'pointer-events-none' : 'cursor-pointer'}`}
+            style={{ top: '15%', right: '8%' }}
+            onClick={() => handleNodeClick('net')}
+          >
+            <div className="relative flex flex-col items-center">
+              <div className="w-28 h-28 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center p-2">
+                <img
+                  src="/Net-logo.png"
+                  alt="NET İnşaat Danışmanlık Mühendislik Logo"
+                  className="w-full h-full object-contain rounded-full"
+                  style={{ background: 'transparent', border: 'none' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    target.nextElementSibling?.classList.remove('hidden');
+                  }}
+                />
+                <Building2 className="w-10 h-10 text-gray-400 hidden" />
+              </div>
+              <div className="text-center mt-2">
+                <span className="text-xs md:text-sm font-bold text-white leading-tight block">NET İnşaat Danışmanlık Mühendislik A.Ş.</span>
+                <span className="text-xs text-white/80 block mt-1">1996</span>
+              </div>
+            </div>
+          </div>
+
+          {/* SOM Prefabrik */}
+          <div
+            id="som"
+            className={`constellation-node partner-node absolute z-10 ${selectedCompany ? 'pointer-events-none' : 'cursor-pointer'}`}
+            style={{ bottom: '15%', right: '8%' }}
+            onClick={() => handleNodeClick('som')}
+          >
+            <div className="relative flex flex-col items-center">
+              <div className="w-28 h-28 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center p-2">
+                <img
+                  src="/som.png"
+                  alt="SOM Prefabrik Betonarme Logo"
+                  className="w-full h-full object-contain rounded-full"
+                  style={{ background: 'transparent', border: 'none' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    target.nextElementSibling?.classList.remove('hidden');
+                  }}
+                />
+                <Factory className="w-10 h-10 text-gray-400 hidden" />
+              </div>
+              <div className="text-center mt-2">
+                <span className="text-xs md:text-sm font-bold text-white leading-tight block">Som Prefabrik İnşaat A.Ş.</span>
+                <span className="text-xs text-white/80 block mt-1">Betonarme Yapı</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Detail Panel */}
       {selectedCompany && (
-        <div 
+        <div
           id="detail-panel"
-          className="fixed top-0 right-0 bottom-0 bg-background/95 backdrop-blur-xl border-l border-border z-50"
-          style={{ 
-            transform: 'translateX(100%)',
+          className="fixed top-0 left-0 bottom-0 bg-background/95 backdrop-blur-xl border-r border-border z-50"
+          style={{
+            transform: 'translateX(-100%)',
             width: '50vw',
             maxWidth: '50vw'
           }}
         >
+          {/* Added prominent, absolute positioned close button for the panel */}
+          <button
+            onClick={closeDetailPanel}
+            className="absolute top-6 right-6 z-50 p-3 bg-white/10 text-white rounded-full shadow-lg hover:bg-white/20 hover:scale-110 transition-all duration-300"
+            title="Kapat"
+          >
+            <X className="w-8 h-8" />
+          </button>
+
           <div className="h-full flex flex-col">
-            <div className="flex items-center justify-between p-8 pb-4 border-b border-border/20">
+            <div className="flex items-center justify-between p-8 pb-4 border-b border-border/20 pr-20">
               <h2 className="text-2xl md:text-3xl font-bold text-primary">
                 {getCompanyData(selectedCompany)?.title}
               </h2>
-              <button
-                onClick={closeDetailPanel}
-                className="p-2 hover:bg-muted rounded-full transition-colors"
-              >
-                <X className="w-6 h-6" />
-              </button>
+              {/* Original header button kept as fallback but hidden on small screens if needed, or we can remove it. Keeping for layout balance but making it invisible or keeping it as secondary. */}
             </div>
-            
+
             <div className="flex-1 overflow-y-auto p-8">
               <div className="space-y-6">
-                <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 p-4">
+                <div className={`${selectedCompany === 'som' ? 'w-48 h-24' : 'w-32 h-32 rounded-full bg-white p-4'} flex items-center justify-center mb-6`}>
                   {getCompanyData(selectedCompany)?.logo ? (
-                    <img 
-                      src={getCompanyData(selectedCompany)?.logo} 
+                    <img
+                      src={getCompanyData(selectedCompany)?.logo}
                       alt={`${getCompanyData(selectedCompany)?.title} Logo`}
-                      className="w-full h-full object-contain rounded-full"
+                      className={`w-full h-full object-contain ${selectedCompany === 'som' ? '' : 'rounded-full'}`}
+                      style={{ background: 'transparent', border: 'none' }}
                     />
                   ) : (
                     (() => {
@@ -458,7 +447,7 @@ export default function PartnershipSection() {
                     })()
                   )}
                 </div>
-                
+
                 <div>
                   <h3 className="text-lg md:text-xl font-semibold mb-4">Hakkımızda</h3>
                   <div className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6 max-h-96 overflow-y-auto">
@@ -474,15 +463,15 @@ export default function PartnershipSection() {
                 {selectedCompany === 'som' && (
                   <div>
                     <h3 className="text-lg md:text-xl font-semibold mb-4">Tanıtım Videosu</h3>
-                    <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                    <div className="aspect-video rounded-lg overflow-hidden bg-black relative group">
                       <video
-                        ref={somVideoRef}
-                        width="100%"
-                        height="100%"
                         controls
                         className="w-full h-full"
+                        src="/SOM PREFABRİK TANITIM.mp4"
+                        onLoadedMetadata={(e) => {
+                          e.currentTarget.currentTime = 41;
+                        }}
                       >
-                        <source src="/som-video.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
                     </div>
@@ -493,8 +482,6 @@ export default function PartnershipSection() {
           </div>
         </div>
       )}
-
-
     </section>
   );
 }

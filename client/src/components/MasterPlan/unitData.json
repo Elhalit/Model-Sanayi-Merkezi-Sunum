@@ -1,0 +1,2258 @@
+[
+  {
+    "id": "unit-M-1",
+    "block": "M",
+    "unitNumber": 1,
+    "M2": 120,
+    "status": "available",
+    "price": "$267,000"
+  },
+  {
+    "id": "unit-M-2",
+    "block": "M",
+    "unitNumber": 2,
+    "M2": 120,
+    "status": "available",
+    "price": "$392,000"
+  },
+  {
+    "id": "unit-M-3",
+    "block": "M",
+    "unitNumber": 3,
+    "M2": 120,
+    "status": "available",
+    "price": "$211,000"
+  },
+  {
+    "id": "unit-M-4",
+    "block": "M",
+    "unitNumber": 4,
+    "M2": 120,
+    "status": "available",
+    "price": "$275,000"
+  },
+  {
+    "id": "unit-M-5",
+    "block": "M",
+    "unitNumber": 5,
+    "M2": 120,
+    "status": "reserved",
+    "price": "$242,000"
+  },
+  {
+    "id": "unit-M-6",
+    "block": "M",
+    "unitNumber": 6,
+    "M2": 120,
+    "status": "available",
+    "price": "$276,000"
+  },
+  {
+    "id": "unit-M-7",
+    "block": "M",
+    "unitNumber": 7,
+    "M2": 120,
+    "status": "reserved",
+    "price": "$361,000"
+  },
+  {
+    "id": "unit-M-8",
+    "block": "M",
+    "unitNumber": 8,
+    "M2": 120,
+    "status": "reserved",
+    "price": "$288,000"
+  },
+  {
+    "id": "unit-M-9",
+    "block": "M",
+    "unitNumber": 9,
+    "M2": 120,
+    "status": "available",
+    "price": "$399,000"
+  },
+  {
+    "id": "unit-M-10",
+    "block": "M",
+    "unitNumber": 10,
+    "M2": 120,
+    "status": "available",
+    "price": "$397,000"
+  },
+  {
+    "id": "unit-M-11",
+    "block": "M",
+    "unitNumber": 11,
+    "M2": 120,
+    "status": "sold",
+    "price": "$226,000"
+  },
+  {
+    "id": "unit-M-12",
+    "block": "M",
+    "unitNumber": 12,
+    "M2": 120,
+    "status": "available",
+    "price": "$363,000"
+  },
+  {
+    "id": "unit-M-13",
+    "block": "M",
+    "unitNumber": 13,
+    "M2": 120,
+    "status": "reserved",
+    "price": "$211,000"
+  },
+  {
+    "id": "unit-M-14",
+    "block": "M",
+    "unitNumber": 14,
+    "M2": 120,
+    "status": "reserved",
+    "price": "$228,000"
+  },
+  {
+    "id": "unit-M-15",
+    "block": "M",
+    "unitNumber": 15,
+    "M2": 120,
+    "status": "available",
+    "price": "$274,000"
+  },
+  {
+    "id": "unit-M-16",
+    "block": "M",
+    "unitNumber": 16,
+    "M2": 120,
+    "status": "reserved",
+    "price": "$367,000"
+  },
+  {
+    "id": "unit-M-17",
+    "block": "M",
+    "unitNumber": 17,
+    "M2": 120,
+    "status": "sold",
+    "price": "$248,000"
+  },
+  {
+    "id": "unit-M-18",
+    "block": "M",
+    "unitNumber": 18,
+    "M2": 120,
+    "status": "available",
+    "price": "$306,000"
+  },
+  {
+    "id": "unit-M-19",
+    "block": "M",
+    "unitNumber": 19,
+    "M2": 120,
+    "status": "available",
+    "price": "$302,000"
+  },
+  {
+    "id": "unit-M-20",
+    "block": "M",
+    "unitNumber": 20,
+    "M2": 120,
+    "status": "sold",
+    "price": "$269,000"
+  },
+  {
+    "id": "unit-M-21",
+    "block": "M",
+    "unitNumber": 21,
+    "M2": 120,
+    "status": "reserved",
+    "price": "$264,000"
+  },
+  {
+    "id": "unit-M-22",
+    "block": "M",
+    "unitNumber": 22,
+    "M2": 120,
+    "status": "reserved",
+    "price": "$232,000"
+  },
+  {
+    "id": "unit-M-23",
+    "block": "M",
+    "unitNumber": 23,
+    "M2": 120,
+    "status": "available",
+    "price": "$379,000"
+  },
+  {
+    "id": "unit-M-24",
+    "block": "M",
+    "unitNumber": 24,
+    "M2": 120,
+    "status": "available",
+    "price": "$317,000"
+  },
+  {
+    "id": "unit-L-1",
+    "block": "L",
+    "unitNumber": 1,
+    "M2": 155,
+    "status": "available",
+    "price": "$272,000"
+  },
+  {
+    "id": "unit-L-2",
+    "block": "L",
+    "unitNumber": 2,
+    "M2": 155,
+    "status": "available",
+    "price": "$317,000"
+  },
+  {
+    "id": "unit-L-3",
+    "block": "L",
+    "unitNumber": 3,
+    "M2": 155,
+    "status": "available",
+    "price": "$320,000"
+  },
+  {
+    "id": "unit-L-4",
+    "block": "L",
+    "unitNumber": 4,
+    "M2": 155,
+    "status": "sold",
+    "price": "$337,000"
+  },
+  {
+    "id": "unit-L-5",
+    "block": "L",
+    "unitNumber": 5,
+    "M2": 155,
+    "status": "available",
+    "price": "$386,000"
+  },
+  {
+    "id": "unit-L-6",
+    "block": "L",
+    "unitNumber": 6,
+    "M2": 155,
+    "status": "available",
+    "price": "$323,000"
+  },
+  {
+    "id": "unit-L-7",
+    "block": "L",
+    "unitNumber": 7,
+    "M2": 155,
+    "status": "available",
+    "price": "$287,000"
+  },
+  {
+    "id": "unit-L-8",
+    "block": "L",
+    "unitNumber": 8,
+    "M2": 155,
+    "status": "sold",
+    "price": "$387,000"
+  },
+  {
+    "id": "unit-L-9",
+    "block": "L",
+    "unitNumber": 9,
+    "M2": 155,
+    "status": "reserved",
+    "price": "$381,000"
+  },
+  {
+    "id": "unit-L-10",
+    "block": "L",
+    "unitNumber": 10,
+    "M2": 155,
+    "status": "available",
+    "price": "$322,000"
+  },
+  {
+    "id": "unit-L-11",
+    "block": "L",
+    "unitNumber": 11,
+    "M2": 155,
+    "status": "available",
+    "price": "$276,000"
+  },
+  {
+    "id": "unit-L-12",
+    "block": "L",
+    "unitNumber": 12,
+    "M2": 155,
+    "status": "sold",
+    "price": "$387,000"
+  },
+  {
+    "id": "unit-L-13",
+    "block": "L",
+    "unitNumber": 13,
+    "M2": 155,
+    "status": "reserved",
+    "price": "$259,000"
+  },
+  {
+    "id": "unit-L-14",
+    "block": "L",
+    "unitNumber": 14,
+    "M2": 155,
+    "status": "available",
+    "price": "$302,000"
+  },
+  {
+    "id": "unit-L-15",
+    "block": "L",
+    "unitNumber": 15,
+    "M2": 155,
+    "status": "reserved",
+    "price": "$305,000"
+  },
+  {
+    "id": "unit-L-16",
+    "block": "L",
+    "unitNumber": 16,
+    "M2": 155,
+    "status": "available",
+    "price": "$301,000"
+  },
+  {
+    "id": "unit-L-17",
+    "block": "L",
+    "unitNumber": 17,
+    "M2": 155,
+    "status": "available",
+    "price": "$336,000"
+  },
+  {
+    "id": "unit-L-18",
+    "block": "L",
+    "unitNumber": 18,
+    "M2": 155,
+    "status": "sold",
+    "price": "$369,000"
+  },
+  {
+    "id": "unit-L-19",
+    "block": "L",
+    "unitNumber": 19,
+    "M2": 155,
+    "status": "sold",
+    "price": "$394,000"
+  },
+  {
+    "id": "unit-L-20",
+    "block": "L",
+    "unitNumber": 20,
+    "M2": 155,
+    "status": "sold",
+    "price": "$245,000"
+  },
+  {
+    "id": "unit-K-1",
+    "block": "K",
+    "unitNumber": 1,
+    "M2": 155,
+    "status": "reserved",
+    "price": "$386,000"
+  },
+  {
+    "id": "unit-K-2",
+    "block": "K",
+    "unitNumber": 2,
+    "M2": 155,
+    "status": "reserved",
+    "price": "$292,000"
+  },
+  {
+    "id": "unit-K-3",
+    "block": "K",
+    "unitNumber": 3,
+    "M2": 155,
+    "status": "reserved",
+    "price": "$215,000"
+  },
+  {
+    "id": "unit-K-4",
+    "block": "K",
+    "unitNumber": 4,
+    "M2": 155,
+    "status": "sold",
+    "price": "$361,000"
+  },
+  {
+    "id": "unit-K-5",
+    "block": "K",
+    "unitNumber": 5,
+    "M2": 155,
+    "status": "available",
+    "price": "$284,000"
+  },
+  {
+    "id": "unit-K-6",
+    "block": "K",
+    "unitNumber": 6,
+    "M2": 155,
+    "status": "available",
+    "price": "$248,000"
+  },
+  {
+    "id": "unit-K-7",
+    "block": "K",
+    "unitNumber": 7,
+    "M2": 155,
+    "status": "reserved",
+    "price": "$276,000"
+  },
+  {
+    "id": "unit-K-8",
+    "block": "K",
+    "unitNumber": 8,
+    "M2": 155,
+    "status": "available",
+    "price": "$394,000"
+  },
+  {
+    "id": "unit-K-9",
+    "block": "K",
+    "unitNumber": 9,
+    "M2": 155,
+    "status": "reserved",
+    "price": "$289,000"
+  },
+  {
+    "id": "unit-K-10",
+    "block": "K",
+    "unitNumber": 10,
+    "M2": 155,
+    "status": "reserved",
+    "price": "$384,000"
+  },
+  {
+    "id": "unit-K-11",
+    "block": "K",
+    "unitNumber": 11,
+    "M2": 155,
+    "status": "reserved",
+    "price": "$301,000"
+  },
+  {
+    "id": "unit-K-12",
+    "block": "K",
+    "unitNumber": 12,
+    "M2": 155,
+    "status": "available",
+    "price": "$277,000"
+  },
+  {
+    "id": "unit-K-13",
+    "block": "K",
+    "unitNumber": 13,
+    "M2": 155,
+    "status": "available",
+    "price": "$359,000"
+  },
+  {
+    "id": "unit-K-14",
+    "block": "K",
+    "unitNumber": 14,
+    "M2": 155,
+    "status": "available",
+    "price": "$212,000"
+  },
+  {
+    "id": "unit-K-15",
+    "block": "K",
+    "unitNumber": 15,
+    "M2": 155,
+    "status": "available",
+    "price": "$357,000"
+  },
+  {
+    "id": "unit-K-16",
+    "block": "K",
+    "unitNumber": 16,
+    "M2": 155,
+    "status": "available",
+    "price": "$357,000"
+  },
+  {
+    "id": "unit-K-17",
+    "block": "K",
+    "unitNumber": 17,
+    "M2": 155,
+    "status": "available",
+    "price": "$231,000"
+  },
+  {
+    "id": "unit-K-18",
+    "block": "K",
+    "unitNumber": 18,
+    "M2": 155,
+    "status": "reserved",
+    "price": "$292,000"
+  },
+  {
+    "id": "unit-K-19",
+    "block": "K",
+    "unitNumber": 19,
+    "M2": 155,
+    "status": "available",
+    "price": "$291,000"
+  },
+  {
+    "id": "unit-K-20",
+    "block": "K",
+    "unitNumber": 20,
+    "M2": 155,
+    "status": "available",
+    "price": "$369,000"
+  },
+  {
+    "id": "unit-H-1",
+    "block": "H",
+    "unitNumber": 1,
+    "M2": 150,
+    "status": "available",
+    "price": "$284,000"
+  },
+  {
+    "id": "unit-H-2",
+    "block": "H",
+    "unitNumber": 2,
+    "M2": 150,
+    "status": "available",
+    "price": "$370,000"
+  },
+  {
+    "id": "unit-H-3",
+    "block": "H",
+    "unitNumber": 3,
+    "M2": 150,
+    "status": "sold",
+    "price": "$374,000"
+  },
+  {
+    "id": "unit-H-4",
+    "block": "H",
+    "unitNumber": 4,
+    "M2": 150,
+    "status": "sold",
+    "price": "$312,000"
+  },
+  {
+    "id": "unit-H-5",
+    "block": "H",
+    "unitNumber": 5,
+    "M2": 150,
+    "status": "available",
+    "price": "$227,000"
+  },
+  {
+    "id": "unit-H-6",
+    "block": "H",
+    "unitNumber": 6,
+    "M2": 150,
+    "status": "available",
+    "price": "$282,000"
+  },
+  {
+    "id": "unit-H-7",
+    "block": "H",
+    "unitNumber": 7,
+    "M2": 150,
+    "status": "reserved",
+    "price": "$278,000"
+  },
+  {
+    "id": "unit-H-8",
+    "block": "H",
+    "unitNumber": 8,
+    "M2": 150,
+    "status": "available",
+    "price": "$300,000"
+  },
+  {
+    "id": "unit-H-9",
+    "block": "H",
+    "unitNumber": 9,
+    "M2": 150,
+    "status": "available",
+    "price": "$293,000"
+  },
+  {
+    "id": "unit-H-10",
+    "block": "H",
+    "unitNumber": 10,
+    "M2": 150,
+    "status": "reserved",
+    "price": "$263,000"
+  },
+  {
+    "id": "unit-H-11",
+    "block": "H",
+    "unitNumber": 11,
+    "M2": 150,
+    "status": "reserved",
+    "price": "$215,000"
+  },
+  {
+    "id": "unit-H-12",
+    "block": "H",
+    "unitNumber": 12,
+    "M2": 150,
+    "status": "sold",
+    "price": "$327,000"
+  },
+  {
+    "id": "unit-H-13",
+    "block": "H",
+    "unitNumber": 13,
+    "M2": 150,
+    "status": "available",
+    "price": "$396,000"
+  },
+  {
+    "id": "unit-H-14",
+    "block": "H",
+    "unitNumber": 14,
+    "M2": 150,
+    "status": "available",
+    "price": "$319,000"
+  },
+  {
+    "id": "unit-H-15",
+    "block": "H",
+    "unitNumber": 15,
+    "M2": 150,
+    "status": "available",
+    "price": "$236,000"
+  },
+  {
+    "id": "unit-H-16",
+    "block": "H",
+    "unitNumber": 16,
+    "M2": 150,
+    "status": "sold",
+    "price": "$357,000"
+  },
+  {
+    "id": "unit-H-17",
+    "block": "H",
+    "unitNumber": 17,
+    "M2": 150,
+    "status": "available",
+    "price": "$268,000"
+  },
+  {
+    "id": "unit-H-18",
+    "block": "H",
+    "unitNumber": 18,
+    "M2": 150,
+    "status": "sold",
+    "price": "$253,000"
+  },
+  {
+    "id": "unit-H-19",
+    "block": "H",
+    "unitNumber": 19,
+    "M2": 150,
+    "status": "sold",
+    "price": "$260,000"
+  },
+  {
+    "id": "unit-H-20",
+    "block": "H",
+    "unitNumber": 20,
+    "M2": 150,
+    "status": "reserved",
+    "price": "$366,000"
+  },
+  {
+    "id": "unit-G-1",
+    "block": "G",
+    "unitNumber": 1,
+    "M2": 150,
+    "status": "available",
+    "price": "$325,000"
+  },
+  {
+    "id": "unit-G-2",
+    "block": "G",
+    "unitNumber": 2,
+    "M2": 150,
+    "status": "available",
+    "price": "$345,000"
+  },
+  {
+    "id": "unit-G-3",
+    "block": "G",
+    "unitNumber": 3,
+    "M2": 150,
+    "status": "sold",
+    "price": "$201,000"
+  },
+  {
+    "id": "unit-G-4",
+    "block": "G",
+    "unitNumber": 4,
+    "M2": 150,
+    "status": "available",
+    "price": "$252,000"
+  },
+  {
+    "id": "unit-G-5",
+    "block": "G",
+    "unitNumber": 5,
+    "M2": 150,
+    "status": "sold",
+    "price": "$324,000"
+  },
+  {
+    "id": "unit-G-6",
+    "block": "G",
+    "unitNumber": 6,
+    "M2": 150,
+    "status": "available",
+    "price": "$382,000"
+  },
+  {
+    "id": "unit-G-7",
+    "block": "G",
+    "unitNumber": 7,
+    "M2": 150,
+    "status": "available",
+    "price": "$360,000"
+  },
+  {
+    "id": "unit-G-8",
+    "block": "G",
+    "unitNumber": 8,
+    "M2": 150,
+    "status": "available",
+    "price": "$318,000"
+  },
+  {
+    "id": "unit-G-9",
+    "block": "G",
+    "unitNumber": 9,
+    "M2": 150,
+    "status": "available",
+    "price": "$312,000"
+  },
+  {
+    "id": "unit-G-10",
+    "block": "G",
+    "unitNumber": 10,
+    "M2": 150,
+    "status": "sold",
+    "price": "$202,000"
+  },
+  {
+    "id": "unit-G-11",
+    "block": "G",
+    "unitNumber": 11,
+    "M2": 150,
+    "status": "available",
+    "price": "$369,000"
+  },
+  {
+    "id": "unit-G-12",
+    "block": "G",
+    "unitNumber": 12,
+    "M2": 150,
+    "status": "reserved",
+    "price": "$352,000"
+  },
+  {
+    "id": "unit-G-13",
+    "block": "G",
+    "unitNumber": 13,
+    "M2": 150,
+    "status": "reserved",
+    "price": "$341,000"
+  },
+  {
+    "id": "unit-G-14",
+    "block": "G",
+    "unitNumber": 14,
+    "M2": 150,
+    "status": "available",
+    "price": "$356,000"
+  },
+  {
+    "id": "unit-G-15",
+    "block": "G",
+    "unitNumber": 15,
+    "M2": 150,
+    "status": "available",
+    "price": "$369,000"
+  },
+  {
+    "id": "unit-G-16",
+    "block": "G",
+    "unitNumber": 16,
+    "M2": 150,
+    "status": "reserved",
+    "price": "$268,000"
+  },
+  {
+    "id": "unit-G-17",
+    "block": "G",
+    "unitNumber": 17,
+    "M2": 150,
+    "status": "available",
+    "price": "$236,000"
+  },
+  {
+    "id": "unit-G-18",
+    "block": "G",
+    "unitNumber": 18,
+    "M2": 150,
+    "status": "available",
+    "price": "$362,000"
+  },
+  {
+    "id": "unit-G-19",
+    "block": "G",
+    "unitNumber": 19,
+    "M2": 150,
+    "status": "sold",
+    "price": "$303,000"
+  },
+  {
+    "id": "unit-G-20",
+    "block": "G",
+    "unitNumber": 20,
+    "M2": 150,
+    "status": "available",
+    "price": "$319,000"
+  },
+  {
+    "id": "unit-F-1",
+    "block": "F",
+    "unitNumber": 1,
+    "M2": 145,
+    "status": "sold",
+    "price": "$230,000"
+  },
+  {
+    "id": "unit-F-2",
+    "block": "F",
+    "unitNumber": 2,
+    "M2": 145,
+    "status": "sold",
+    "price": "$209,000"
+  },
+  {
+    "id": "unit-F-3",
+    "block": "F",
+    "unitNumber": 3,
+    "M2": 145,
+    "status": "available",
+    "price": "$392,000"
+  },
+  {
+    "id": "unit-F-4",
+    "block": "F",
+    "unitNumber": 4,
+    "M2": 145,
+    "status": "sold",
+    "price": "$382,000"
+  },
+  {
+    "id": "unit-F-5",
+    "block": "F",
+    "unitNumber": 5,
+    "M2": 145,
+    "status": "available",
+    "price": "$253,000"
+  },
+  {
+    "id": "unit-F-6",
+    "block": "F",
+    "unitNumber": 6,
+    "M2": 145,
+    "status": "available",
+    "price": "$348,000"
+  },
+  {
+    "id": "unit-F-7",
+    "block": "F",
+    "unitNumber": 7,
+    "M2": 145,
+    "status": "available",
+    "price": "$254,000"
+  },
+  {
+    "id": "unit-F-8",
+    "block": "F",
+    "unitNumber": 8,
+    "M2": 145,
+    "status": "available",
+    "price": "$292,000"
+  },
+  {
+    "id": "unit-F-9",
+    "block": "F",
+    "unitNumber": 9,
+    "M2": 145,
+    "status": "reserved",
+    "price": "$398,000"
+  },
+  {
+    "id": "unit-F-10",
+    "block": "F",
+    "unitNumber": 10,
+    "M2": 145,
+    "status": "sold",
+    "price": "$318,000"
+  },
+  {
+    "id": "unit-F-11",
+    "block": "F",
+    "unitNumber": 11,
+    "M2": 145,
+    "status": "reserved",
+    "price": "$201,000"
+  },
+  {
+    "id": "unit-F-12",
+    "block": "F",
+    "unitNumber": 12,
+    "M2": 145,
+    "status": "available",
+    "price": "$346,000"
+  },
+  {
+    "id": "unit-F-13",
+    "block": "F",
+    "unitNumber": 13,
+    "M2": 145,
+    "status": "reserved",
+    "price": "$372,000"
+  },
+  {
+    "id": "unit-F-14",
+    "block": "F",
+    "unitNumber": 14,
+    "M2": 145,
+    "status": "reserved",
+    "price": "$298,000"
+  },
+  {
+    "id": "unit-F-15",
+    "block": "F",
+    "unitNumber": 15,
+    "M2": 145,
+    "status": "available",
+    "price": "$232,000"
+  },
+  {
+    "id": "unit-F-16",
+    "block": "F",
+    "unitNumber": 16,
+    "M2": 145,
+    "status": "reserved",
+    "price": "$231,000"
+  },
+  {
+    "id": "unit-F-17",
+    "block": "F",
+    "unitNumber": 17,
+    "M2": 145,
+    "status": "available",
+    "price": "$391,000"
+  },
+  {
+    "id": "unit-F-18",
+    "block": "F",
+    "unitNumber": 18,
+    "M2": 145,
+    "status": "available",
+    "price": "$223,000"
+  },
+  {
+    "id": "unit-F-19",
+    "block": "F",
+    "unitNumber": 19,
+    "M2": 145,
+    "status": "available",
+    "price": "$267,000"
+  },
+  {
+    "id": "unit-F-20",
+    "block": "F",
+    "unitNumber": 20,
+    "M2": 145,
+    "status": "available",
+    "price": "$392,000"
+  },
+  {
+    "id": "unit-F-21",
+    "block": "F",
+    "unitNumber": 21,
+    "M2": 145,
+    "status": "available",
+    "price": "$288,000"
+  },
+  {
+    "id": "unit-F-22",
+    "block": "F",
+    "unitNumber": 22,
+    "M2": 145,
+    "status": "available",
+    "price": "$201,000"
+  },
+  {
+    "id": "unit-A-1",
+    "block": "A",
+    "unitNumber": 1,
+    "M2": 160,
+    "status": "available",
+    "price": "$396,000"
+  },
+  {
+    "id": "unit-A-2",
+    "block": "A",
+    "unitNumber": 2,
+    "M2": 160,
+    "status": "reserved",
+    "price": "$213,000"
+  },
+  {
+    "id": "unit-A-3",
+    "block": "A",
+    "unitNumber": 3,
+    "M2": 160,
+    "status": "available",
+    "price": "$304,000"
+  },
+  {
+    "id": "unit-A-4",
+    "block": "A",
+    "unitNumber": 4,
+    "M2": 160,
+    "status": "available",
+    "price": "$286,000"
+  },
+  {
+    "id": "unit-A-5",
+    "block": "A",
+    "unitNumber": 5,
+    "M2": 160,
+    "status": "available",
+    "price": "$328,000"
+  },
+  {
+    "id": "unit-A-6",
+    "block": "A",
+    "unitNumber": 6,
+    "M2": 160,
+    "status": "available",
+    "price": "$218,000"
+  },
+  {
+    "id": "unit-A-7",
+    "block": "A",
+    "unitNumber": 7,
+    "M2": 160,
+    "status": "available",
+    "price": "$227,000"
+  },
+  {
+    "id": "unit-A-8",
+    "block": "A",
+    "unitNumber": 8,
+    "M2": 160,
+    "status": "available",
+    "price": "$215,000"
+  },
+  {
+    "id": "unit-A-9",
+    "block": "A",
+    "unitNumber": 9,
+    "M2": 160,
+    "status": "reserved",
+    "price": "$380,000"
+  },
+  {
+    "id": "unit-A-10",
+    "block": "A",
+    "unitNumber": 10,
+    "M2": 160,
+    "status": "reserved",
+    "price": "$295,000"
+  },
+  {
+    "id": "unit-A-11",
+    "block": "A",
+    "unitNumber": 11,
+    "M2": 160,
+    "status": "available",
+    "price": "$344,000"
+  },
+  {
+    "id": "unit-A-12",
+    "block": "A",
+    "unitNumber": 12,
+    "M2": 160,
+    "status": "available",
+    "price": "$350,000"
+  },
+  {
+    "id": "unit-A-13",
+    "block": "A",
+    "unitNumber": 13,
+    "M2": 160,
+    "status": "sold",
+    "price": "$227,000"
+  },
+  {
+    "id": "unit-A-14",
+    "block": "A",
+    "unitNumber": 14,
+    "M2": 160,
+    "status": "sold",
+    "price": "$215,000"
+  },
+  {
+    "id": "unit-A-15",
+    "block": "A",
+    "unitNumber": 15,
+    "M2": 160,
+    "status": "available",
+    "price": "$293,000"
+  },
+  {
+    "id": "unit-A-16",
+    "block": "A",
+    "unitNumber": 16,
+    "M2": 160,
+    "status": "sold",
+    "price": "$306,000"
+  },
+  {
+    "id": "unit-A-17",
+    "block": "A",
+    "unitNumber": 17,
+    "M2": 160,
+    "status": "sold",
+    "price": "$371,000"
+  },
+  {
+    "id": "unit-A-18",
+    "block": "A",
+    "unitNumber": 18,
+    "M2": 160,
+    "status": "available",
+    "price": "$374,000"
+  },
+  {
+    "id": "unit-A-19",
+    "block": "A",
+    "unitNumber": 19,
+    "M2": 160,
+    "status": "sold",
+    "price": "$265,000"
+  },
+  {
+    "id": "unit-A-20",
+    "block": "A",
+    "unitNumber": 20,
+    "M2": 160,
+    "status": "reserved",
+    "price": "$398,000"
+  },
+  {
+    "id": "unit-A-21",
+    "block": "A",
+    "unitNumber": 21,
+    "M2": 160,
+    "status": "available",
+    "price": "$258,000"
+  },
+  {
+    "id": "unit-A-22",
+    "block": "A",
+    "unitNumber": 22,
+    "M2": 160,
+    "status": "sold",
+    "price": "$382,000"
+  },
+  {
+    "id": "unit-A-23",
+    "block": "A",
+    "unitNumber": 23,
+    "M2": 160,
+    "status": "sold",
+    "price": "$381,000"
+  },
+  {
+    "id": "unit-A-24",
+    "block": "A",
+    "unitNumber": 24,
+    "M2": 160,
+    "status": "available",
+    "price": "$396,000"
+  },
+  {
+    "id": "unit-A-25",
+    "block": "A",
+    "unitNumber": 25,
+    "M2": 160,
+    "status": "sold",
+    "price": "$346,000"
+  },
+  {
+    "id": "unit-A-26",
+    "block": "A",
+    "unitNumber": 26,
+    "M2": 160,
+    "status": "sold",
+    "price": "$398,000"
+  },
+  {
+    "id": "unit-A-27",
+    "block": "A",
+    "unitNumber": 27,
+    "M2": 160,
+    "status": "available",
+    "price": "$212,000"
+  },
+  {
+    "id": "unit-A-28",
+    "block": "A",
+    "unitNumber": 28,
+    "M2": 160,
+    "status": "available",
+    "price": "$390,000"
+  },
+  {
+    "id": "unit-A-29",
+    "block": "A",
+    "unitNumber": 29,
+    "M2": 160,
+    "status": "available",
+    "price": "$213,000"
+  },
+  {
+    "id": "unit-A-30",
+    "block": "A",
+    "unitNumber": 30,
+    "M2": 160,
+    "status": "available",
+    "price": "$393,000"
+  },
+  {
+    "id": "unit-A-31",
+    "block": "A",
+    "unitNumber": 31,
+    "M2": 160,
+    "status": "available",
+    "price": "$274,000"
+  },
+  {
+    "id": "unit-A-32",
+    "block": "A",
+    "unitNumber": 32,
+    "M2": 160,
+    "status": "sold",
+    "price": "$291,000"
+  },
+  {
+    "id": "unit-A-33",
+    "block": "A",
+    "unitNumber": 33,
+    "M2": 160,
+    "status": "reserved",
+    "price": "$242,000"
+  },
+  {
+    "id": "unit-A-34",
+    "block": "A",
+    "unitNumber": 34,
+    "M2": 160,
+    "status": "sold",
+    "price": "$307,000"
+  },
+  {
+    "id": "unit-A-35",
+    "block": "A",
+    "unitNumber": 35,
+    "M2": 160,
+    "status": "sold",
+    "price": "$302,000"
+  },
+  {
+    "id": "unit-A-36",
+    "block": "A",
+    "unitNumber": 36,
+    "M2": 160,
+    "status": "available",
+    "price": "$213,000"
+  },
+  {
+    "id": "unit-A-37",
+    "block": "A",
+    "unitNumber": 37,
+    "M2": 160,
+    "status": "available",
+    "price": "$363,000"
+  },
+  {
+    "id": "unit-A-38",
+    "block": "A",
+    "unitNumber": 38,
+    "M2": 160,
+    "status": "available",
+    "price": "$399,000"
+  },
+  {
+    "id": "unit-A-39",
+    "block": "A",
+    "unitNumber": 39,
+    "M2": 160,
+    "status": "reserved",
+    "price": "$358,000"
+  },
+  {
+    "id": "unit-A-40",
+    "block": "A",
+    "unitNumber": 40,
+    "M2": 160,
+    "status": "available",
+    "price": "$231,000"
+  },
+  {
+    "id": "unit-A-41",
+    "block": "A",
+    "unitNumber": 41,
+    "M2": 160,
+    "status": "reserved",
+    "price": "$273,000"
+  },
+  {
+    "id": "unit-A-42",
+    "block": "A",
+    "unitNumber": 42,
+    "M2": 160,
+    "status": "reserved",
+    "price": "$348,000"
+  },
+  {
+    "id": "unit-A-43",
+    "block": "A",
+    "unitNumber": 43,
+    "M2": 160,
+    "status": "available",
+    "price": "$233,000"
+  },
+  {
+    "id": "unit-A-44",
+    "block": "A",
+    "unitNumber": 44,
+    "M2": 160,
+    "status": "available",
+    "price": "$236,000"
+  },
+  {
+    "id": "unit-A-45",
+    "block": "A",
+    "unitNumber": 45,
+    "M2": 160,
+    "status": "sold",
+    "price": "$363,000"
+  },
+  {
+    "id": "unit-A-46",
+    "block": "A",
+    "unitNumber": 46,
+    "M2": 160,
+    "status": "reserved",
+    "price": "$354,000"
+  },
+  {
+    "id": "unit-A-47",
+    "block": "A",
+    "unitNumber": 47,
+    "M2": 160,
+    "status": "available",
+    "price": "$324,000"
+  },
+  {
+    "id": "unit-A-48",
+    "block": "A",
+    "unitNumber": 48,
+    "M2": 160,
+    "status": "reserved",
+    "price": "$248,000"
+  },
+  {
+    "id": "unit-B-1",
+    "block": "B",
+    "unitNumber": 1,
+    "M2": 165,
+    "status": "available",
+    "price": "$289,000"
+  },
+  {
+    "id": "unit-B-2",
+    "block": "B",
+    "unitNumber": 2,
+    "M2": 165,
+    "status": "available",
+    "price": "$395,000"
+  },
+  {
+    "id": "unit-B-3",
+    "block": "B",
+    "unitNumber": 3,
+    "M2": 165,
+    "status": "available",
+    "price": "$213,000"
+  },
+  {
+    "id": "unit-B-4",
+    "block": "B",
+    "unitNumber": 4,
+    "M2": 165,
+    "status": "sold",
+    "price": "$230,000"
+  },
+  {
+    "id": "unit-B-5",
+    "block": "B",
+    "unitNumber": 5,
+    "M2": 165,
+    "status": "available",
+    "price": "$241,000"
+  },
+  {
+    "id": "unit-B-6",
+    "block": "B",
+    "unitNumber": 6,
+    "M2": 165,
+    "status": "available",
+    "price": "$355,000"
+  },
+  {
+    "id": "unit-B-7",
+    "block": "B",
+    "unitNumber": 7,
+    "M2": 165,
+    "status": "available",
+    "price": "$256,000"
+  },
+  {
+    "id": "unit-B-8",
+    "block": "B",
+    "unitNumber": 8,
+    "M2": 165,
+    "status": "reserved",
+    "price": "$365,000"
+  },
+  {
+    "id": "unit-B-9",
+    "block": "B",
+    "unitNumber": 9,
+    "M2": 165,
+    "status": "available",
+    "price": "$303,000"
+  },
+  {
+    "id": "unit-B-10",
+    "block": "B",
+    "unitNumber": 10,
+    "M2": 165,
+    "status": "sold",
+    "price": "$243,000"
+  },
+  {
+    "id": "unit-B-11",
+    "block": "B",
+    "unitNumber": 11,
+    "M2": 165,
+    "status": "reserved",
+    "price": "$316,000"
+  },
+  {
+    "id": "unit-B-12",
+    "block": "B",
+    "unitNumber": 12,
+    "M2": 165,
+    "status": "available",
+    "price": "$265,000"
+  },
+  {
+    "id": "unit-B-13",
+    "block": "B",
+    "unitNumber": 13,
+    "M2": 165,
+    "status": "available",
+    "price": "$262,000"
+  },
+  {
+    "id": "unit-B-14",
+    "block": "B",
+    "unitNumber": 14,
+    "M2": 165,
+    "status": "reserved",
+    "price": "$378,000"
+  },
+  {
+    "id": "unit-B-15",
+    "block": "B",
+    "unitNumber": 15,
+    "M2": 165,
+    "status": "sold",
+    "price": "$236,000"
+  },
+  {
+    "id": "unit-B-16",
+    "block": "B",
+    "unitNumber": 16,
+    "M2": 165,
+    "status": "reserved",
+    "price": "$327,000"
+  },
+  {
+    "id": "unit-B-17",
+    "block": "B",
+    "unitNumber": 17,
+    "M2": 165,
+    "status": "available",
+    "price": "$384,000"
+  },
+  {
+    "id": "unit-B-18",
+    "block": "B",
+    "unitNumber": 18,
+    "M2": 165,
+    "status": "reserved",
+    "price": "$235,000"
+  },
+  {
+    "id": "unit-B-19",
+    "block": "B",
+    "unitNumber": 19,
+    "M2": 165,
+    "status": "sold",
+    "price": "$221,000"
+  },
+  {
+    "id": "unit-B-20",
+    "block": "B",
+    "unitNumber": 20,
+    "M2": 165,
+    "status": "available",
+    "price": "$237,000"
+  },
+  {
+    "id": "unit-B-21",
+    "block": "B",
+    "unitNumber": 21,
+    "M2": 165,
+    "status": "available",
+    "price": "$374,000"
+  },
+  {
+    "id": "unit-B-22",
+    "block": "B",
+    "unitNumber": 22,
+    "M2": 165,
+    "status": "sold",
+    "price": "$203,000"
+  },
+  {
+    "id": "unit-B-23",
+    "block": "B",
+    "unitNumber": 23,
+    "M2": 165,
+    "status": "available",
+    "price": "$287,000"
+  },
+  {
+    "id": "unit-B-24",
+    "block": "B",
+    "unitNumber": 24,
+    "M2": 165,
+    "status": "available",
+    "price": "$352,000"
+  },
+  {
+    "id": "unit-B-25",
+    "block": "B",
+    "unitNumber": 25,
+    "M2": 165,
+    "status": "available",
+    "price": "$253,000"
+  },
+  {
+    "id": "unit-B-26",
+    "block": "B",
+    "unitNumber": 26,
+    "M2": 165,
+    "status": "reserved",
+    "price": "$367,000"
+  },
+  {
+    "id": "unit-B-27",
+    "block": "B",
+    "unitNumber": 27,
+    "M2": 165,
+    "status": "reserved",
+    "price": "$313,000"
+  },
+  {
+    "id": "unit-B-28",
+    "block": "B",
+    "unitNumber": 28,
+    "M2": 165,
+    "status": "available",
+    "price": "$395,000"
+  },
+  {
+    "id": "unit-B-29",
+    "block": "B",
+    "unitNumber": 29,
+    "M2": 165,
+    "status": "available",
+    "price": "$354,000"
+  },
+  {
+    "id": "unit-B-30",
+    "block": "B",
+    "unitNumber": 30,
+    "M2": 165,
+    "status": "available",
+    "price": "$327,000"
+  },
+  {
+    "id": "unit-B-31",
+    "block": "B",
+    "unitNumber": 31,
+    "M2": 165,
+    "status": "available",
+    "price": "$206,000"
+  },
+  {
+    "id": "unit-B-32",
+    "block": "B",
+    "unitNumber": 32,
+    "M2": 165,
+    "status": "available",
+    "price": "$369,000"
+  },
+  {
+    "id": "unit-B-33",
+    "block": "B",
+    "unitNumber": 33,
+    "M2": 165,
+    "status": "available",
+    "price": "$249,000"
+  },
+  {
+    "id": "unit-B-34",
+    "block": "B",
+    "unitNumber": 34,
+    "M2": 165,
+    "status": "available",
+    "price": "$259,000"
+  },
+  {
+    "id": "unit-B-35",
+    "block": "B",
+    "unitNumber": 35,
+    "M2": 165,
+    "status": "available",
+    "price": "$209,000"
+  },
+  {
+    "id": "unit-B-36",
+    "block": "B",
+    "unitNumber": 36,
+    "M2": 165,
+    "status": "available",
+    "price": "$223,000"
+  },
+  {
+    "id": "unit-B-37",
+    "block": "B",
+    "unitNumber": 37,
+    "M2": 165,
+    "status": "sold",
+    "price": "$272,000"
+  },
+  {
+    "id": "unit-B-38",
+    "block": "B",
+    "unitNumber": 38,
+    "M2": 165,
+    "status": "available",
+    "price": "$260,000"
+  },
+  {
+    "id": "unit-B-39",
+    "block": "B",
+    "unitNumber": 39,
+    "M2": 165,
+    "status": "available",
+    "price": "$239,000"
+  },
+  {
+    "id": "unit-B-40",
+    "block": "B",
+    "unitNumber": 40,
+    "M2": 165,
+    "status": "available",
+    "price": "$343,000"
+  },
+  {
+    "id": "unit-B-41",
+    "block": "B",
+    "unitNumber": 41,
+    "M2": 165,
+    "status": "sold",
+    "price": "$305,000"
+  },
+  {
+    "id": "unit-B-42",
+    "block": "B",
+    "unitNumber": 42,
+    "M2": 165,
+    "status": "available",
+    "price": "$205,000"
+  },
+  {
+    "id": "unit-B-43",
+    "block": "B",
+    "unitNumber": 43,
+    "M2": 165,
+    "status": "available",
+    "price": "$309,000"
+  },
+  {
+    "id": "unit-C-1",
+    "block": "C",
+    "unitNumber": 1,
+    "M2": 180,
+    "status": "reserved",
+    "price": "$228,000"
+  },
+  {
+    "id": "unit-C-2",
+    "block": "C",
+    "unitNumber": 2,
+    "M2": 180,
+    "status": "available",
+    "price": "$308,000"
+  },
+  {
+    "id": "unit-C-3",
+    "block": "C",
+    "unitNumber": 3,
+    "M2": 180,
+    "status": "available",
+    "price": "$328,000"
+  },
+  {
+    "id": "unit-C-4",
+    "block": "C",
+    "unitNumber": 4,
+    "M2": 180,
+    "status": "sold",
+    "price": "$350,000"
+  },
+  {
+    "id": "unit-C-5",
+    "block": "C",
+    "unitNumber": 5,
+    "M2": 180,
+    "status": "available",
+    "price": "$315,000"
+  },
+  {
+    "id": "unit-C-6",
+    "block": "C",
+    "unitNumber": 6,
+    "M2": 180,
+    "status": "reserved",
+    "price": "$234,000"
+  },
+  {
+    "id": "unit-C-7",
+    "block": "C",
+    "unitNumber": 7,
+    "M2": 180,
+    "status": "available",
+    "price": "$234,000"
+  },
+  {
+    "id": "unit-C-8",
+    "block": "C",
+    "unitNumber": 8,
+    "M2": 180,
+    "status": "reserved",
+    "price": "$362,000"
+  },
+  {
+    "id": "unit-C-9",
+    "block": "C",
+    "unitNumber": 9,
+    "M2": 180,
+    "status": "available",
+    "price": "$293,000"
+  },
+  {
+    "id": "unit-C-10",
+    "block": "C",
+    "unitNumber": 10,
+    "M2": 180,
+    "status": "reserved",
+    "price": "$282,000"
+  },
+  {
+    "id": "unit-C-11",
+    "block": "C",
+    "unitNumber": 11,
+    "M2": 180,
+    "status": "reserved",
+    "price": "$209,000"
+  },
+  {
+    "id": "unit-C-12",
+    "block": "C",
+    "unitNumber": 12,
+    "M2": 180,
+    "status": "available",
+    "price": "$229,000"
+  },
+  {
+    "id": "unit-C-13",
+    "block": "C",
+    "unitNumber": 13,
+    "M2": 180,
+    "status": "reserved",
+    "price": "$380,000"
+  },
+  {
+    "id": "unit-C-14",
+    "block": "C",
+    "unitNumber": 14,
+    "M2": 180,
+    "status": "reserved",
+    "price": "$240,000"
+  },
+  {
+    "id": "unit-C-15",
+    "block": "C",
+    "unitNumber": 15,
+    "M2": 180,
+    "status": "reserved",
+    "price": "$231,000"
+  },
+  {
+    "id": "unit-C-16",
+    "block": "C",
+    "unitNumber": 16,
+    "M2": 180,
+    "status": "reserved",
+    "price": "$373,000"
+  },
+  {
+    "id": "unit-C-17",
+    "block": "C",
+    "unitNumber": 17,
+    "M2": 180,
+    "status": "sold",
+    "price": "$312,000"
+  },
+  {
+    "id": "unit-C-18",
+    "block": "C",
+    "unitNumber": 18,
+    "M2": 180,
+    "status": "available",
+    "price": "$266,000"
+  },
+  {
+    "id": "unit-C-19",
+    "block": "C",
+    "unitNumber": 19,
+    "M2": 180,
+    "status": "reserved",
+    "price": "$273,000"
+  },
+  {
+    "id": "unit-C-20",
+    "block": "C",
+    "unitNumber": 20,
+    "M2": 180,
+    "status": "sold",
+    "price": "$212,000"
+  },
+  {
+    "id": "unit-C-21",
+    "block": "C",
+    "unitNumber": 21,
+    "M2": 180,
+    "status": "available",
+    "price": "$300,000"
+  },
+  {
+    "id": "unit-C-22",
+    "block": "C",
+    "unitNumber": 22,
+    "M2": 180,
+    "status": "sold",
+    "price": "$207,000"
+  },
+  {
+    "id": "unit-C-23",
+    "block": "C",
+    "unitNumber": 23,
+    "M2": 180,
+    "status": "sold",
+    "price": "$315,000"
+  },
+  {
+    "id": "unit-C-24",
+    "block": "C",
+    "unitNumber": 24,
+    "M2": 180,
+    "status": "reserved",
+    "price": "$324,000"
+  },
+  {
+    "id": "unit-C-25",
+    "block": "C",
+    "unitNumber": 25,
+    "M2": 180,
+    "status": "sold",
+    "price": "$345,000"
+  },
+  {
+    "id": "unit-D-1",
+    "block": "D",
+    "unitNumber": 1,
+    "M2": 200,
+    "status": "sold",
+    "price": "$263,000"
+  },
+  {
+    "id": "unit-D-2",
+    "block": "D",
+    "unitNumber": 2,
+    "M2": 200,
+    "status": "available",
+    "price": "$291,000"
+  },
+  {
+    "id": "unit-D-3",
+    "block": "D",
+    "unitNumber": 3,
+    "M2": 200,
+    "status": "available",
+    "price": "$216,000"
+  },
+  {
+    "id": "unit-D-4",
+    "block": "D",
+    "unitNumber": 4,
+    "M2": 200,
+    "status": "reserved",
+    "price": "$366,000"
+  },
+  {
+    "id": "unit-D-5",
+    "block": "D",
+    "unitNumber": 5,
+    "M2": 200,
+    "status": "available",
+    "price": "$369,000"
+  },
+  {
+    "id": "unit-D-6",
+    "block": "D",
+    "unitNumber": 6,
+    "M2": 200,
+    "status": "available",
+    "price": "$244,000"
+  },
+  {
+    "id": "unit-D-7",
+    "block": "D",
+    "unitNumber": 7,
+    "M2": 200,
+    "status": "reserved",
+    "price": "$301,000"
+  },
+  {
+    "id": "unit-D-8",
+    "block": "D",
+    "unitNumber": 8,
+    "M2": 200,
+    "status": "sold",
+    "price": "$258,000"
+  },
+  {
+    "id": "unit-D-9",
+    "block": "D",
+    "unitNumber": 9,
+    "M2": 200,
+    "status": "sold",
+    "price": "$365,000"
+  },
+  {
+    "id": "unit-D-10",
+    "block": "D",
+    "unitNumber": 10,
+    "M2": 200,
+    "status": "sold",
+    "price": "$391,000"
+  },
+  {
+    "id": "unit-D-11",
+    "block": "D",
+    "unitNumber": 11,
+    "M2": 200,
+    "status": "available",
+    "price": "$317,000"
+  },
+  {
+    "id": "unit-D-12",
+    "block": "D",
+    "unitNumber": 12,
+    "M2": 200,
+    "status": "available",
+    "price": "$316,000"
+  },
+  {
+    "id": "unit-D-13",
+    "block": "D",
+    "unitNumber": 13,
+    "M2": 200,
+    "status": "available",
+    "price": "$277,000"
+  },
+  {
+    "id": "unit-D-14",
+    "block": "D",
+    "unitNumber": 14,
+    "M2": 200,
+    "status": "sold",
+    "price": "$201,000"
+  },
+  {
+    "id": "unit-D-15",
+    "block": "D",
+    "unitNumber": 15,
+    "M2": 200,
+    "status": "sold",
+    "price": "$256,000"
+  },
+  {
+    "id": "unit-D-16",
+    "block": "D",
+    "unitNumber": 16,
+    "M2": 200,
+    "status": "available",
+    "price": "$383,000"
+  },
+  {
+    "id": "unit-D-17",
+    "block": "D",
+    "unitNumber": 17,
+    "M2": 200,
+    "status": "available",
+    "price": "$206,000"
+  },
+  {
+    "id": "unit-D-18",
+    "block": "D",
+    "unitNumber": 18,
+    "M2": 200,
+    "status": "available",
+    "price": "$351,000"
+  },
+  {
+    "id": "unit-D-19",
+    "block": "D",
+    "unitNumber": 19,
+    "M2": 200,
+    "status": "available",
+    "price": "$332,000"
+  },
+  {
+    "id": "unit-D-20",
+    "block": "D",
+    "unitNumber": 20,
+    "M2": 200,
+    "status": "available",
+    "price": "$289,000"
+  },
+  {
+    "id": "unit-E-1",
+    "block": "E",
+    "unitNumber": 1,
+    "M2": 200,
+    "status": "reserved",
+    "price": "$217,000"
+  },
+  {
+    "id": "unit-E-2",
+    "block": "E",
+    "unitNumber": 2,
+    "M2": 200,
+    "status": "reserved",
+    "price": "$239,000"
+  },
+  {
+    "id": "unit-E-3",
+    "block": "E",
+    "unitNumber": 3,
+    "M2": 200,
+    "status": "available",
+    "price": "$315,000"
+  },
+  {
+    "id": "unit-E-4",
+    "block": "E",
+    "unitNumber": 4,
+    "M2": 200,
+    "status": "available",
+    "price": "$239,000"
+  },
+  {
+    "id": "unit-E-5",
+    "block": "E",
+    "unitNumber": 5,
+    "M2": 200,
+    "status": "sold",
+    "price": "$384,000"
+  },
+  {
+    "id": "unit-E-6",
+    "block": "E",
+    "unitNumber": 6,
+    "M2": 200,
+    "status": "available",
+    "price": "$388,000"
+  },
+  {
+    "id": "unit-E-7",
+    "block": "E",
+    "unitNumber": 7,
+    "M2": 200,
+    "status": "available",
+    "price": "$361,000"
+  },
+  {
+    "id": "unit-E-8",
+    "block": "E",
+    "unitNumber": 8,
+    "M2": 200,
+    "status": "reserved",
+    "price": "$212,000"
+  },
+  {
+    "id": "unit-E-9",
+    "block": "E",
+    "unitNumber": 9,
+    "M2": 200,
+    "status": "sold",
+    "price": "$312,000"
+  },
+  {
+    "id": "unit-E-10",
+    "block": "E",
+    "unitNumber": 10,
+    "M2": 200,
+    "status": "sold",
+    "price": "$245,000"
+  },
+  {
+    "id": "unit-E-11",
+    "block": "E",
+    "unitNumber": 11,
+    "M2": 200,
+    "status": "available",
+    "price": "$305,000"
+  },
+  {
+    "id": "unit-E-12",
+    "block": "E",
+    "unitNumber": 12,
+    "M2": 200,
+    "status": "sold",
+    "price": "$247,000"
+  },
+  {
+    "id": "unit-E-13",
+    "block": "E",
+    "unitNumber": 13,
+    "M2": 200,
+    "status": "available",
+    "price": "$342,000"
+  },
+  {
+    "id": "unit-E-14",
+    "block": "E",
+    "unitNumber": 14,
+    "M2": 200,
+    "status": "available",
+    "price": "$305,000"
+  },
+  {
+    "id": "unit-E-15",
+    "block": "E",
+    "unitNumber": 15,
+    "M2": 200,
+    "status": "available",
+    "price": "$268,000"
+  },
+  {
+    "id": "unit-E-16",
+    "block": "E",
+    "unitNumber": 16,
+    "M2": 200,
+    "status": "reserved",
+    "price": "$290,000"
+  },
+  {
+    "id": "unit-E-17",
+    "block": "E",
+    "unitNumber": 17,
+    "M2": 200,
+    "status": "available",
+    "price": "$296,000"
+  },
+  {
+    "id": "unit-E-18",
+    "block": "E",
+    "unitNumber": 18,
+    "M2": 200,
+    "status": "reserved",
+    "price": "$357,000"
+  },
+  {
+    "id": "unit-E-19",
+    "block": "E",
+    "unitNumber": 19,
+    "M2": 200,
+    "status": "sold",
+    "price": "$219,000"
+  },
+  {
+    "id": "unit-E-20",
+    "block": "E",
+    "unitNumber": 20,
+    "M2": 200,
+    "status": "sold",
+    "price": "$319,000"
+  }
+]

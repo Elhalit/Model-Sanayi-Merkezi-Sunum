@@ -5,6 +5,8 @@ export interface Location {
   title: string;
   type: 'port' | 'train' | 'industrial' | 'customs' | 'osb' | 'project';
   description: string;
+  polyline?: [number, number][];
+  polygon?: [number, number][];
 }
 
 export const mapLocations: Location[] = [
@@ -36,7 +38,14 @@ export const mapLocations: Location[] = [
     coordinates: [27.943797150480712, 41.289516396747885],
     title: "KOSB - Kapaklı Organize Sanayi Bölgesi",
     type: "osb",
-    description: "Kapaklı OSB - Organize sanayi bölgesi"
+    description: "Kapaklı OSB - Organize sanayi bölgesi",
+    polygon: [
+      [41.282, 27.935],
+      [41.282, 27.995],
+      [41.315, 27.995],
+      [41.315, 27.935],
+      [41.282, 27.935]
+    ]
   },
   {
     coordinates: [27.965, 41.285],

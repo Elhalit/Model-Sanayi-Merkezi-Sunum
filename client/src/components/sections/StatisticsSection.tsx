@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { motion } from 'framer-motion';
 
 export default function StatisticsSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -9,10 +10,9 @@ export default function StatisticsSection() {
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            // Animate stats
             gsap.fromTo('.stat-card',
-              { opacity: 0, y: 30 },
-              { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' }
+              { opacity: 0, y: 30, scale: 0.9 },
+              { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out' }
             );
           }
         });
@@ -28,73 +28,132 @@ export default function StatisticsSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="section" data-testid="statistics-section" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', backgroundColor: '#111827' }}>
-      <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '2rem' }}>
-        
+    <section
+      ref={sectionRef}
+      className="section bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center"
+      data-testid="statistics-section"
+    >
+      <div className="w-full h-full flex flex-col justify-center gap-8 max-w-7xl mx-auto px-8 py-12">
+
         {/* Top Row: Demographics and Model Sanayi */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
           {/* Çerkezköy/Kapaklı Stats */}
-          <div className="stat-card opacity-0" style={{ backgroundColor: 'rgba(255,255,255,0.05)', padding: '2rem', borderRadius: '0.75rem', textAlign: 'center', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#ff6b1a', marginBottom: '1.5rem' }}>
+          <motion.div
+            className="stat-card opacity-0 p-6 rounded-2xl border backdrop-blur-sm"
+            style={{
+              borderColor: '#ff6b1a40',
+              background: 'linear-gradient(145deg, rgba(2,6,23,0.6), rgba(15,23,42,0.6))'
+            }}
+          >
+            <h2 className="text-2xl font-bold text-[#ff6b1a] mb-6">
               ÇERKEZKÖY/KAPAKLI
             </h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '1.125rem', color: 'rgba(255,255,255,0.9)' }}>
-              <div><span style={{ fontWeight: 'bold' }}>Nüfus:</span> 375.000</div>
-              <div><span style={{ fontWeight: 'bold' }}>Ortalama Yıllık Artış:</span> %7</div>
-              <div><span style={{ fontWeight: 'bold' }}>Nüfusun %50'si:</span> 25-45 Yaş Arası</div>
+            <div className="flex flex-col gap-4 text-xl text-white/90 font-bold">
+              <div>Nüfus: 375.000</div>
+              <div>Nüfusun %50'si: 25-45 Yaş Arası</div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Model Sanayi Merkezi Stats */}
-          <div className="stat-card opacity-0" style={{ backgroundColor: 'rgba(255,255,255,0.05)', padding: '2rem', borderRadius: '0.75rem', textAlign: 'center', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#ff6b1a', marginBottom: '1.5rem' }}>
+          {/* Model Sanayi Merkezi Stats */}
+          <motion.div
+            className="stat-card opacity-0 p-6 rounded-2xl border backdrop-blur-sm"
+            style={{
+              borderColor: '#ff6b1a40',
+              background: 'linear-gradient(145deg, rgba(2,6,23,0.6), rgba(15,23,42,0.6))'
+            }}
+          >
+            <h2 className="text-2xl font-bold text-[#ff6b1a] mb-6">
               MODEL SANAYİ MERKEZİ
             </h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'white' }}>76 FİRMA</div>
-              <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'white' }}>1.050 ÇALIŞAN</div>
+            <div className="flex flex-col gap-4 text-xl text-white font-bold">
+              <div>76 AKTİF FİRMA</div>
+              <div>1.050 ÇALIŞAN</div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* World Trade Access */}
-        <div className="stat-card opacity-0" style={{ backgroundColor: 'rgba(255,255,255,0.05)', padding: '1.5rem', borderRadius: '0.75rem', textAlign: 'center', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 'bold', color: '#ff6b1a' }}>
-            DÜNYA TİCARETİNE KOLAY ULAŞIM
+        {/* World Trade Access */}
+        <motion.div
+          className="stat-card opacity-0 p-6 rounded-2xl border backdrop-blur-sm text-center"
+          style={{
+            borderColor: '#ff6b1a40',
+            background: 'linear-gradient(145deg, rgba(2,6,23,0.6), rgba(15,23,42,0.6))'
+          }}
+        >
+          <h2 className="text-2xl font-bold text-[#ff6b1a]">
+            Gücünüze Güç Katacak Lokasyon
           </h2>
-        </div>
+        </motion.div>
 
         {/* OSB Companies - 2 rows, 3 columns */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
-          <div className="stat-card opacity-0" style={{ backgroundColor: 'rgba(255,255,255,0.05)', padding: '1.5rem', borderRadius: '0.75rem', textAlign: 'center', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' }}>Çerkezköy</div>
-            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#ff6b1a' }}>312 Firma</div>
-          </div>
-          
-          <div className="stat-card opacity-0" style={{ backgroundColor: 'rgba(255,255,255,0.05)', padding: '1.5rem', borderRadius: '0.75rem', textAlign: 'center', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' }}>Velimeşe</div>
-            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#ff6b1a' }}>176 Firma</div>
-          </div>
-          
-          <div className="stat-card opacity-0" style={{ backgroundColor: 'rgba(255,255,255,0.05)', padding: '1.5rem', borderRadius: '0.75rem', textAlign: 'center', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' }}>Ergene</div>
-            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#ff6b1a' }}>190 Firma</div>
-          </div>
-          
-          <div className="stat-card opacity-0" style={{ backgroundColor: 'rgba(255,255,255,0.05)', padding: '1.5rem', borderRadius: '0.75rem', textAlign: 'center', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' }}>Kapaklı</div>
-            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#ff6b1a' }}>31 Firma</div>
-          </div>
-          
-          <div className="stat-card opacity-0" style={{ backgroundColor: 'rgba(255,255,255,0.05)', padding: '1.5rem', borderRadius: '0.75rem', textAlign: 'center', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' }}>Veliköy</div>
-            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#ff6b1a' }}>72 Firma</div>
-          </div>
-          
-          <div className="stat-card opacity-0" style={{ backgroundColor: 'rgba(255,255,255,0.05)', padding: '1.5rem', borderRadius: '0.75rem', textAlign: 'center', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '0.5rem' }}>Yalıboyu</div>
-            <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#ff6b1a' }}>34 Firma</div>
-          </div>
+        <div className="grid grid-cols-3 gap-6">
+          <motion.div
+            className="stat-card opacity-0 p-6 rounded-2xl border backdrop-blur-sm text-center"
+            style={{
+              borderColor: '#ff6b1a40',
+              background: 'linear-gradient(145deg, rgba(2,6,23,0.6), rgba(15,23,42,0.6))'
+            }}
+          >
+            <div className="text-xl font-bold text-white mb-2">Çerkezköy</div>
+            <div className="text-2xl font-bold text-[#ff6b1a]">312 Firma</div>
+          </motion.div>
+
+          <motion.div
+            className="stat-card opacity-0 p-6 rounded-2xl border backdrop-blur-sm text-center"
+            style={{
+              borderColor: '#ff6b1a40',
+              background: 'linear-gradient(145deg, rgba(2,6,23,0.6), rgba(15,23,42,0.6))'
+            }}
+          >
+            <div className="text-xl font-bold text-white mb-2">Velimeşe</div>
+            <div className="text-2xl font-bold text-[#ff6b1a]">176 Firma</div>
+          </motion.div>
+
+          <motion.div
+            className="stat-card opacity-0 p-6 rounded-2xl border backdrop-blur-sm text-center"
+            style={{
+              borderColor: '#ff6b1a40',
+              background: 'linear-gradient(145deg, rgba(2,6,23,0.6), rgba(15,23,42,0.6))'
+            }}
+          >
+            <div className="text-xl font-bold text-white mb-2">Ergene</div>
+            <div className="text-2xl font-bold text-[#ff6b1a]">190 Firma</div>
+          </motion.div>
+
+          <motion.div
+            className="stat-card opacity-0 p-6 rounded-2xl border backdrop-blur-sm text-center"
+            style={{
+              borderColor: '#ff6b1a40',
+              background: 'linear-gradient(145deg, rgba(2,6,23,0.6), rgba(15,23,42,0.6))'
+            }}
+          >
+            <div className="text-xl font-bold text-white mb-2">Kapaklı</div>
+            <div className="text-2xl font-bold text-[#ff6b1a]">31 Firma</div>
+          </motion.div>
+
+          <motion.div
+            className="stat-card opacity-0 p-6 rounded-2xl border backdrop-blur-sm text-center"
+            style={{
+              borderColor: '#ff6b1a40',
+              background: 'linear-gradient(145deg, rgba(2,6,23,0.6), rgba(15,23,42,0.6))'
+            }}
+          >
+            <div className="text-xl font-bold text-white mb-2">Veliköy</div>
+            <div className="text-2xl font-bold text-[#ff6b1a]">72 Firma</div>
+          </motion.div>
+
+          <motion.div
+            className="stat-card opacity-0 p-6 rounded-2xl border backdrop-blur-sm text-center"
+            style={{
+              borderColor: '#ff6b1a40',
+              background: 'linear-gradient(145deg, rgba(2,6,23,0.6), rgba(15,23,42,0.6))'
+            }}
+          >
+            <div className="text-xl font-bold text-white mb-2">Yalıboyu</div>
+            <div className="text-2xl font-bold text-[#ff6b1a]">34 Firma</div>
+          </motion.div>
         </div>
 
       </div>

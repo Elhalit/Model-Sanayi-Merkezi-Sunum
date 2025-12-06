@@ -153,7 +153,7 @@ export default function CompanySection() {
                 if (company.name.includes('Nadir Metal')) logoSrc = '/nadirmetal.jpeg';
                 if (company.name.includes('İNNO')) logoSrc = '/İnno-GY-Logo.png';
                 if (company.name.includes('NET')) logoSrc = '/Net-logo.png';
-                if (company.name.includes('Som')) logoSrc = '/Som-Prefabrik-Logo.png';
+                if (company.name.includes('Som')) logoSrc = '/som-prefabrik-logo.png';
                 return (
                   <div key={company.name} className="flex flex-col items-center w-40">
                     <div className="w-20 h-20 mb-3">

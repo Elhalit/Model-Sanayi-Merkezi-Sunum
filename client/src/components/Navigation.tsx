@@ -11,9 +11,11 @@ const sectionNames = [
   'Giriş',
   'Ortaklık',
   'Projemiz',
+  'Sanayi Merkezi',
   'Istatistikler',
   'Stratejik Lokasyon',
   'Vaziyet Planı',
+  'Tanıtım Videosu',
   'Kat Planları - 1. Etap',
   'Kat Planları - 2. Etap',
   'Kat Planları - 3. Etap',
@@ -41,11 +43,10 @@ export default function Navigation({ currentSection, onNavigate, totalSections }
         {Array.from({ length: totalSections }).map((_, index) => (
           <div
             key={index}
-            className={`relative group cursor-pointer transition-all duration-300 ${
-              currentSection === index 
-                ? 'w-4 h-4 bg-primary' 
-                : 'w-3 h-3 bg-white/30 hover:bg-primary/60 hover:scale-110'
-            } rounded-full`}
+            className={`relative group cursor-pointer transition-all duration-300 ${currentSection === index
+              ? 'w-4 h-4 bg-primary'
+              : 'w-3 h-3 bg-white/30 hover:bg-primary/60 hover:scale-110'
+              } rounded-full`}
             onClick={() => onNavigate(index)}
             data-testid={`nav-dot-${index}`}
           >

@@ -15,7 +15,7 @@ export default function FloorPlansSection5() {
   const [availableBlocks, setAvailableBlocks] = useState<string[]>([]);
   const [filter, setFilter] = useState<FilterType>('all');
   const [searchTerm, setSearchTerm] = useState('');
-  const [hoveredUnit, setHoveredUnit] = useState<FloorPlanUnit | null>(null);
+  const [selectedUnit, setSelectedUnit] = useState<FloorPlanUnit | null>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
   // Load CSV data on component mount
@@ -27,13 +27,13 @@ export default function FloorPlansSection5() {
         const unitsContent = await unitsResponse.text();
         const parsedUnits = parseCSV(unitsContent, '5');
         setUnits(parsedUnits);
-        
+
         // Load firm information
         const firmsResponse = await fetch('/MSM FİRMA BİLGİLERİ(1) - Sayfa1 (1).csv');
         const firmsContent = await firmsResponse.text();
         const parsedFirms = parseFirmInfoCSV(firmsContent);
         setFirms(parsedFirms);
-        
+
         const blocks = getAllBlocks(parsedUnits);
         setAvailableBlocks(blocks);
         if (blocks.length > 0) {
@@ -65,18 +65,18 @@ export default function FloorPlansSection5() {
   // Get current block data
   const blockSummary = getBlockSummary(units, activeBlock);
   const currentBlockUnits = units.filter(unit => unit.block === activeBlock);
-  
+
   // Sort units: arrange in columns, bottom to top (1-5 per column)
   const sortedUnits = [...currentBlockUnits].sort((a, b) => {
     const numA = parseInt(a.unitNumber);
     const numB = parseInt(b.unitNumber);
     return numA - numB;
   });
-  
+
   // Calculate grid dimensions - 6 units per column (bottom to top)
   const unitsPerColumn = 6;
   const numColumns = Math.max(1, Math.ceil(sortedUnits.length / unitsPerColumn));
-  
+
   // Rearrange units to display bottom-to-top in columns
   const arrangedUnits: FloorPlanUnit[] = [];
   for (let col = 0; col < numColumns; col++) {
@@ -90,12 +90,12 @@ export default function FloorPlansSection5() {
     // Reverse to show bottom to top
     arrangedUnits.push(...columnUnits.reverse());
   }
-  
+
   // Filter units based on search and filter
   const filteredUnits = currentBlockUnits.filter(unit => {
-    const matchesSearch = searchTerm === '' || 
+    const matchesSearch = searchTerm === '' ||
       unit.unitNumber.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     let matchesFilter = false;
     if (filter === 'all') {
       matchesFilter = true;
@@ -104,300 +104,277 @@ export default function FloorPlansSection5() {
     } else {
       matchesFilter = unit.status === filter;
     }
-    
+
     return matchesSearch && matchesFilter;
   });
 
   return (
-    <section className="section bg-slate-800 relative" data-testid="floorplans-section-5">
-      <div className="w-full h-full flex flex-col px-0 relative z-10">
-        <div className="px-8">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 text-center" style={{
+    <section
+      className="section bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative h-screen w-full overflow-hidden"
+      data-testid="floorplans-section-5"
+    >
+      <div className="w-full h-full flex flex-col relative z-10 pl-12 pr-32">
+        {/* Top Section - Compact Header */}
+        <div className="px-6 pt-4 shrink-0 flex flex-col gap-3">
+          <h2 className="text-2xl md:text-3xl font-black text-center py-2" style={{
             background: 'linear-gradient(to right, #ff5300, #ff6b1a, #ff5300)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'
           }}>
-            Kat Planları - 5. Etap
+            KAT PLANLARI - 5. ETAP
           </h2>
-          
-          {/* Block Tabs */}
-          <div className="flex gap-3 mb-6 overflow-x-auto pb-2">
-            {availableBlocks.map((block) => (
-              <button
-                key={block}
-                className={`glass px-6 py-3 rounded-lg font-semibold whitespace-nowrap 
-                           transition-all ${
-                             activeBlock === block 
-                               ? 'bg-primary/20 text-primary border-primary' 
-                               : 'hover:bg-primary/20'
-                           }`}
-                onClick={() => setActiveBlock(block)}
-                data-testid={`floor-tab-${block}`}
-              >
-                {block} Blok
-              </button>
-            ))}
-          </div>
 
-          {/* Controls */}
-          <div className="flex gap-4 mb-6">
+          {/* Controls Row */}
+          <div className="flex items-center justify-between gap-4 max-w-7xl mx-auto w-full">
+            {/* Block Tabs */}
+            <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+              {availableBlocks.map((block) => (
+                <button
+                  key={block}
+                  className={`glass px-4 py-2 rounded-lg font-semibold whitespace-nowrap text-sm
+                             transition-all border border-white/10 ${activeBlock === block
+                      ? 'bg-primary/20 text-primary border-primary'
+                      : 'hover:bg-primary/20 text-white/70'
+                    }`}
+                  onClick={() => setActiveBlock(block)}
+                >
+                  {block} Blok
+                </button>
+              ))}
+            </div>
+
             {/* Search */}
-            <div className="flex-1">
-              <div className="glass rounded-xl overflow-hidden flex items-center">
-                <Search className="w-5 h-5 text-muted-foreground ml-4" />
-                <input 
-                  type="text" 
-                  placeholder="Ünite numarası ara..."
-                  className="flex-1 bg-transparent px-4 py-2 outline-none text-foreground"
+            <div className="w-64">
+              <div className="glass rounded-lg overflow-hidden flex items-center border border-white/10 h-10">
+                <Search className="w-4 h-4 text-white/50 ml-3" />
+                <input
+                  type="text"
+                  placeholder="Ünite ara..."
+                  className="flex-1 bg-transparent px-3 py-1 outline-none text-white text-sm placeholder:text-white/30"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
             </div>
 
-            {/* Filters */}
-            <div className="flex gap-2 flex-wrap">
-              {(['all', 'available', 'sold', 'reserved', 'with-firms'] as FilterType[]).map((filterType) => (
-                <button
-                  key={filterType}
-                  className={`glass px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
-                    filter === filterType ? 'bg-primary/20 text-primary' : 'hover:bg-primary/20'
-                  }`}
-                  onClick={() => setFilter(filterType)}
-                >
-                  {filterType === 'all' ? 'Tümü' : 
-                   filterType === 'available' ? 'Müsait' : 
-                   filterType === 'sold' ? 'Satılan' : 
-                   filterType === 'reserved' ? 'Rezerve' :
-                   filterType === 'with-firms' ? '🏢 Firma Var' : filterType}
-                </button>
-              ))}
-            </div>
+            {/* Filters removed as per request */}
           </div>
 
-          {/* Block Statistics */}
-          <div className="grid grid-cols-4 gap-4 mb-6">
-            <div className="glass p-4 rounded-xl text-center">
-              <div className="text-2xl font-bold text-primary">{blockSummary.total}</div>
-              <div className="text-sm text-muted-foreground">Toplam Ünite</div>
+          {/* Block Statistics - Compact */}
+          <div className="grid grid-cols-4 gap-3 max-w-3xl mx-auto w-full">
+            <div className="glass px-3 py-2 rounded-lg text-center border border-white/10 bg-white/5 flex items-center justify-between">
+              <span className="text-xs text-white/60">Toplam</span>
+              <span className="text-lg font-bold text-primary">{blockSummary.total}</span>
             </div>
-            <div className="glass p-4 rounded-xl text-center">
-              <div className="text-2xl font-bold text-success">{blockSummary.available}</div>
-              <div className="text-sm text-muted-foreground">Müsait</div>
+            <div className="glass px-3 py-2 rounded-lg text-center border border-white/10 bg-white/5 flex items-center justify-between">
+              <span className="text-xs text-white/60">Müsait</span>
+              <span className="text-lg font-bold text-success">{blockSummary.available}</span>
             </div>
-            <div className="glass p-4 rounded-xl text-center">
-              <div className="text-2xl font-bold text-destructive">{blockSummary.sold}</div>
-              <div className="text-sm text-muted-foreground">Satılan</div>
+            <div className="glass px-3 py-2 rounded-lg text-center border border-white/10 bg-white/5 flex items-center justify-between">
+              <span className="text-xs text-white/60">Satılan</span>
+              <span className="text-lg font-bold text-destructive">{blockSummary.sold}</span>
             </div>
-            <div className="glass p-4 rounded-xl text-center">
-              <div className="text-2xl font-bold text-warning">{blockSummary.reserved}</div>
-              <div className="text-sm text-muted-foreground">Rezerve</div>
+            <div className="glass px-3 py-2 rounded-lg text-center border border-white/10 bg-white/5 flex items-center justify-between">
+              <span className="text-xs text-white/60">Rezerve</span>
+              <span className="text-lg font-bold text-warning">{blockSummary.reserved}</span>
             </div>
           </div>
         </div>
 
-        {/* Interactive Unit Grid */}
-        <div className="flex-1 glass rounded-3xl overflow-hidden relative">
-          <div className="w-full h-full p-8">
-            <div className="w-full h-full relative">
-              
-              {/* Grid Container - Horizontal Rectangular Layout */}
-              <div className="w-full h-full flex items-center justify-center px-4">
-                <div className="grid gap-3" style={{
-                  gridTemplateColumns: `repeat(${numColumns}, minmax(140px, 180px))`,
-                  gridTemplateRows: `repeat(${unitsPerColumn}, minmax(60px, 80px))`,
-                  maxWidth: '95%',
-                  maxHeight: '85%'
-                }}>
-                  {arrangedUnits.map((unit, index) => {
-                    const isFiltered = filteredUnits.includes(unit);
-                    const col = Math.floor(index / unitsPerColumn);
-                    const row = index % unitsPerColumn;
-                    
-                    return (
-                      <div
-                        key={`${unit.block}-${unit.unitNumber}`}
-                        className={`
-                          relative cursor-pointer transition-all duration-300 
-                          ${isFiltered ? 'opacity-100 scale-100' : 'opacity-30 scale-95'}
-                          hover:scale-105 hover:z-10
-                        `}
-                        style={{
-                          gridColumn: col + 1,
-                          gridRow: row + 1
-                        }}
-                        onMouseEnter={() => setHoveredUnit(unit)}
-                        onMouseLeave={() => setHoveredUnit(null)}
-                        onClick={() => {
-                          console.log('Selected unit:', unit);
-                        }}
-                      >
-                        {/* Unit Box - Horizontal Rectangle */}
-                        <div className={`
-                          w-full h-full rounded-lg border-2 transition-all duration-300
-                          flex items-center justify-between px-4 py-2 relative
-                          ${unit.status === 'sold' 
-                            ? 'bg-destructive/20 border-destructive hover:bg-destructive/30' 
-                            : unit.status === 'reserved'
-                            ? 'bg-warning/20 border-warning hover:bg-warning/30'
-                            : 'bg-success/20 border-success hover:bg-success/30'
-                          }
-                          ${!isFiltered ? 'grayscale' : ''}
-                        `}>
-                          {/* Left side - Unit Number */}
-                          <div className="font-bold text-xl">
-                            {unit.unitNumber}
-                          </div>
-                          
-                          {/* Right side - Area */}
-                          <div className="text-sm font-medium opacity-90">
-                            {unit.netArea}m²
-                          </div>
-                          
-                          {/* Status Indicator */}
-                          <div className={`
-                            absolute -top-1 -right-1 w-3 h-3 rounded-full
-                            ${unit.status === 'sold' 
-                              ? 'bg-destructive' 
-                              : unit.status === 'reserved'
-                              ? 'bg-warning'
-                              : 'bg-success'
-                            }
-                          `} />
-                          
-                          {/* Firm Indicator */}
-                          {getFirmInfoForUnit(firms, unit.block, unit.unitNumber, '5') && (
-                            <div className="absolute -top-1 -left-1 w-4 h-4 bg-accent rounded-full flex items-center justify-center">
-                              <span className="text-xs">🏢</span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+        {/* Main Content Area */}
+        <div className="flex-1 flex min-h-0 px-6 pb-6 pt-4 gap-6 overflow-hidden">
 
-              {/* Combined Left Panel - Fixed to Screen Left */}
-              <div className="fixed top-1/2 left-4 transform -translate-y-1/2 glass p-4 rounded-lg space-y-6 z-50">
-                {/* Info Panel */}
+          {/* Left Sidebar - Info & Details */}
+          <div className="w-80 shrink-0 flex flex-col gap-4 overflow-y-auto pr-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+
+            {/* Block Info & Legend */}
+            <div className="glass p-5 rounded-xl border border-white/10 bg-black/40 backdrop-blur-xl">
+              <h3 className="font-semibold text-orange-500 mb-3 text-lg border-b border-white/10 pb-2">
+                {activeBlock} Blok Bilgisi
+              </h3>
+
+              <div className="space-y-4">
                 <div>
-                  <h3 className="font-semibold text-orange-500 mb-2">{activeBlock} Blok - 5. Etap</h3>
-                  <div className="text-sm text-muted-foreground mb-2">
-                    Toplam {currentBlockUnits.length} ünite
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    Filtrelenmiş: {filteredUnits.length} ünite
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="text-white/60">Görüntülenen:</span>
+                    <span className="text-white font-medium">{filteredUnits.length} / {currentBlockUnits.length}</span>
                   </div>
                   {searchTerm && (
-                    <div className="text-xs mt-2 text-accent">
+                    <div className="text-xs text-accent">
                       Arama: "{searchTerm}"
                     </div>
                   )}
                 </div>
 
-                {/* Legend */}
                 <div>
-                  <div className="text-sm font-semibold mb-3">Göstergeler:</div>
-                  <div className="flex flex-col gap-2">
-                    <div className="text-xs font-medium text-muted-foreground mb-1">Durum:</div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 bg-success rounded border-2 border-success"></div>
-                      <span className="text-xs">Müsait</span>
+                  <div className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">Göstergeler</div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="flex items-center gap-2 bg-white/5 p-1.5 rounded">
+                      <div className="w-3 h-3 bg-success rounded-full"></div>
+                      <span className="text-xs text-white/80">Müsait</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 bg-destructive rounded border-2 border-destructive"></div>
-                      <span className="text-xs">Satıldı</span>
+                    <div className="flex items-center gap-2 bg-white/5 p-1.5 rounded">
+                      <div className="w-3 h-3 bg-destructive rounded-full"></div>
+                      <span className="text-xs text-white/80">Satıldı</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 bg-warning rounded border-2 border-warning"></div>
-                      <span className="text-xs">Rezerve</span>
+                    <div className="flex items-center gap-2 bg-white/5 p-1.5 rounded">
+                      <div className="w-3 h-3 bg-warning rounded-full"></div>
+                      <span className="text-xs text-white/80">Rezerve</span>
                     </div>
-                    
-                    <div className="text-xs font-medium text-muted-foreground mt-3 mb-1">Özel:</div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 bg-accent rounded-full flex items-center justify-center">
-                        <span className="text-xs">🏢</span>
-                      </div>
-                      <span className="text-xs">Firma Bilgisi Var</span>
+                    <div className="flex items-center gap-2 bg-white/5 p-1.5 rounded">
+                      <div className="w-3 h-3 bg-accent rounded-full flex items-center justify-center text-[8px]">🏢</div>
+                      <span className="text-xs text-white/80">Firma</span>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Fixed Right Panel - Unit Info Display */}
-              <div className="fixed top-1/2 right-8 transform -translate-y-1/2 glass p-4 rounded-lg z-50 min-w-[300px] max-w-[400px]">
-                {hoveredUnit ? (
-                  <div>
-                    <div className="font-semibold text-orange-500 mb-3">
-                      {hoveredUnit.block} Blok - Ünite {hoveredUnit.unitNumber}
+            {/* Unit Details Card */}
+            <div className={`glass p-5 rounded-xl border border-white/10 bg-black/40 backdrop-blur-xl transition-all duration-300 ${selectedUnit ? 'opacity-100 translate-x-0' : 'opacity-50 translate-x-0'}`}>
+              {selectedUnit ? (
+                <div>
+                  <div className="font-semibold text-orange-500 mb-4 text-lg border-b border-white/10 pb-2 flex items-center justify-between">
+                    <span>Ünite {selectedUnit.unitNumber}</span>
+                    <span className="text-xs text-white/50 font-normal">{selectedUnit.block} Blok</span>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="bg-white/5 p-2 rounded-lg">
+                        <span className="text-white/50 text-xs block mb-1">Net Alan</span>
+                        <span className="font-bold text-white text-lg">{selectedUnit.netArea} m²</span>
+                      </div>
+                      <div className="bg-white/5 p-2 rounded-lg">
+                        <span className="text-white/50 text-xs block mb-1">Brüt Alan</span>
+                        <span className="font-bold text-white text-lg">{selectedUnit.grossArea} m²</span>
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Net Alan:</span>
-                        <span className="font-medium">{hoveredUnit.netArea} m²</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Brüt Alan:</span>
-                        <span className="font-medium">{hoveredUnit.grossArea} m²</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-muted-foreground">Durum:</span>
-                        <div className={`px-2 py-1 rounded text-xs font-semibold ${
-                          hoveredUnit.status === 'sold' 
-                            ? 'bg-destructive/20 text-destructive' 
-                            : hoveredUnit.status === 'reserved'
-                            ? 'bg-warning/20 text-warning'
-                            : 'bg-success/20 text-success'
+
+                    <div className="pt-2">
+                      <span className="text-white/50 text-xs block mb-2">Durum</span>
+                      <div className={`px-3 py-2 rounded-lg text-sm font-bold text-center uppercase tracking-wider ${selectedUnit.status === 'sold'
+                        ? 'bg-destructive/20 text-destructive border border-destructive/30'
+                        : selectedUnit.status === 'reserved'
+                          ? 'bg-warning/20 text-warning border border-warning/30'
+                          : 'bg-success/20 text-success border border-success/30'
                         }`}>
-                          {hoveredUnit.status === 'sold' ? 'Satıldı' : 
-                           hoveredUnit.status === 'reserved' ? 'Rezerve' : 'Müsait'}
-                        </div>
+                        {selectedUnit.status === 'sold' ? 'Satıldı' :
+                          selectedUnit.status === 'reserved' ? 'Rezerve' : 'Müsait'}
                       </div>
-                      
-                      {/* Firm Information */}
-                      {(() => {
-                        const firmInfo = getFirmInfoForUnit(firms, hoveredUnit.block, hoveredUnit.unitNumber, '5');
-                        return firmInfo ? (
-                          <div className="border-t pt-3 mt-3">
-                            <div className="text-sm font-semibold text-orange-500 mb-2">
-                              🏢 Firma Bilgileri
+                    </div>
+
+                    {/* Firm Information */}
+                    {(() => {
+                      const firmInfo = getFirmInfoForUnit(firms, selectedUnit.block, selectedUnit.unitNumber, '5');
+                      return firmInfo ? (
+                        <div className="border-t border-white/10 pt-4 mt-4">
+                          <div className="text-xs font-bold text-orange-500 mb-3 flex items-center gap-2 uppercase tracking-wider">
+                            <span>🏢</span> Firma Bilgileri
+                          </div>
+                          <div className="space-y-3 bg-white/5 p-3 rounded-lg">
+                            <div>
+                              <span className="text-white/40 text-[10px] uppercase tracking-wider block mb-1">Firma Adı</span>
+                              <div className="font-semibold text-white text-sm leading-tight">{firmInfo.firma}</div>
                             </div>
-                            <div className="space-y-1 text-xs">
+                            <div className="grid grid-cols-2 gap-2">
                               <div>
-                                <span className="text-muted-foreground">Firma:</span>
-                                <div className="font-medium text-wrap break-words">{firmInfo.firma}</div>
-                              </div>
-                              <div className="flex justify-between">
-                                <span className="text-muted-foreground">Durum:</span>
-                                <span className={`font-medium ${
-                                  firmInfo.kiraci.includes('MALİK') ? 'text-success' : 'text-warning'
-                                }`}>
+                                <span className="text-white/40 text-[10px] uppercase tracking-wider block mb-1">Durum</span>
+                                <span className={`font-bold text-xs ${firmInfo.kiraci.includes('MALİK') ? 'text-success' : 'text-warning'
+                                  }`}>
                                   {firmInfo.kiraci}
                                 </span>
                               </div>
                               <div>
-                                <span className="text-muted-foreground">İş Kolu:</span>
-                                <div className="font-medium text-wrap break-words">{firmInfo.isKolu}</div>
+                                <span className="text-white/40 text-[10px] uppercase tracking-wider block mb-1">İş Kolu</span>
+                                <div className="font-medium text-white/90 text-xs leading-tight">{firmInfo.isKolu}</div>
                               </div>
                             </div>
                           </div>
-                        ) : null;
-                      })()}
-                    </div>
+                        </div>
+                      ) : null;
+                    })()}
                   </div>
-                ) : (
-                  <div className="text-center text-muted-foreground">
-                    <div className="mb-2">📍</div>
-                    <div className="text-sm">
-                      Ünite detayları için<br />
-                      fareyi ünite üzerine getirin
-                    </div>
+                </div>
+              ) : (
+                <div className="text-center text-white/40 py-12 flex flex-col items-center justify-center h-full">
+                  <div className="mb-4 text-4xl opacity-30 animate-pulse">📍</div>
+                  <div className="text-sm font-medium">
+                    Detaylar için<br />
+                    bir ünite seçin
                   </div>
-                )}
-              </div>
+                </div>
+              )}
+            </div>
+          </div>
 
+          {/* Grid Area */}
+          <div className="flex-1 glass rounded-2xl p-4 flex items-center justify-center overflow-hidden border border-white/10 bg-black/20 relative">
+            <div className="w-full h-full overflow-hidden flex items-center justify-center">
+              <div className="w-[90%] h-[96%] grid gap-3 mx-auto" style={{
+                gridTemplateColumns: `repeat(${numColumns}, 1fr)`,
+                gridTemplateRows: `repeat(${unitsPerColumn}, 1fr)`,
+              }}>
+                {arrangedUnits.map((unit, index) => {
+                  const isFiltered = filteredUnits.includes(unit);
+                  const col = Math.floor(index / unitsPerColumn);
+                  const row = index % unitsPerColumn;
+
+                  return (
+                    <div
+                      key={`${unit.block}-${unit.unitNumber}`}
+                      className={`
+                          relative cursor-pointer transition-all duration-300 
+                          ${isFiltered ? 'opacity-100 scale-100' : 'opacity-30 scale-95'}
+                          hover:scale-[1.02] hover:z-10 w-full h-full
+                        `}
+                      style={{
+                        gridColumn: col + 1,
+                        gridRow: row + 1
+                      }}
+                      onClick={() => setSelectedUnit(unit)}
+                    >
+                      <div className={`
+                          w-full h-full rounded-md border transition-all duration-300
+                          flex items-center justify-between px-2 relative
+                          ${unit.status === 'sold'
+                          ? 'bg-destructive/10 border-destructive/50 hover:bg-destructive/20'
+                          : unit.status === 'reserved'
+                            ? 'bg-warning/10 border-warning/50 hover:bg-warning/20'
+                            : 'bg-success/10 border-success/50 hover:bg-success/20'
+                        }
+                          ${!isFiltered ? 'grayscale' : ''}
+                          ${selectedUnit === unit ? 'ring-2 ring-white shadow-lg z-20' : ''}
+                        `}>
+                        <div className="font-bold text-sm md:text-base lg:text-lg text-white">
+                          {unit.unitNumber}
+                        </div>
+
+                        <div className="text-[10px] md:text-xs font-medium text-white/70">
+                          {unit.netArea}m²
+                        </div>
+
+                        <div className={`
+                            absolute -top-1 -right-1 w-2 h-2 rounded-full border border-black/50
+                            ${unit.status === 'sold'
+                            ? 'bg-destructive'
+                            : unit.status === 'reserved'
+                              ? 'bg-warning'
+                              : 'bg-success'
+                          }
+                          `} />
+
+                        {getFirmInfoForUnit(firms, unit.block, unit.unitNumber, '5') && (
+                          <div className="absolute -top-1 -left-1 w-3 h-3 bg-accent rounded-full flex items-center justify-center border border-black/50 shadow-sm">
+                            <span className="text-[6px]">🏢</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

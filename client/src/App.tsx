@@ -5,12 +5,14 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Presentation from "@/pages/Presentation";
+import MasterPlanPage from "@/pages/MasterPlanPage";
 import "./lib/i18n";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Presentation} />
+      <Route path="/master-plan" component={MasterPlanPage} />
       <Route component={NotFound} />
     </Switch>
   );
