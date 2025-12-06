@@ -51,7 +51,7 @@ export default function HeroSection() {
         </h2>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-8 w-full flex-1 flex items-center justify-center min-h-0">
+      <div className="relative z-10 max-w-7xl mx-auto pl-8 pr-32 w-full flex-1 flex items-center justify-center min-h-0">
 
         {/* Content Grid */}
         <div id="hero-facilities" className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">

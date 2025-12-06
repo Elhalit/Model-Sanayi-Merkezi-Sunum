@@ -122,7 +122,7 @@ export default function ProjectSection() {
         </h2>
       </div>
       {/* Features Grid - Centered 3 rows x 4 icons */}
-      <div className="w-full px-4 flex-1 flex items-center">
+      <div className="w-full pl-4 pr-32 flex-1 flex items-center">
         <div className="mx-auto max-w-7xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 place-items-center">
           {features.map((feature, idx) => {
             const Icon = feature.Icon;

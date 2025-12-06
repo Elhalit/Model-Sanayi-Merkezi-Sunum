@@ -33,7 +33,7 @@ export default function StatisticsSection() {
       className="section bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center"
       data-testid="statistics-section"
     >
-      <div className="w-full h-full flex flex-col justify-center gap-8 max-w-7xl mx-auto px-8 py-12">
+      <div className="w-full h-full flex flex-col justify-center gap-8 max-w-7xl mx-auto pl-8 pr-32 py-12">
 
         {/* Top Row: Demographics and Model Sanayi */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>

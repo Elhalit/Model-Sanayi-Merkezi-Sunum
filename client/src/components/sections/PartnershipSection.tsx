@@ -172,7 +172,7 @@ export default function PartnershipSection() {
 
       <div className="relative z-10 h-full w-full flex items-center justify-center">
         {/* Main INNO Section - Full Width */}
-        <div className="w-full px-8">
+        <div className="w-full pl-8 pr-32">
           <div
             className="flex flex-row items-center gap-8 px-8 py-16"
           >
