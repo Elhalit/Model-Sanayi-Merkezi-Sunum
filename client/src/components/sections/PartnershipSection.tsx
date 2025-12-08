@@ -197,7 +197,7 @@ export default function PartnershipSection() {
             <div className="flex-1">
               <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">İNNO Gayrimenkul Yatırım A.Ş.</h3>
               <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
-                Sektördeki 30. yılını dolduran İnno Gayrimenkul, fizibilite çalışmalarını önceden tamamladığı stratejik lokasyonlarda ülke sanayisine katkı sunmak ve gayrimenkul sektörünü ileri taşımak için endüstriyel tesis, imalathane, depolama ve lojistik alanları inşa etmektedir.{' '}
+                İnno ülke sanayisine katkı sunmak ve gayrimenkul sektörünü ileri taşımak için stratejik lokasyonlarda endüstriyel tesis, imalathane, depolama ve lojistik alanlarından oluşan sanayi merkezleri inşa eden bu alanda öncü firmalardan biridir.{' '}
                 <span
                   className="font-bold cursor-pointer hover:scale-105 inline-block transition-transform"
                   onClick={(e) => {
@@ -409,7 +409,8 @@ export default function PartnershipSection() {
           style={{
             transform: 'translateX(-100%)',
             width: '50vw',
-            maxWidth: '50vw'
+            maxWidth: '50vw',
+            zIndex: 60
           }}
         >
           {/* Added prominent, absolute positioned close button for the panel */}
@@ -429,7 +430,7 @@ export default function PartnershipSection() {
               {/* Original header button kept as fallback but hidden on small screens if needed, or we can remove it. Keeping for layout balance but making it invisible or keeping it as secondary. */}
             </div>
 
-            <div className="flex-1 overflow-y-auto p-8">
+            <div className="flex-1 overflow-y-auto p-8 pb-32">
               <div className="space-y-6">
                 <div className={`${selectedCompany === 'som' ? 'w-48 h-24' : 'w-32 h-32 rounded-full bg-white p-4'} flex items-center justify-center mb-6`}>
                   {getCompanyData(selectedCompany)?.logo ? (
@@ -466,8 +467,12 @@ export default function PartnershipSection() {
                     <div className="aspect-video rounded-lg overflow-hidden bg-black relative group">
                       <video
                         controls
-                        className="w-full h-full"
-                        src="/SOM PREFABRİK TANITIM.mp4"
+                        className="w-full h-full relative z-10"
+                        src="/SOM PREFABRİK TANITIM(720P_HD).mp4"
+                        playsInline
+                        muted={false}
+                        ref={videoRef}
+                        style={{ pointerEvents: 'auto' }}
                         onLoadedMetadata={(e) => {
                           e.currentTarget.currentTime = 41;
                         }}

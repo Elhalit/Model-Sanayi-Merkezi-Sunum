@@ -160,38 +160,53 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
                 <BoundsController locations={locations} selectedLocation={selectedLocation} />
 
                 {/* Markers */}
-                {locations.map((loc, idx) => (
-                    <Marker
-                        key={idx}
-                        position={[loc.coordinates[1], loc.coordinates[0]]}
-                        eventHandlers={{
-                            click: () => {
-                                onLocationSelect && onLocationSelect(loc);
-                            },
-                        }}
-                    >
-                        <Popup>
-                            <div className="p-2">
-                                <h3 className="font-bold">{loc.title}</h3>
-                                <p className="text-sm">{loc.description}</p>
-                            </div>
-                        </Popup>
-                    </Marker>
-                ))}
+                {locations.map((loc, idx) => {
+                    // Don't show marker for locations with polygon (e.g. KOSB)
+                    if (loc.polygon) return null;
+
+                    return (
+                        <Marker
+                            key={idx}
+                            position={[loc.coordinates[1], loc.coordinates[0]]}
+                            eventHandlers={{
+                                click: () => {
+                                    onLocationSelect && onLocationSelect(loc);
+                                },
+                            }}
+                        >
+                            <Popup>
+                                <div className="p-2">
+                                    <h3 className="font-bold">{loc.title}</h3>
+                                    <p className="text-sm">{loc.description}</p>
+                                </div>
+                            </Popup>
+                        </Marker>
+                    );
+                })}
 
                 {/* Location Specific Polygons */}
-                {selectedLocation?.polygon && (
-                    <Polygon
-                        positions={selectedLocation.polygon}
-                        pathOptions={{
-                            color: '#088',
-                            weight: 2,
-                            opacity: 1,
-                            fillColor: '#088',
-                            fillOpacity: 0.4
-                        }}
-                    />
-                )}
+                {locations.map((loc, idx) => (
+                    loc.polygon && (
+                        <Polygon
+                            key={`polygon-${idx}`}
+                            positions={loc.polygon}
+                            pathOptions={{
+                                color: '#3b82f6', // Blue as requested
+                                weight: 2,
+                                opacity: 0.8,
+                                fillColor: '#3b82f6',
+                                fillOpacity: 0.15,
+                                dashArray: '10, 10',
+                                className: 'animate-route-draw' // Animated dash effect
+                            }}
+                            eventHandlers={{
+                                click: () => {
+                                    onLocationSelect && onLocationSelect(loc);
+                                }
+                            }}
+                        />
+                    )
+                ))}
 
                 {/* Location Specific Polylines */}
                 {locations.map((loc, idx) => (
@@ -224,6 +239,8 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
                         }}
                     />
                 )}
+
+
             </MapContainer>
         </div>
     );
