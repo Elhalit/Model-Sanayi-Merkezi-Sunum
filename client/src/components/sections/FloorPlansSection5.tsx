@@ -1,6 +1,6 @@
 ﻿import { useState, useRef, useEffect } from 'react';
 import { Download, ZoomIn, Users, Building, TrendingUp, Search, Filter } from 'lucide-react';
-import { parseCSV, getBlockSummary, getAllBlocks, parseFirmInfoCSV, getFirmInfoForUnit, type FloorPlanUnit, type FirmInfo } from '@/lib/csvParser';
+import { parseCSV, getBlockSummary, getAllBlocks, parseFirmInfoCSV, getFirmInfoForUnit, parseZKNKCSV, type FloorPlanUnit, type FirmInfo } from '@/lib/csvParser';
 
 const floorPlanImages = {
   A: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=900'
@@ -25,7 +25,32 @@ export default function FloorPlansSection5() {
         // Load units data
         const unitsResponse = await fetch('/5.etab - 5.etab.csv');
         const unitsContent = await unitsResponse.text();
-        const parsedUnits = parseCSV(unitsContent, '5');
+        let parsedUnits = parseCSV(unitsContent, '5');
+
+        // Load ZKNK data
+        try {
+          const zknkResponse = await fetch('/zknk_data.csv');
+          if (zknkResponse.ok) {
+            const zknkContent = await zknkResponse.text();
+            const zknkData = parseZKNKCSV(zknkContent);
+
+            // Merge ZKNK data
+            parsedUnits = parsedUnits.map(unit => {
+              const key = `${unit.block}-${unit.unitNumber}`;
+              if (zknkData[key]) {
+                return {
+                  ...unit,
+                  groundFloorArea: zknkData[key].ground,
+                  normalFloorArea: zknkData[key].normal
+                };
+              }
+              return unit;
+            });
+          }
+        } catch (err) {
+          console.error('Error loading ZKNK data:', err);
+        }
+
         setUnits(parsedUnits);
 
         // Load firm information
@@ -243,12 +268,12 @@ export default function FloorPlansSection5() {
                   <div className="space-y-3">
                     <div className="grid grid-cols-2 gap-3">
                       <div className="bg-white/5 p-2 rounded-lg">
-                        <span className="text-white/50 text-xs block mb-1">Net Alan</span>
-                        <span className="font-bold text-white text-lg">{selectedUnit.netArea} m²</span>
+                        <span className="text-white/50 text-xs block mb-1">Zemin Kat m²</span>
+                        <span className="font-bold text-white text-lg">{selectedUnit.groundFloorArea || '-'} m²</span>
                       </div>
                       <div className="bg-white/5 p-2 rounded-lg">
-                        <span className="text-white/50 text-xs block mb-1">Brüt Alan</span>
-                        <span className="font-bold text-white text-lg">{selectedUnit.grossArea} m²</span>
+                        <span className="text-white/50 text-xs block mb-1">Normal Kat m²</span>
+                        <span className="font-bold text-white text-lg">{selectedUnit.normalFloorArea || '-'} m²</span>
                       </div>
                     </div>
 
@@ -352,7 +377,7 @@ export default function FloorPlansSection5() {
                         </div>
 
                         <div className="text-[10px] md:text-xs font-medium text-white/70">
-                          {unit.netArea}m²
+                          {unit.groundFloorArea ? Math.round(unit.groundFloorArea + (unit.normalFloorArea || 0)) : unit.netArea}m²
                         </div>
 
                         <div className={`
