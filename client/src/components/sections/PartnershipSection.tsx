@@ -179,7 +179,7 @@ export default function PartnershipSection() {
             {/* INNO Logo */}
             <div className="shrink-0 w-80 h-64 flex items-center justify-center">
               <img
-                src="/innogy_new.png"
+                src="/innogy.png"
                 alt="İNNO Gayrimenkul Yatırım Logo"
                 className="w-full h-full object-contain"
                 style={{ background: 'transparent', border: 'none' }}

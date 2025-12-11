@@ -36,7 +36,7 @@ export default function ThankYouSection() {
                 {/* Logo Container */}
                 <div className="w-64 h-64 md:w-80 md:h-80 mb-8 flex items-center justify-center">
                     <img
-                        src="/innogy_new.png"
+                        src="/innogy.png"
                         alt="İNNO Gayrimenkul Yatırım Logo"
                         className="w-full h-full object-contain"
                         style={{ filter: 'drop-shadow(0 0 20px rgba(255, 107, 26, 0.2))' }}

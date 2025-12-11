@@ -27,7 +27,7 @@ export default function LeaderSection() {
   }, []);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="section relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
       data-testid="leader-section"
@@ -35,9 +35,9 @@ export default function LeaderSection() {
       {/* Full Screen Image */}
       <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-slate-900">
         <img
-          src="/sanayi.png"
+          src="/sanayi1.png"
           alt="Sanayi Merkezi"
-          className="leader-image w-full h-full object-contain"
+          className="leader-image w-full h-full object-cover"
         />
       </div>
     </section>

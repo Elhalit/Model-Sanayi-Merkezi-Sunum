@@ -9,6 +9,8 @@ export interface FloorPlanUnit {
   status: 'sold' | 'available' | 'reserved'; // Durumu - converted
   groundFloorArea?: number; // Zemin Kat m²
   normalFloorArea?: number; // Normal Kat m²
+  priceTL?: number;
+  priceUSD?: number;
 }
 
 export interface FirmInfo {
@@ -229,9 +231,9 @@ export function getFirmsForEtap(firms: FirmInfo[], etap: string): FirmInfo[] {
   return firms.filter(firm => firm.etap.toString() === etap.toString());
 }
 
-export function parseZKNKCSV(csvContent: string): Record<string, { ground: number; normal: number }> {
+export function parseZKNKCSV(csvContent: string): Record<string, { ground: number; normal: number; priceTL: number; priceUSD: number }> {
   const lines = csvContent.split('\n');
-  const data: Record<string, { ground: number; normal: number }> = {};
+  const data: Record<string, { ground: number; normal: number; priceTL: number; priceUSD: number }> = {};
 
   // Skip header row
   for (let i = 1; i < lines.length; i++) {
@@ -241,19 +243,61 @@ export function parseZKNKCSV(csvContent: string): Record<string, { ground: numbe
     // Parse CSV line
     const fields = parseCSVLine(line);
 
-    // Index 5: Blok No, 6: Daire No, 12: Zemin Kat m², 13: Normal Kat m²
+    // Index 5: Blok No, 6: Daire No, 10: Zemin Kat m², 11: Normal Kat m², 12: TL, 13: USD
     if (fields.length >= 14) {
       const block = fields[5].trim();
       const unit = fields[6].trim();
 
       // Parse numbers, handling commas as decimal points if necessary
-      const ground = parseFloat(fields[12].replace(',', '.')) || 0;
-      const normal = parseFloat(fields[13].replace(',', '.')) || 0;
+      const ground = parseFloat(fields[10].replace(',', '.')) || 0;
+      const normal = parseFloat(fields[11].replace(',', '.')) || 0;
+      const priceTL = parseFloat(fields[12].replace(',', '.')) || 0;
+      const priceUSD = parseFloat(fields[13].replace(',', '.')) || 0;
 
       const key = `${block}-${unit}`;
-      data[key] = { ground, normal };
+      data[key] = { ground, normal, priceTL, priceUSD };
     }
   }
 
   return data;
+}
+
+export interface PaymentPlanItem {
+  installmentNo: number; // 0 for Down Payment
+  date: string; // ISO Date
+  amount: number;
+  description: string;
+}
+
+export function calculatePaymentPlan(totalPrice: number, startDate: string): PaymentPlanItem[] {
+  const plan: PaymentPlanItem[] = [];
+  const start = new Date(startDate);
+
+  // Down Payment: 30%
+  const downPayment = totalPrice * 0.30;
+  plan.push({
+    installmentNo: 0,
+    date: start.toISOString().split('T')[0],
+    amount: downPayment,
+    description: 'Peşinat (%30)'
+  });
+
+  // Remaining: 70% over 20 months
+  const remaining = totalPrice * 0.70;
+  const monthlyAmount = remaining / 20;
+
+  for (let i = 1; i <= 20; i++) {
+    // Add Month
+    const date = new Date(start);
+    date.setMonth(start.getMonth() + i);
+
+    plan.push({
+      installmentNo: i,
+      date: date.toISOString().split('T')[0],
+      amount: monthlyAmount,
+      description: 'Taksit'
+    });
+  }
+
+  return plan;
 }

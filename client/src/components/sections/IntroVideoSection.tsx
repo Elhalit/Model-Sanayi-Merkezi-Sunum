@@ -3,17 +3,17 @@ import { useRef, useState, useEffect } from 'react';
 export default function IntroVideoSection() {
     return (
         <section className="section bg-black relative overflow-hidden" data-testid="intro-video-section">
-            {/* Video Container - Fits screen without cropping controls */}
-            <div className="w-full h-full flex items-center justify-center bg-black">
+            {/* Video Container - Fits full screen */}
+            <div className="absolute inset-0 w-full h-full bg-black">
                 <video
                     src="/Model Sanayi Merkezi_nde 4. Etap Başlıyor_(720P_HD).mp4"
-                    className="max-w-full max-h-full w-auto h-auto object-contain"
+                    className="w-full h-full object-cover"
                     autoPlay
                     loop
                     playsInline
                     controls
                     muted={false}
-                    style={{ pointerEvents: 'auto', zIndex: 20 }}
+                    style={{ pointerEvents: 'auto', zIndex: 0 }}
                 />
             </div>
 

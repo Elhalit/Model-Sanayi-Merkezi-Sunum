@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { Download, ZoomIn, Users, Building, TrendingUp, Search, Filter } from 'lucide-react';
 import { parseCSV, getBlockSummary, getAllBlocks, parseFirmInfoCSV, getFirmInfoForUnit, parseZKNKCSV, type FloorPlanUnit, type FirmInfo } from '@/lib/csvParser';
+import PaymentModal from '../PaymentModal';
 
 const floorPlanImages = {
   A: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=900',
@@ -20,6 +21,7 @@ export default function FloorPlansSection() {
   const [filter, setFilter] = useState<FilterType>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedUnit, setSelectedUnit] = useState<FloorPlanUnit | null>(null);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
 
   // Load CSV data on component mount
@@ -45,7 +47,9 @@ export default function FloorPlansSection() {
                 return {
                   ...unit,
                   groundFloorArea: zknkData[key].ground,
-                  normalFloorArea: zknkData[key].normal
+                  normalFloorArea: zknkData[key].normal,
+                  priceTL: zknkData[key].priceTL,
+                  priceUSD: zknkData[key].priceUSD
                 };
               }
               return unit;
@@ -91,51 +95,68 @@ export default function FloorPlansSection() {
     }
   };
 
-  // Get current block data
-  const blockSummary = getBlockSummary(units, activeBlock);
-  const currentBlockUnits = units.filter(unit => unit.block === activeBlock);
+  // Get current block data - Memoized
+  const blockSummary = useMemo(() => getBlockSummary(units, activeBlock), [units, activeBlock]);
 
-  // Sort units: arrange in columns, bottom to top (1-5 per column)
-  const sortedUnits = [...currentBlockUnits].sort((a, b) => {
-    const numA = parseInt(a.unitNumber);
-    const numB = parseInt(b.unitNumber);
-    return numA - numB;
-  });
+  const currentBlockUnits = useMemo(() =>
+    units.filter(unit => unit.block === activeBlock),
+    [units, activeBlock]);
 
-  // Calculate grid dimensions - 6 units per column (bottom to top)
-  const unitsPerColumn = 6;
-  const numColumns = Math.max(1, Math.ceil(sortedUnits.length / unitsPerColumn));
+  // Sort units for generic blocks
+  const sortedUnits = useMemo(() => {
+    return [...currentBlockUnits].sort((a, b) => {
+      const numA = parseInt(a.unitNumber.replace(/\D/g, '')) || 0;
+      const numB = parseInt(b.unitNumber.replace(/\D/g, '')) || 0;
+      return numA - numB;
+    });
+  }, [currentBlockUnits]);
 
-  // Rearrange units to display bottom-to-top in columns
-  const arrangedUnits: FloorPlanUnit[] = [];
-  for (let col = 0; col < numColumns; col++) {
-    const columnUnits: FloorPlanUnit[] = [];
-    for (let row = 0; row < unitsPerColumn; row++) {
-      const index = col * unitsPerColumn + row;
-      if (index < sortedUnits.length) {
-        columnUnits.push(sortedUnits[index]);
+  // Filter units - Memoized
+  const filteredUnits = useMemo(() => {
+    return currentBlockUnits.filter(unit => {
+      const matchesSearch = searchTerm === '' ||
+        unit.unitNumber.toLowerCase().includes(searchTerm.toLowerCase());
+
+      let matchesFilter = false;
+      if (filter === 'all') {
+        matchesFilter = true;
+      } else if (filter === 'with-firms') {
+        matchesFilter = getFirmInfoForUnit(firms, unit.block, unit.unitNumber, '1') !== null;
+      } else {
+        matchesFilter = unit.status === filter;
       }
+
+      return matchesSearch && matchesFilter;
+    });
+  }, [currentBlockUnits, searchTerm, filter, firms]);
+
+  // Grid Configuration
+  // We use a 12-column grid to accommodate different bottom row splits (4 units=3cols each, 3 units=4cols each, 2 units=6cols each)
+  const isSpecialBlock = ['A', 'B', 'C', 'D', 'E'].includes(activeBlock);
+
+  const gridStyle = useMemo(() => {
+    if (isSpecialBlock) {
+      return {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(12, 1fr)',
+        gridTemplateRows: 'repeat(10, 1fr)', // 9 rows for 1-18, 1 row for bottom units
+        gap: '0.75rem',
+        height: '96%',
+        width: '90%'
+      };
     }
-    // Reverse to show bottom to top
-    arrangedUnits.push(...columnUnits.reverse());
-  }
-
-  // Filter units based on search and filter
-  const filteredUnits = currentBlockUnits.filter(unit => {
-    const matchesSearch = searchTerm === '' ||
-      unit.unitNumber.toLowerCase().includes(searchTerm.toLowerCase());
-
-    let matchesFilter = false;
-    if (filter === 'all') {
-      matchesFilter = true;
-    } else if (filter === 'with-firms') {
-      matchesFilter = getFirmInfoForUnit(firms, unit.block, unit.unitNumber, '1') !== null;
-    } else {
-      matchesFilter = unit.status === filter;
-    }
-
-    return matchesSearch && matchesFilter;
-  });
+    // Generic Fallback
+    const unitsPerColumn = 6;
+    const numColumns = Math.max(1, Math.ceil(sortedUnits.length / unitsPerColumn));
+    return {
+      display: 'grid',
+      gridTemplateColumns: `repeat(${numColumns}, 1fr)`,
+      gridTemplateRows: `repeat(${unitsPerColumn}, 1fr)`,
+      gap: '0.75rem',
+      height: '96%',
+      width: '90%'
+    };
+  }, [isSpecialBlock, sortedUnits.length]);
 
   return (
     <section
@@ -186,8 +207,6 @@ export default function FloorPlansSection() {
                 />
               </div>
             </div>
-
-            {/* Filters removed as per request */}
           </div>
 
           {/* Block Statistics - Compact */}
@@ -282,16 +301,38 @@ export default function FloorPlansSection() {
                     </div>
 
                     <div className="pt-2">
-                      <span className="text-white/50 text-xs block mb-2">Durum</span>
-                      <div className={`px-3 py-2 rounded-lg text-sm font-bold text-center uppercase tracking-wider ${selectedUnit.status === 'sold'
-                        ? 'bg-destructive/20 text-destructive border border-destructive/30'
-                        : selectedUnit.status === 'reserved'
-                          ? 'bg-warning/20 text-warning border border-warning/30'
-                          : 'bg-success/20 text-success border border-success/30'
-                        }`}>
-                        {selectedUnit.status === 'sold' ? 'Satıldı' :
-                          selectedUnit.status === 'reserved' ? 'Rezerve' : 'Müsait'}
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-white/50 text-xs block">Durum</span>
                       </div>
+
+                      {selectedUnit.status === 'available' ? (
+                        <div
+                          className="w-full relative z-[100] cursor-pointer"
+                          onClick={() => {
+                            setShowPaymentModal(true);
+                          }}
+                        >
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setShowPaymentModal(true);
+                            }}
+                            className="w-full px-3 py-2 rounded-lg text-sm font-bold text-center uppercase tracking-wider transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-lg group relative overflow-hidden bg-success/20 text-success border border-success/30 hover:bg-success/30 pointer-events-auto z-[101]"
+                          >
+                            <div className="flex items-center justify-center gap-2 pointer-events-none">
+                              <span>Müsait</span>
+                            </div>
+                          </button>
+                        </div>
+                      ) : (
+                        <div className={`px-3 py-2 rounded-lg text-sm font-bold text-center uppercase tracking-wider
+                          ${selectedUnit.status === 'sold'
+                            ? 'bg-destructive/20 text-destructive border border-destructive/30'
+                            : 'bg-warning/20 text-warning border border-warning/30'
+                          }`}>
+                          {selectedUnit.status === 'sold' ? 'Satıldı' : 'Rezerve'}
+                        </div>
+                      )}
                     </div>
 
                     {/* Firm Information */}
@@ -341,64 +382,99 @@ export default function FloorPlansSection() {
           {/* Grid Area */}
           <div className="flex-1 glass rounded-2xl p-4 flex items-center justify-center overflow-hidden border border-white/10 bg-black/20 relative">
             <div className="w-full h-full overflow-hidden flex items-center justify-center">
-              <div className="w-[90%] h-[96%] grid gap-3 mx-auto" style={{
-                gridTemplateColumns: `repeat(${numColumns}, 1fr)`,
-                gridTemplateRows: `repeat(${unitsPerColumn}, 1fr)`,
-              }}>
-                {arrangedUnits.map((unit, index) => {
+              <div
+                className="mx-auto"
+                style={gridStyle}
+              >
+                {sortedUnits.map((unit, index) => {
                   const isFiltered = filteredUnits.includes(unit);
-                  const col = Math.floor(index / unitsPerColumn);
-                  const row = index % unitsPerColumn;
+                  const isSold = unit.status === 'sold' || unit.status === 'reserved';
+                  const unitNum = parseInt(unit.unitNumber.replace(/\D/g, '')) || 0;
+
+                  let style: React.CSSProperties = {};
+
+                  if (isSpecialBlock) {
+                    // 12-Column Layout Strategy
+
+                    // Main Units 1-18
+                    if (unitNum >= 1 && unitNum <= 18) {
+                      const isOdd = unitNum % 2 !== 0;
+                      const pairRow = Math.floor((unitNum - 1) / 2); // 0-indexed row (0-8)
+
+                      style = {
+                        gridColumn: isOdd ? '1 / span 5' : '8 / span 5', // Use 5 cols, leave 2 col gap (6,7)
+                        gridRow: (pairRow + 1).toString()
+                      };
+                    }
+                    // Bottom Units >= 19
+                    else if (unitNum >= 19) {
+                      const isBlockAB = activeBlock === 'A' || activeBlock === 'B';
+                      const isBlockCD = activeBlock === 'C' || activeBlock === 'D';
+                      const isBlockE = activeBlock === 'E';
+
+                      let itemsPerRow = 4;
+                      let colSpan = 3;
+
+                      if (isBlockAB) {
+                        itemsPerRow = 4;
+                        colSpan = 3;
+                      } else if (isBlockCD) {
+                        itemsPerRow = 3;
+                        colSpan = 4;
+                      } else if (isBlockE) {
+                        itemsPerRow = 2;
+                        colSpan = 6;
+                      }
+
+                      const offset = unitNum - 19;
+                      const rowOffset = Math.floor(offset / itemsPerRow);
+                      const colIndex = offset % itemsPerRow;
+
+                      style = {
+                        gridRow: (10 + rowOffset).toString(),
+                        gridColumn: `${(colIndex * colSpan) + 1} / span ${colSpan}`
+                      };
+                    }
+                  } else {
+                    // Generic grid logic (bottom to top columns)
+                    const unitsPerColumn = 6;
+                    const k = index;
+                    const col = Math.floor(k / unitsPerColumn);
+                    const row = unitsPerColumn - 1 - (k % unitsPerColumn);
+                    style = {
+                      gridColumn: col + 1,
+                      gridRow: row + 1
+                    }
+                  }
 
                   return (
                     <div
                       key={`${unit.block}-${unit.unitNumber}`}
                       className={`
-                          relative cursor-pointer transition-all duration-300 
-                          ${isFiltered ? 'opacity-100 scale-100' : 'opacity-30 scale-95'}
-                          hover:scale-[1.02] hover:z-10 w-full h-full
+                          relative cursor-pointer transition-all duration-300 w-full h-full
+                          ${isFiltered ? 'opacity-100 scale-100' : 'opacity-10 scale-90 pointer-events-none'}
+                          hover:scale-[1.02] hover:z-10
                         `}
-                      style={{
-                        gridColumn: col + 1,
-                        gridRow: row + 1
-                      }}
+                      style={style}
                       onClick={() => setSelectedUnit(unit)}
                     >
                       <div className={`
                           w-full h-full rounded-md border transition-all duration-300
                           flex items-center justify-between px-2 relative
-                          ${unit.status === 'sold'
-                          ? 'bg-destructive/10 border-destructive/50 hover:bg-destructive/20'
-                          : unit.status === 'reserved'
-                            ? 'bg-warning/10 border-warning/50 hover:bg-warning/20'
-                            : 'bg-success/10 border-success/50 hover:bg-success/20'
+                          ${isSold
+                          ? 'bg-[#ef4444] border-red-700 hover:bg-red-500'
+                          : 'bg-[#22c55e] border-green-700 hover:bg-green-500'
                         }
                           ${!isFiltered ? 'grayscale' : ''}
                           ${selectedUnit === unit ? 'ring-2 ring-white shadow-lg z-20' : ''}
                         `}>
-                        <div className="font-bold text-sm md:text-base lg:text-lg text-white">
+                        <div className="font-bold text-sm md:text-base lg:text-lg text-white drop-shadow-md">
                           {unit.unitNumber}
                         </div>
 
-                        <div className="text-[10px] md:text-xs font-medium text-white/70">
+                        <div className="text-[10px] md:text-xs font-bold text-white drop-shadow-md">
                           {unit.groundFloorArea ? Math.round(unit.groundFloorArea + (unit.normalFloorArea || 0)) : unit.netArea}m²
                         </div>
-
-                        <div className={`
-                            absolute -top-1 -right-1 w-2 h-2 rounded-full border border-black/50
-                            ${unit.status === 'sold'
-                            ? 'bg-destructive'
-                            : unit.status === 'reserved'
-                              ? 'bg-warning'
-                              : 'bg-success'
-                          }
-                          `} />
-
-                        {getFirmInfoForUnit(firms, unit.block, unit.unitNumber, '1') && (
-                          <div className="absolute -top-1 -left-1 w-3 h-3 bg-accent rounded-full flex items-center justify-center border border-black/50 shadow-sm">
-                            <span className="text-[6px]">🏢</span>
-                          </div>
-                        )}
                       </div>
                     </div>
                   );
@@ -407,6 +483,14 @@ export default function FloorPlansSection() {
             </div>
           </div>
         </div>
+
+        {/* Modal */}
+        {showPaymentModal && selectedUnit && (
+          <PaymentModal
+            unit={selectedUnit}
+            onClose={() => setShowPaymentModal(false)}
+          />
+        )}
       </div>
     </section>
   );

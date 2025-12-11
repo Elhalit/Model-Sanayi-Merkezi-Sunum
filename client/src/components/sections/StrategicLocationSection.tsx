@@ -14,6 +14,7 @@ interface SectionLocation {
   description: string;
   polyline?: [number, number][];
   polygon?: [number, number][];
+  trainPath?: [number, number][];
 }
 
 export default function StrategicLocationSection() {
@@ -99,7 +100,32 @@ export default function StrategicLocationSection() {
       distance: 1,
       distanceText: '1 KM',
       type: 'train',
-      description: 'Hızlı Tren İstasyonu'
+      description: 'Hızlı Tren İstasyonu',
+      trainPath: [
+        [41.283013, 27.895774],
+        [41.282900, 27.899036],
+        [41.283005, 27.905559],
+        [41.283150, 27.910870],
+        [41.283333, 27.914170],
+        [41.283475, 27.917660],
+        [41.283417, 27.920478],
+        [41.283417, 27.921915],
+        [41.283425, 27.924780],
+        [41.283433, 27.928213],
+        [41.283514, 27.931936],
+        [41.283514, 27.934618],
+        [41.283473, 27.939006],
+        [41.283554, 27.942311],
+        [41.283578, 27.945637],
+        [41.283546, 27.949510],
+        [41.283570, 27.952450],
+        [41.283667, 27.955668],
+        [41.283699, 27.957900],
+        [41.283602, 27.960818],
+        [41.283385, 27.962942],
+        [41.283110, 27.964648],
+        [41.282835, 27.965948]
+      ]
     },
     {
       id: 3,
@@ -189,7 +215,8 @@ export default function StrategicLocationSection() {
       type: loc.type,
       description: loc.description,
       polyline: loc.polyline,
-      polygon: loc.polygon
+      polygon: loc.polygon,
+      trainPath: loc.trainPath
     }));
   }, [currentLocations]);
 
@@ -308,9 +335,7 @@ export default function StrategicLocationSection() {
                   <p className={`font-bold mb-1 ${location.id === 0 ? 'text-base' : 'text-sm'}`} style={{ color: '#ffffff' }}>
                     {location.name}
                   </p>
-                  {location.type === 'industrial' && (
-                    <p className="text-xs text-white/60">{location.description}</p>
-                  )}
+
                 </div>
               </motion.div>
             ))}

@@ -63,8 +63,8 @@ export default function Presentation() {
         <LeaderSection />
         <StatisticsSection />
         <StrategicLocationSection />
-        <MasterPlanSection />
         <IntroVideoSection />
+        <MasterPlanSection />
         <FloorPlansSection />
         <FloorPlansSection2 />
         <FloorPlansSection3 />

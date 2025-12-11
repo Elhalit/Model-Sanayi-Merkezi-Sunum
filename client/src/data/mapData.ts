@@ -7,6 +7,7 @@ export interface Location {
   description: string;
   polyline?: [number, number][];
   polygon?: [number, number][];
+  trainPath?: [number, number][];
 }
 
 export const mapLocations: Location[] = [

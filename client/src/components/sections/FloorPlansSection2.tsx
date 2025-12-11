@@ -1,6 +1,7 @@
 ﻿import { useState, useRef, useEffect } from 'react';
 import { Download, ZoomIn, Users, Building, TrendingUp, Search, Filter } from 'lucide-react';
 import { parseCSV, getBlockSummary, getAllBlocks, parseFirmInfoCSV, getFirmInfoForUnit, parseZKNKCSV, type FloorPlanUnit, type FirmInfo } from '@/lib/csvParser';
+import PaymentModal from '../PaymentModal';
 
 const floorPlanImages = {
   F: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=900',
@@ -18,6 +19,7 @@ export default function FloorPlansSection2() {
   const [filter, setFilter] = useState<FilterType>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedUnit, setSelectedUnit] = useState<FloorPlanUnit | null>(null);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
 
   // Load CSV data on component mount
@@ -43,7 +45,9 @@ export default function FloorPlansSection2() {
                 return {
                   ...unit,
                   groundFloorArea: zknkData[key].ground,
-                  normalFloorArea: zknkData[key].normal
+                  normalFloorArea: zknkData[key].normal,
+                  priceTL: zknkData[key].priceTL,
+                  priceUSD: zknkData[key].priceUSD
                 };
               }
               return unit;
@@ -280,16 +284,43 @@ export default function FloorPlansSection2() {
                     </div>
 
                     <div className="pt-2">
-                      <span className="text-white/50 text-xs block mb-2">Durum</span>
-                      <div className={`px-3 py-2 rounded-lg text-sm font-bold text-center uppercase tracking-wider ${selectedUnit.status === 'sold'
-                        ? 'bg-destructive/20 text-destructive border border-destructive/30'
-                        : selectedUnit.status === 'reserved'
-                          ? 'bg-warning/20 text-warning border border-warning/30'
-                          : 'bg-success/20 text-success border border-success/30'
-                        }`}>
-                        {selectedUnit.status === 'sold' ? 'Satıldı' :
-                          selectedUnit.status === 'reserved' ? 'Rezerve' : 'Müsait'}
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-white/50 text-xs block">Durum</span>
                       </div>
+
+                      {selectedUnit.status === 'available' ? (
+                        <div
+                          className="w-full relative z-[100] cursor-pointer"
+                          onClick={() => {
+                            console.log('Opening payment modal (wrapper click) for', selectedUnit.unitNumber);
+                            setShowPaymentModal(true);
+                          }}
+                        >
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              console.log('Opening payment modal (button click) for', selectedUnit.unitNumber);
+                              setShowPaymentModal(true);
+                            }}
+                            className="w-full px-3 py-2 rounded-lg text-sm font-bold text-center uppercase tracking-wider transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-lg group relative overflow-hidden bg-success/20 text-success border border-success/30 hover:bg-success/30 pointer-events-auto z-[101]"
+                          >
+                            <div className="flex items-center justify-center gap-2 pointer-events-none">
+                              <span>Müsait</span>
+                              <span className="bg-white/20 px-1.5 py-0.5 rounded text-[10px] animate-pulse">
+
+                              </span>
+                            </div>
+                          </button>
+                        </div>
+                      ) : (
+                        <div className={`px-3 py-2 rounded-lg text-sm font-bold text-center uppercase tracking-wider
+                           ${selectedUnit.status === 'sold'
+                            ? 'bg-destructive/20 text-destructive border border-destructive/30'
+                            : 'bg-warning/20 text-warning border border-warning/30'
+                          }`}>
+                          {selectedUnit.status === 'sold' ? 'Satıldı' : 'Rezerve'}
+                        </div>
+                      )}
                     </div>
 
                     {/* Firm Information */}
@@ -348,6 +379,8 @@ export default function FloorPlansSection2() {
                   const col = Math.floor(index / unitsPerColumn);
                   const row = index % unitsPerColumn;
 
+                  const isSold = unit.status === 'sold' || unit.status === 'reserved';
+
                   return (
                     <div
                       key={`${unit.block}-${unit.unitNumber}`}
@@ -365,38 +398,20 @@ export default function FloorPlansSection2() {
                       <div className={`
                           w-full h-full rounded-md border transition-all duration-300
                           flex items-center justify-between px-2 relative
-                          ${unit.status === 'sold'
-                          ? 'bg-destructive/10 border-destructive/50 hover:bg-destructive/20'
-                          : unit.status === 'reserved'
-                            ? 'bg-warning/10 border-warning/50 hover:bg-warning/20'
-                            : 'bg-success/10 border-success/50 hover:bg-success/20'
+                          ${isSold
+                          ? 'bg-[#ef4444] border-red-700 hover:bg-red-500'
+                          : 'bg-[#22c55e] border-green-700 hover:bg-green-500'
                         }
                           ${!isFiltered ? 'grayscale' : ''}
                           ${selectedUnit === unit ? 'ring-2 ring-white shadow-lg z-20' : ''}
                         `}>
-                        <div className="font-bold text-sm md:text-base lg:text-lg text-white">
+                        <div className="font-bold text-sm md:text-base lg:text-lg text-white drop-shadow-md">
                           {unit.unitNumber}
                         </div>
 
-                        <div className="text-[10px] md:text-xs font-medium text-white/70">
+                        <div className="text-[10px] md:text-xs font-bold text-white drop-shadow-md">
                           {unit.groundFloorArea ? Math.round(unit.groundFloorArea + (unit.normalFloorArea || 0)) : unit.netArea}m²
                         </div>
-
-                        <div className={`
-                            absolute -top-1 -right-1 w-2 h-2 rounded-full border border-black/50
-                            ${unit.status === 'sold'
-                            ? 'bg-destructive'
-                            : unit.status === 'reserved'
-                              ? 'bg-warning'
-                              : 'bg-success'
-                          }
-                          `} />
-
-                        {getFirmInfoForUnit(firms, unit.block, unit.unitNumber, '2') && (
-                          <div className="absolute -top-1 -left-1 w-3 h-3 bg-accent rounded-full flex items-center justify-center border border-black/50 shadow-sm">
-                            <span className="text-[6px]">🏢</span>
-                          </div>
-                        )}
                       </div>
                     </div>
                   );
@@ -405,6 +420,14 @@ export default function FloorPlansSection2() {
             </div>
           </div>
         </div>
+
+        {/* Payment Modal */}
+        {showPaymentModal && selectedUnit && (
+          <PaymentModal
+            unit={selectedUnit}
+            onClose={() => setShowPaymentModal(false)}
+          />
+        )}
       </div>
     </section>
   );
