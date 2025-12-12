@@ -40,10 +40,8 @@ export function parseCSV(csvContent: string, etapType: '1' | '2' | '3' | '4' | '
       const statusText = fields[5].toLowerCase();
       let status: 'sold' | 'available' | 'reserved' = 'available';
 
-      if (statusText.includes('satıldı')) {
+      if (statusText.includes('satıldı') || statusText.includes('satışa kapalı')) {
         status = 'sold';
-      } else if (statusText.includes('satışa kapalı')) {
-        status = 'reserved';
       }
 
       units.push({
@@ -59,12 +57,10 @@ export function parseCSV(csvContent: string, etapType: '1' | '2' | '3' | '4' | '
       const statusText = fields[7].toLowerCase();
       let status: 'sold' | 'available' | 'reserved' = 'available';
 
-      if (statusText.includes('satıldı')) {
+      if (statusText.includes('satıldı') || statusText.includes('satışa kapalı')) {
         status = 'sold';
       } else if (statusText.includes('satılık')) {
         status = 'available';
-      } else if (statusText.includes('satışa kapalı')) {
-        status = 'reserved';
       }
 
       units.push({
@@ -80,12 +76,10 @@ export function parseCSV(csvContent: string, etapType: '1' | '2' | '3' | '4' | '
       const statusText = fields[5].toLowerCase();
       let status: 'sold' | 'available' | 'reserved' = 'available';
 
-      if (statusText.includes('satıldı')) {
+      if (statusText.includes('satıldı') || statusText.includes('satışa kapalı')) {
         status = 'sold';
       } else if (statusText.includes('satılık')) {
         status = 'available';
-      } else if (statusText.includes('satışa kapalı')) {
-        status = 'reserved';
       }
 
       units.push({

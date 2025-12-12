@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useMemo } from 'react';
 import { Download, ZoomIn, Users, Building, TrendingUp, Search, Filter } from 'lucide-react';
 import { parseCSV, getBlockSummary, getAllBlocks, parseFirmInfoCSV, getFirmInfoForUnit, parseZKNKCSV, type FloorPlanUnit, type FirmInfo } from '@/lib/csvParser';
 import PaymentModal from '../PaymentModal';
+import CBlockFloorPlan from './CBlockFloorPlan';
 
 const floorPlanImages = {
   A: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=900',
@@ -102,18 +103,31 @@ export default function FloorPlansSection() {
     units.filter(unit => unit.block === activeBlock),
     [units, activeBlock]);
 
+
+  // Clean units to remove garbage data (e.g. units > 22 for A/F, > 21 for B/C, > 20 for D/E/G)
+  const cleanedBlockUnits = useMemo(() => {
+    return currentBlockUnits.filter(unit => {
+      const num = parseInt(unit.unitNumber.replace(/\D/g, '')) || 0;
+      if (activeBlock === 'A' && num > 22) return false;
+      if (['B', 'C'].includes(activeBlock) && num > 21) return false;
+      if (['D', 'E', 'G'].includes(activeBlock) && num > 20) return false;
+      if (activeBlock === 'F' && num > 22) return false;
+      return true;
+    });
+  }, [currentBlockUnits, activeBlock]);
+
   // Sort units for generic blocks
   const sortedUnits = useMemo(() => {
-    return [...currentBlockUnits].sort((a, b) => {
+    return [...cleanedBlockUnits].sort((a, b) => {
       const numA = parseInt(a.unitNumber.replace(/\D/g, '')) || 0;
       const numB = parseInt(b.unitNumber.replace(/\D/g, '')) || 0;
       return numA - numB;
     });
-  }, [currentBlockUnits]);
+  }, [cleanedBlockUnits]);
 
   // Filter units - Memoized
   const filteredUnits = useMemo(() => {
-    return currentBlockUnits.filter(unit => {
+    return cleanedBlockUnits.filter(unit => {
       const matchesSearch = searchTerm === '' ||
         unit.unitNumber.toLowerCase().includes(searchTerm.toLowerCase());
 
@@ -128,13 +142,24 @@ export default function FloorPlansSection() {
 
       return matchesSearch && matchesFilter;
     });
-  }, [currentBlockUnits, searchTerm, filter, firms]);
+  }, [cleanedBlockUnits, searchTerm, filter, firms]);
 
   // Grid Configuration
   // We use a 12-column grid to accommodate different bottom row splits (4 units=3cols each, 3 units=4cols each, 2 units=6cols each)
-  const isSpecialBlock = ['A', 'B', 'C', 'D', 'E'].includes(activeBlock);
+  const isSpecialBlock = ['A', 'B', 'C', 'D', 'E', 'F', 'G'].includes(activeBlock);
 
   const gridStyle = useMemo(() => {
+    if (['A', 'B', 'D', 'E', 'F', 'G'].includes(activeBlock)) {
+      return {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(9, 1fr)',
+        gridTemplateRows: 'repeat(10, 1fr)',
+        gap: '0.75rem',
+        height: '96%',
+        width: '90%'
+      };
+    }
+
     if (isSpecialBlock) {
       return {
         display: 'grid',
@@ -156,7 +181,7 @@ export default function FloorPlansSection() {
       height: '96%',
       width: '90%'
     };
-  }, [isSpecialBlock, sortedUnits.length]);
+  }, [isSpecialBlock, sortedUnits.length, activeBlock]);
 
   return (
     <section
@@ -194,19 +219,7 @@ export default function FloorPlansSection() {
               ))}
             </div>
 
-            {/* Search */}
-            <div className="w-64">
-              <div className="glass rounded-lg overflow-hidden flex items-center border border-white/10 h-10">
-                <Search className="w-4 h-4 text-white/50 ml-3" />
-                <input
-                  type="text"
-                  placeholder="Ünite ara..."
-                  className="flex-1 bg-transparent px-3 py-1 outline-none text-white text-sm placeholder:text-white/30"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-            </div>
+
           </div>
 
           {/* Block Statistics - Compact */}
@@ -381,106 +394,154 @@ export default function FloorPlansSection() {
 
           {/* Grid Area */}
           <div className="flex-1 glass rounded-2xl p-4 flex items-center justify-center overflow-hidden border border-white/10 bg-black/20 relative">
-            <div className="w-full h-full overflow-hidden flex items-center justify-center">
-              <div
-                className="mx-auto"
-                style={gridStyle}
-              >
-                {sortedUnits.map((unit, index) => {
-                  const isFiltered = filteredUnits.includes(unit);
-                  const isSold = unit.status === 'sold' || unit.status === 'reserved';
-                  const unitNum = parseInt(unit.unitNumber.replace(/\D/g, '')) || 0;
+            {activeBlock === 'C' ? (
+              <CBlockFloorPlan
+                units={sortedUnits}
+                selectedUnit={selectedUnit}
+                onSelect={setSelectedUnit}
+              />
+            ) : (
+              <div className="w-full h-full overflow-hidden flex items-center justify-center">
+                <div
+                  className="mx-auto"
+                  style={gridStyle}
+                >
+                  {sortedUnits.map((unit, index) => {
+                    const isFiltered = filteredUnits.includes(unit);
+                    const isSold = unit.status === 'sold' || unit.status === 'reserved';
+                    const unitNum = parseInt(unit.unitNumber.replace(/\D/g, '')) || 0;
 
-                  let style: React.CSSProperties = {};
+                    let style: React.CSSProperties = {};
 
-                  if (isSpecialBlock) {
-                    // 12-Column Layout Strategy
+                    const isSpecialBlock = ['A', 'B', 'C', 'D', 'E'].includes(activeBlock);
 
-                    // Main Units 1-18
-                    if (unitNum >= 1 && unitNum <= 18) {
-                      const isOdd = unitNum % 2 !== 0;
-                      const pairRow = Math.floor((unitNum - 1) / 2); // 0-indexed row (0-8)
+                    if (['A', 'B', 'D', 'E', 'F', 'G'].includes(activeBlock)) {
+                      // Block A, B, D, E, F, G Specific Layout (9 Column Grid)
+                      // Top Units: 1-18 (or 16 for G) (2 columns with gap)
 
-                      style = {
-                        gridColumn: isOdd ? '1 / span 5' : '8 / span 5', // Use 5 cols, leave 2 col gap (6,7)
-                        gridRow: (pairRow + 1).toString()
-                      };
-                    }
-                    // Bottom Units >= 19
-                    else if (unitNum >= 19) {
-                      const isBlockAB = activeBlock === 'A' || activeBlock === 'B';
-                      const isBlockCD = activeBlock === 'C' || activeBlock === 'D';
-                      const isBlockE = activeBlock === 'E';
+                      const topUnitLimit = activeBlock === 'G' ? 16 : 18;
 
-                      let itemsPerRow = 4;
-                      let colSpan = 3;
+                      if (unitNum <= topUnitLimit) {
+                        const isOdd = unitNum % 2 !== 0;
+                        const pairRow = Math.floor((unitNum - 1) / 2); // 0-indexed row (0-8)
 
-                      if (isBlockAB) {
-                        itemsPerRow = 4;
-                        colSpan = 3;
-                      } else if (isBlockCD) {
-                        itemsPerRow = 3;
-                        colSpan = 4;
-                      } else if (isBlockE) {
-                        itemsPerRow = 2;
-                        colSpan = 6;
+                        style = {
+                          gridColumn: isOdd ? '1 / span 4' : '6 / span 4', // 4 col width, 1 col gap (col 5)
+                          gridRow: (pairRow + 1).toString()
+                        };
+                      } else {
+                        // Bottom Units
+                        if (activeBlock === 'A') {
+                          // A Block: 19-22
+                          let colStart;
+                          if (unitNum === 19) colStart = 1;
+                          else if (unitNum === 20) colStart = 3;
+                          else if (unitNum === 21) colStart = 6;
+                          else if (unitNum === 22) colStart = 8;
+                          else colStart = 1;
+
+                          style = {
+                            gridRow: '10',
+                            gridColumn: `${colStart} / span 2`
+                          };
+                        } else if (activeBlock === 'B') {
+                          // B Block: 19, 20, 21 (Centered)
+                          let colStart;
+                          let colSpan = 3;
+
+                          if (unitNum === 19) colStart = 1;
+                          else if (unitNum === 20) colStart = 4;
+                          else if (unitNum === 21) colStart = 7;
+                          else { colStart = 1; colSpan = 1; }
+
+                          style = {
+                            gridRow: '10',
+                            gridColumn: `${colStart} / span ${colSpan}`
+                          };
+                        } else if (['D', 'E'].includes(activeBlock)) {
+                          // D/E Block: 19, 20 (Align under main columns)
+                          let colStart = unitNum === 19 ? 1 : 6;
+
+                          style = {
+                            gridRow: '10',
+                            gridColumn: `${colStart} / span 4`
+                          };
+                        } else if (activeBlock === 'F') {
+                          // F Block: 19-22 (Full width like A)
+                          let colStart;
+                          if (unitNum === 19) colStart = 1;
+                          else if (unitNum === 20) colStart = 3;
+                          else if (unitNum === 21) colStart = 6;
+                          else if (unitNum === 22) colStart = 8;
+                          else colStart = 1;
+
+                          style = {
+                            gridRow: '10',
+                            gridColumn: `${colStart} / span 2`
+                          };
+                        } else if (activeBlock === 'G') {
+                          // G Block: 17-20 (Full width like F/A)
+                          const localNum = unitNum - 16;
+                          let colStart;
+                          if (localNum === 1) colStart = 1;       // 17
+                          else if (localNum === 2) colStart = 3;  // 18
+                          else if (localNum === 3) colStart = 6;  // 19
+                          else if (localNum === 4) colStart = 8;  // 20
+                          else colStart = 1;
+
+                          style = {
+                            gridRow: '10',
+                            gridColumn: `${colStart} / span 2`
+                          };
+                        }
                       }
-
-                      const offset = unitNum - 19;
-                      const rowOffset = Math.floor(offset / itemsPerRow);
-                      const colIndex = offset % itemsPerRow;
-
+                    } else {
+                      // Generic grid logic (bottom to top columns) for any other block not in the special list
+                      const unitsPerColumn = 6;
+                      const k = index;
+                      const col = Math.floor(k / unitsPerColumn);
+                      const row = unitsPerColumn - 1 - (k % unitsPerColumn);
                       style = {
-                        gridRow: (10 + rowOffset).toString(),
-                        gridColumn: `${(colIndex * colSpan) + 1} / span ${colSpan}`
-                      };
+                        gridColumn: col + 1,
+                        gridRow: row + 1
+                      }
                     }
-                  } else {
-                    // Generic grid logic (bottom to top columns)
-                    const unitsPerColumn = 6;
-                    const k = index;
-                    const col = Math.floor(k / unitsPerColumn);
-                    const row = unitsPerColumn - 1 - (k % unitsPerColumn);
-                    style = {
-                      gridColumn: col + 1,
-                      gridRow: row + 1
-                    }
-                  }
 
-                  return (
-                    <div
-                      key={`${unit.block}-${unit.unitNumber}`}
-                      className={`
+                    return (
+                      <div
+                        key={`${unit.block}-${unit.unitNumber}`}
+                        className={`
                           relative cursor-pointer transition-all duration-300 w-full h-full
                           ${isFiltered ? 'opacity-100 scale-100' : 'opacity-10 scale-90 pointer-events-none'}
                           hover:scale-[1.02] hover:z-10
                         `}
-                      style={style}
-                      onClick={() => setSelectedUnit(unit)}
-                    >
-                      <div className={`
+                        style={style}
+                        onClick={() => setSelectedUnit(unit)}
+                      >
+                        <div className={`
                           w-full h-full rounded-md border transition-all duration-300
                           flex items-center justify-between px-2 relative
                           ${isSold
-                          ? 'bg-[#ef4444] border-red-700 hover:bg-red-500'
-                          : 'bg-[#22c55e] border-green-700 hover:bg-green-500'
-                        }
+                            ? 'bg-[#ef4444] border-red-700 hover:bg-red-500'
+                            : 'bg-[#22c55e] border-green-700 hover:bg-green-500'
+                          }
                           ${!isFiltered ? 'grayscale' : ''}
                           ${selectedUnit === unit ? 'ring-2 ring-white shadow-lg z-20' : ''}
                         `}>
-                        <div className="font-bold text-sm md:text-base lg:text-lg text-white drop-shadow-md">
-                          {unit.unitNumber}
-                        </div>
+                          <div className="font-bold text-sm md:text-base lg:text-lg text-white drop-shadow-md">
+                            {unit.unitNumber}
+                          </div>
 
-                        <div className="text-[10px] md:text-xs font-bold text-white drop-shadow-md">
-                          {unit.groundFloorArea ? Math.round(unit.groundFloorArea + (unit.normalFloorArea || 0)) : unit.netArea}m²
+                          <div className="text-[10px] md:text-xs font-bold text-white drop-shadow-md">
+                            {unit.groundFloorArea ? Math.round(unit.groundFloorArea + (unit.normalFloorArea || 0)) : unit.netArea}m²
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
 

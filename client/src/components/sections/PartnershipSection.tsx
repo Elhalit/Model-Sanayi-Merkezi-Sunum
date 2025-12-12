@@ -108,7 +108,7 @@ export default function PartnershipSection() {
         projects: [],
         color: 'from-gray-600 to-gray-800',
         icon: Hammer,
-        logo: '/inno-logo.png',
+        logo: '/final_inno_logo.png',
         story: "2017 yılında Abdullah TÜTÜNCÜ (Nadir Metal Rafineri) ve Ali YAMAN (NET İnşaat Danışmanlık Mühendislik A.Ş.) ortaklığı ile kurulan İNNO Gayrimenkul Yatırım A.Ş. birçok projenin altına başarıyla imza atmaktadır.",
         videoUrl: undefined
       },
@@ -179,7 +179,7 @@ export default function PartnershipSection() {
             {/* INNO Logo */}
             <div className="shrink-0 w-80 h-64 flex items-center justify-center">
               <img
-                src="/innogy.png"
+                src="/final_inno_logo.png"
                 alt="İNNO Gayrimenkul Yatırım Logo"
                 className="w-full h-full object-contain"
                 style={{ background: 'transparent', border: 'none' }}
@@ -291,7 +291,7 @@ export default function PartnershipSection() {
             <div className="relative flex flex-col items-center">
               <div className="w-36 h-36 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center p-2">
                 <img
-                  src="/İnno-GY-Logo.png"
+                  src="/final_inno_logo.png"
                   alt="İNNO Gayrimenkul Yatırım Logo"
                   className="w-full h-full object-contain"
                   style={{ background: 'transparent', border: 'none' }}

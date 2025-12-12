@@ -104,23 +104,8 @@ export default function FloorPlansSection2() {
     return numA - numB;
   });
 
-  // Calculate grid dimensions - 6 units per column (bottom to top)
-  const unitsPerColumn = 6;
-  const numColumns = Math.max(1, Math.ceil(sortedUnits.length / unitsPerColumn));
+  // Grid layout logic is now handled directly in the render loop based on unit numbers
 
-  // Rearrange units to display bottom-to-top in columns
-  const arrangedUnits: FloorPlanUnit[] = [];
-  for (let col = 0; col < numColumns; col++) {
-    const columnUnits: FloorPlanUnit[] = [];
-    for (let row = 0; row < unitsPerColumn; row++) {
-      const index = col * unitsPerColumn + row;
-      if (index < sortedUnits.length) {
-        columnUnits.push(sortedUnits[index]);
-      }
-    }
-    // Reverse to show bottom to top
-    arrangedUnits.push(...columnUnits.reverse());
-  }
 
   // Filter units based on search and filter
   const filteredUnits = currentBlockUnits.filter(unit => {
@@ -175,19 +160,7 @@ export default function FloorPlansSection2() {
               ))}
             </div>
 
-            {/* Search */}
-            <div className="w-64">
-              <div className="glass rounded-lg overflow-hidden flex items-center border border-white/10 h-10">
-                <Search className="w-4 h-4 text-white/50 ml-3" />
-                <input
-                  type="text"
-                  placeholder="Ünite ara..."
-                  className="flex-1 bg-transparent px-3 py-1 outline-none text-white text-sm placeholder:text-white/30"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-            </div>
+
 
             {/* Filters removed as per request */}
           </div>
@@ -370,29 +343,87 @@ export default function FloorPlansSection2() {
           {/* Grid Area */}
           <div className="flex-1 glass rounded-2xl p-4 flex items-center justify-center overflow-hidden border border-white/10 bg-black/20 relative">
             <div className="w-full h-full overflow-hidden flex items-center justify-center">
-              <div className="w-[90%] h-[96%] grid gap-3 mx-auto" style={{
-                gridTemplateColumns: `repeat(${numColumns}, 1fr)`,
-                gridTemplateRows: `repeat(${unitsPerColumn}, 1fr)`,
-              }}>
-                {arrangedUnits.map((unit, index) => {
-                  const isFiltered = filteredUnits.includes(unit);
-                  const col = Math.floor(index / unitsPerColumn);
-                  const row = index % unitsPerColumn;
 
+              <div
+                className="mx-auto"
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(9, 1fr)',
+                  gridTemplateRows: 'repeat(10, 1fr)',
+                  gap: '0.75rem',
+                  height: '96%',
+                  width: '90%'
+                }}
+              >
+                {sortedUnits.map((unit) => {
+                  const isFiltered = filteredUnits.includes(unit);
                   const isSold = unit.status === 'sold' || unit.status === 'reserved';
+                  const unitNum = parseInt(unit.unitNumber.replace(/\D/g, '')) || 0;
+
+                  let style: React.CSSProperties = {};
+
+                  // Generic Layout Logic based on 1. Etap Structure
+                  if (unitNum <= 18) {
+                    // Top Units (1-18)
+                    const isOdd = unitNum % 2 !== 0;
+                    const pairRow = Math.floor((unitNum - 1) / 2); // 0-indexed row (0-8)
+                    style = {
+                      gridColumn: isOdd ? '1 / span 4' : '6 / span 4',
+                      gridRow: (pairRow + 1).toString()
+                    };
+                  } else {
+                    // Bottom Units (19+)
+                    const bottomUnits = sortedUnits.filter(u => {
+                      const n = parseInt(u.unitNumber.replace(/\D/g, '')) || 0;
+                      return n > 18;
+                    });
+                    const bottomIndex = bottomUnits.findIndex(u => u === unit);
+                    const totalBottom = bottomUnits.length;
+
+                    let colStart = 1;
+                    let colSpan = 2;
+
+                    if (totalBottom === 4) {
+                      // 4 units: 1-2, 3-4, 6-7, 8-9
+                      const starts = [1, 3, 6, 8];
+                      colStart = starts[bottomIndex] || 1;
+                      colSpan = 2;
+                    } else if (totalBottom === 2) {
+                      // 2 units: 1-4, 6-9
+                      const starts = [1, 6];
+                      colStart = starts[bottomIndex] || 1;
+                      colSpan = 4;
+                    } else if (totalBottom === 3) {
+                      // 3 units: 1-3, 4-6, 7-9
+                      const starts = [1, 4, 7];
+                      colStart = starts[bottomIndex] || 1;
+                      colSpan = 3;
+                    } else {
+                      // Default/Fallback
+                      if (totalBottom === 1) {
+                        colStart = 3;
+                        colSpan = 5;
+                      } else {
+                        colSpan = Math.max(1, Math.floor(9 / totalBottom));
+                        colStart = 1 + (bottomIndex * colSpan);
+                      }
+                    }
+
+                    style = {
+                      gridRow: '10',
+                      gridColumn: `${colStart} / span ${colSpan}`
+                    };
+                  }
 
                   return (
                     <div
                       key={`${unit.block}-${unit.unitNumber}`}
                       className={`
-                          relative cursor-pointer transition-all duration-300 
-                          ${isFiltered ? 'opacity-100 scale-100' : 'opacity-30 scale-95'}
-                          hover:scale-[1.02] hover:z-10 w-full h-full
+                          relative cursor-pointer transition-all duration-300 w-full h-full
+                          ${isFiltered ? 'opacity-100 scale-100' : 'opacity-10 scale-90 pointer-events-none'}
+                          hover:scale-[1.02] hover:z-10
                         `}
-                      style={{
-                        gridColumn: col + 1,
-                        gridRow: row + 1
-                      }}
+                      style={style}
                       onClick={() => setSelectedUnit(unit)}
                     >
                       <div className={`

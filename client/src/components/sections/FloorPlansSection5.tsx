@@ -96,29 +96,14 @@ export default function FloorPlansSection5() {
   const currentBlockUnits = units.filter(unit => unit.block === activeBlock);
 
   // Sort units: arrange in columns, bottom to top (1-5 per column)
+  // Sort units safely
   const sortedUnits = [...currentBlockUnits].sort((a, b) => {
-    const numA = parseInt(a.unitNumber);
-    const numB = parseInt(b.unitNumber);
+    const numA = parseInt(a.unitNumber.replace(/\D/g, '')) || 0;
+    const numB = parseInt(b.unitNumber.replace(/\D/g, '')) || 0;
     return numA - numB;
   });
 
-  // Calculate grid dimensions - 6 units per column (bottom to top)
-  const unitsPerColumn = 6;
-  const numColumns = Math.max(1, Math.ceil(sortedUnits.length / unitsPerColumn));
-
-  // Rearrange units to display bottom-to-top in columns
-  const arrangedUnits: FloorPlanUnit[] = [];
-  for (let col = 0; col < numColumns; col++) {
-    const columnUnits: FloorPlanUnit[] = [];
-    for (let row = 0; row < unitsPerColumn; row++) {
-      const index = col * unitsPerColumn + row;
-      if (index < sortedUnits.length) {
-        columnUnits.push(sortedUnits[index]);
-      }
-    }
-    // Reverse to show bottom to top
-    arrangedUnits.push(...columnUnits.reverse());
-  }
+  // Grid layout logic is now handled directly in the render loop based on unit numbers
 
   // Filter units based on search and filter
   const filteredUnits = currentBlockUnits.filter(unit => {
@@ -173,19 +158,7 @@ export default function FloorPlansSection5() {
               ))}
             </div>
 
-            {/* Search */}
-            <div className="w-64">
-              <div className="glass rounded-lg overflow-hidden flex items-center border border-white/10 h-10">
-                <Search className="w-4 h-4 text-white/50 ml-3" />
-                <input
-                  type="text"
-                  placeholder="Ünite ara..."
-                  className="flex-1 bg-transparent px-3 py-1 outline-none text-white text-sm placeholder:text-white/30"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-            </div>
+
 
             {/* Filters removed as per request */}
           </div>
@@ -368,29 +341,67 @@ export default function FloorPlansSection5() {
           {/* Grid Area */}
           <div className="flex-1 glass rounded-2xl p-4 flex items-center justify-center overflow-hidden border border-white/10 bg-black/20 relative">
             <div className="w-full h-full overflow-hidden flex items-center justify-center">
-              <div className="w-[90%] h-[96%] grid gap-3 mx-auto" style={{
-                gridTemplateColumns: `repeat(${numColumns}, 1fr)`,
-                gridTemplateRows: `repeat(${unitsPerColumn}, 1fr)`,
-              }}>
-                {arrangedUnits.map((unit, index) => {
+              <div
+                className="mx-auto"
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(13, 1fr)',
+                  gridTemplateRows: 'repeat(10, 1fr)',
+                  gap: '0.75rem',
+                  height: '96%',
+                  width: '90%'
+                }}
+              >
+                {sortedUnits.map((unit) => {
                   const isFiltered = filteredUnits.includes(unit);
-                  const col = Math.floor(index / unitsPerColumn);
-                  const row = index % unitsPerColumn;
-
                   const isSold = unit.status === 'sold' || unit.status === 'reserved';
+                  const unitNum = parseInt(unit.unitNumber.replace(/\D/g, '')) || 0;
+
+                  let style: React.CSSProperties = {};
+
+                  // Generic Layout Logic (13-column grid for better alignment)
+                  if (unitNum <= 18) {
+                    // Top Units (1-18)
+                    const isOdd = unitNum % 2 !== 0;
+                    const pairRow = Math.floor((unitNum - 1) / 2); // 0-indexed row (0-8)
+                    style = {
+                      gridColumn: isOdd ? '1 / span 6' : '8 / span 6',
+                      gridRow: (pairRow + 1).toString()
+                    };
+                  } else {
+                    // Bottom Units (19+)
+                    const bottomUnits = sortedUnits.filter(u => {
+                      const n = parseInt(u.unitNumber.replace(/\D/g, '')) || 0;
+                      return n > 18;
+                    });
+                    const bottomIndex = bottomUnits.findIndex(u => u === unit);
+                    const totalBottom = bottomUnits.length;
+
+                    // Intelligent Distribution
+                    const half = Math.ceil(totalBottom / 2);
+                    const isLeft = bottomIndex < half;
+                    const indexInSide = isLeft ? bottomIndex : (bottomIndex - half);
+                    const countInSide = isLeft ? half : (totalBottom - half);
+
+                    const span = Math.floor(6 / countInSide);
+                    const sideStart = isLeft ? 1 : 8;
+                    const colStart = sideStart + (indexInSide * span);
+
+                    style = {
+                      gridRow: '10',
+                      gridColumn: `${colStart} / span ${span}`
+                    };
+                  }
 
                   return (
                     <div
                       key={`${unit.block}-${unit.unitNumber}`}
                       className={`
-                          relative cursor-pointer transition-all duration-300 
-                          ${isFiltered ? 'opacity-100 scale-100' : 'opacity-30 scale-95'}
-                          hover:scale-[1.02] hover:z-10 w-full h-full
+                          relative cursor-pointer transition-all duration-300 w-full h-full
+                          ${isFiltered ? 'opacity-100 scale-100' : 'opacity-10 scale-90 pointer-events-none'}
+                          hover:scale-[1.02] hover:z-10
                         `}
-                      style={{
-                        gridColumn: col + 1,
-                        gridRow: row + 1
-                      }}
+                      style={style}
                       onClick={() => setSelectedUnit(unit)}
                     >
                       <div className={`
