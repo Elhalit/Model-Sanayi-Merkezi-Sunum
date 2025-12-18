@@ -29,37 +29,43 @@ export default function CBlockFloorPlan({ units, selectedUnit, onSelect }: CBloc
 
             const colWidth = 100;
             const rowHeight = 60;
-            const gap = 10;
+            const gap = 0;
 
-            const w = 4 * colWidth - gap;
-            const h = rowHeight - gap;
+            const w = 4 * colWidth;
+            const h = rowHeight; // Remove vertical gap
 
-            const x = isOdd ? 0 : 5 * colWidth;
+            const x = isOdd ? 0 : 4 * colWidth;
             const y = pairRow * rowHeight;
 
             return { x, y, w, h };
         } else {
             // Bottom Units 19, 20, 21
-            // Row = 9
-            // 19: Col 0-3 (3 cols). 
-            // 20: Col 3-6 (3 cols). 
-            // 21: Col 6-9 (3 cols).
-
-            const bottomNum = unitNumber - 19; // 0, 1, 2
+            // Adapted for 8 cols (3-2-3 split)
             const colWidth = 100;
             const rowHeight = 60;
-            const gap = 10;
+            const gap = 0;
+            const h = rowHeight;
 
-            const x = bottomNum * 3 * colWidth;
+            let x, w;
+
+            if (unitNumber === 19) {
+                x = 0;
+                w = 3 * colWidth;
+            } else if (unitNumber === 20) {
+                x = 3 * colWidth;
+                w = 2 * colWidth;
+            } else { // 21
+                x = 5 * colWidth;
+                w = 3 * colWidth;
+            }
+
             const y = 9 * rowHeight; // 10th row
-            const w = 3 * colWidth - gap;
-            const h = rowHeight - gap;
 
             return { x, y, w, h };
         }
     };
 
-    const totalWidth = 9 * 100 - 10; // 890
+    const totalWidth = 8 * 100; // 800
     const totalHeight = 10 * 60 - 10; // 590
     const pad = 20;
 
@@ -97,9 +103,9 @@ export default function CBlockFloorPlan({ units, selectedUnit, onSelect }: CBloc
                                 y={y}
                                 width={w}
                                 height={h}
-                                rx={6}
+                                rx={0}
                                 fill={getUnitColor(unit)}
-                                stroke={isSelected ? "white" : "rgba(255,255,255,0.2)"}
+                                stroke={isSelected ? "white" : "black"}
                                 strokeWidth={isSelected ? 4 : 1}
                                 className="transition-all duration-300 hover:filter hover:brightness-110"
                                 style={{

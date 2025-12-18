@@ -142,7 +142,7 @@ export default function PartnershipSection() {
         color: 'from-gray-600 to-gray-800',
         icon: Factory,
         logo: '/som.png',
-        story: "Prefabrik Betonarme Yapı sektöründe, müşterilerimizin gereksinimleri ile beklentilerinin karşılanması ve aşılmasına yönelik olarak üretim, satış ve satış sonrası hizmetlerde faaliyet göstermektedir.",
+        story: "Kırklareli OSB’deki modern üretim tesisimiz; teknolojik altyapısı, deneyimli mühendislik kadrosu ve yüksek üretim kapasitesiyle endüstriyel tesisler, fabrikalar, lojistik depolar ve sanayi yapıları için hızlı, güvenilir ve ekonomik çözümler sunmaktadır.",
         videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" // Placeholder video URL - replace with actual SOM video
       }
     };
@@ -166,15 +166,15 @@ export default function PartnershipSection() {
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text'
         }}>
-          Hakkımızda
+          HAKKIMIZDA
         </h2>
       </div>
 
       <div className="relative z-10 h-full w-full flex items-center justify-center">
         {/* Main INNO Section - Full Width */}
-        <div className="w-full pl-8 pr-32">
+        <div className="w-full px-8 max-w-7xl mx-auto flex items-center justify-center">
           <div
-            className="flex flex-row items-center gap-8 px-8 py-16"
+            className="flex flex-row items-center gap-8 px-8 py-16 w-full"
           >
             {/* INNO Logo */}
             <div className="shrink-0 w-80 h-64 flex items-center justify-center">
@@ -195,11 +195,12 @@ export default function PartnershipSection() {
 
             {/* INNO Description */}
             <div className="flex-1">
-              <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">İNNO Gayrimenkul Yatırım A.Ş.</h3>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">İNNO Gayrimenkul Yatırım A.Ş.</h2>
               <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
-                İnno ülke sanayisine katkı sunmak ve gayrimenkul sektörünü ileri taşımak için stratejik lokasyonlarda endüstriyel tesis, imalathane, depolama ve lojistik alanlarından oluşan sanayi merkezleri inşa eden bu alanda öncü firmalardan biridir.{' '}
+                İnno ülke sanayisine katkı sunmak ve gayrimenkul sektörünü ileri taşımak için stratejik lokasyonlarda endüstriyel tesis, imalathane, depolama ve lojistik alanlarından oluşan sanayi merkezleri inşa eden bu alanda öncü firmalardan biridir.
+                <br />
                 <span
-                  className="font-bold cursor-pointer hover:scale-105 inline-block transition-transform"
+                  className="font-bold cursor-pointer hover:scale-105 inline-block transition-transform mt-2"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleNodeClick('som');
@@ -401,38 +402,35 @@ export default function PartnershipSection() {
         </div>
       </div>
 
-      {/* Detail Panel */}
+      {/* Detail Panel - Full Screen */}
       {selectedCompany && (
         <div
           id="detail-panel"
-          className="fixed top-0 left-0 bottom-0 bg-background/95 backdrop-blur-xl border-r border-border z-50"
+          className="fixed inset-0 bg-slate-900 z-50 overflow-hidden"
           style={{
             transform: 'translateX(-100%)',
-            width: '50vw',
-            maxWidth: '50vw',
             zIndex: 60
           }}
         >
           {/* Added prominent, absolute positioned close button for the panel */}
           <button
             onClick={closeDetailPanel}
-            className="absolute top-6 right-6 z-50 p-3 bg-white/10 text-white rounded-full shadow-lg hover:bg-white/20 hover:scale-110 transition-all duration-300"
+            className="absolute top-6 left-6 z-50 p-3 bg-white/10 text-white rounded-full shadow-lg hover:bg-white/20 hover:scale-110 transition-all duration-300"
             title="Kapat"
           >
             <X className="w-8 h-8" />
           </button>
 
-          <div className="h-full flex flex-col">
-            <div className="flex items-center justify-between p-8 pb-4 border-b border-border/20 pr-20">
+          <div className="h-full flex flex-col px-12 py-8">
+            <div className="flex items-center justify-between pb-4 border-b border-border/20 pl-20 shrink-0">
               <h2 className="text-2xl md:text-3xl font-bold text-primary">
                 {getCompanyData(selectedCompany)?.title}
               </h2>
-              {/* Original header button kept as fallback but hidden on small screens if needed, or we can remove it. Keeping for layout balance but making it invisible or keeping it as secondary. */}
             </div>
 
-            <div className="flex-1 overflow-y-auto p-8 pb-32">
-              <div className="space-y-6">
-                <div className={`${selectedCompany === 'som' ? 'w-48 h-24' : 'w-32 h-32 rounded-full bg-white p-4'} flex items-center justify-center mb-6`}>
+            <div id="partnership-popup-content" className="flex-1 flex flex-col overflow-hidden pt-4 pb-8 space-y-4">
+              <div className="flex gap-8 items-start shrink-0">
+                <div className={`${selectedCompany === 'som' ? 'w-48 h-24' : 'w-32 h-32 rounded-full bg-white p-4'} flex items-center justify-center shrink-0`}>
                   {getCompanyData(selectedCompany)?.logo ? (
                     <img
                       src={getCompanyData(selectedCompany)?.logo}
@@ -449,40 +447,40 @@ export default function PartnershipSection() {
                   )}
                 </div>
 
-                <div>
-                  <h3 className="text-lg md:text-xl font-semibold mb-4">Hakkımızda</h3>
-                  <div className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6 max-h-96 overflow-y-auto">
+                <div className="flex-1">
+                  <h3 className="text-lg md:text-xl font-semibold mb-2">Hakkımızda</h3>
+                  <div className="text-sm md:text-base text-muted-foreground leading-relaxed">
                     {getCompanyData(selectedCompany)?.story.split('\n\n').map((paragraph, index) => (
-                      <p key={index} className="mb-4 last:mb-0">
+                      <p key={index} className="mb-2 last:mb-0">
                         {paragraph}
                       </p>
                     ))}
                   </div>
                 </div>
-
-                {/* Show video for SOM */}
-                {selectedCompany === 'som' && (
-                  <div>
-                    <h3 className="text-lg md:text-xl font-semibold mb-4">Tanıtım Videosu</h3>
-                    <div className="aspect-video rounded-lg overflow-hidden bg-black relative group">
-                      <video
-                        controls
-                        className="w-full h-full relative z-10"
-                        src="/SOM PREFABRİK TANITIM(720P_HD).mp4"
-                        playsInline
-                        muted={false}
-                        ref={videoRef}
-                        style={{ pointerEvents: 'auto' }}
-                        onLoadedMetadata={(e) => {
-                          e.currentTarget.currentTime = 41;
-                        }}
-                      >
-                        Your browser does not support the video tag.
-                      </video>
-                    </div>
-                  </div>
-                )}
               </div>
+
+              {/* Show video for SOM */}
+              {selectedCompany === 'som' && (
+                <div className="flex-1 min-h-0 flex flex-col">
+                  <h3 className="text-lg md:text-xl font-semibold mb-2 shrink-0">Tanıtım Videosu</h3>
+                  <div className="flex-1 min-h-0 rounded-lg overflow-hidden bg-black relative group w-full max-w-4xl mx-auto">
+                    <video
+                      controls
+                      className="w-full h-full relative z-10"
+                      src="/SOM PREFABRİK TANITIM(720P_HD).mp4"
+                      playsInline
+                      muted={false}
+                      ref={videoRef}
+                      style={{ pointerEvents: 'auto' }}
+                      onLoadedMetadata={(e) => {
+                        e.currentTarget.currentTime = 41;
+                      }}
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -1,4 +1,73 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@font-face {
+  font-family: 'Canaro';
+  src: url('/fonts/Canaro-Thin.woff2') format('woff2'),
+    url('/fonts/Canaro-Thin.woff') format('woff'),
+    url('/fonts/Canaro-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Canaro';
+  src: url('/fonts/Canaro-ThinItalic.woff2') format('woff2'),
+    url('/fonts/Canaro-ThinItalic.woff') format('woff'),
+    url('/fonts/Canaro-ThinItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Canaro';
+  src: url('/fonts/Canaro-Light.woff2') format('woff2'),
+    url('/fonts/Canaro-Light.woff') format('woff'),
+    url('/fonts/Canaro-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Canaro';
+  src: url('/fonts/Canaro-Book.woff2') format('woff2'),
+    url('/fonts/Canaro-Book.woff') format('woff'),
+    url('/fonts/Canaro-Book.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Canaro';
+  src: url('/fonts/Canaro-BookItalic.woff2') format('woff2'),
+    url('/fonts/Canaro-BookItalic.woff') format('woff'),
+    url('/fonts/Canaro-BookItalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Canaro';
+  src: url('/fonts/Canaro-Bold.woff2') format('woff2'),
+    url('/fonts/Canaro-Bold.woff') format('woff'),
+    url('/fonts/Canaro-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Canaro';
+  src: url('/fonts/Canaro-BoldItalic.woff2') format('woff2'),
+    url('/fonts/Canaro-BoldItalic.woff') format('woff'),
+    url('/fonts/Canaro-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,7 +93,7 @@
   --border: hsl(220, 26%, 18%);
   --input: hsl(220, 26%, 18%);
   --ring: hsl(43, 74%, 52%);
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Canaro', 'Inter', system-ui, sans-serif;
   --radius: 0.75rem;
 }
 
@@ -57,7 +126,7 @@
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans font-light antialiased bg-background text-foreground;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -396,6 +465,16 @@
   body {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  /* Universal No Scrollbar Utility */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
   }
 }
 

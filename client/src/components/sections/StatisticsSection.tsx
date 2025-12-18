@@ -33,7 +33,7 @@ export default function StatisticsSection() {
       className="section bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center"
       data-testid="statistics-section"
     >
-      <div className="w-full h-full flex flex-col justify-center gap-8 max-w-7xl mx-auto pl-8 pr-32 py-12">
+      <div className="w-full h-full flex flex-col justify-center gap-8 max-w-7xl mx-auto px-8 py-12">
 
         {/* Top Row: Demographics and Model Sanayi */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
@@ -48,9 +48,9 @@ export default function StatisticsSection() {
             <h2 className="text-2xl font-bold text-[#ff6b1a] mb-6">
               ÇERKEZKÖY/KAPAKLI
             </h2>
-            <div className="flex flex-col gap-4 text-xl text-white/90 font-bold">
-              <div>Nüfus: 375.000</div>
-              <div>Nüfusun %50'si: 25-45 Yaş Arası</div>
+            <div className="flex flex-col gap-4 text-xl text-white font-bold">
+              <div>NÜFUS: 375.000</div>
+              <div>NÜFUSUN %50'Sİ: 25-45 YAŞ </div>
             </div>
           </motion.div>
 
@@ -83,7 +83,7 @@ export default function StatisticsSection() {
           }}
         >
           <h2 className="text-2xl font-bold text-[#ff6b1a]">
-            Gücünüze Güç Katacak Lokasyon
+            İŞ HACMİNİZİ  BÜYÜTECEK LOKASYON
           </h2>
         </motion.div>
 
@@ -96,7 +96,7 @@ export default function StatisticsSection() {
               background: 'linear-gradient(145deg, rgba(2,6,23,0.6), rgba(15,23,42,0.6))'
             }}
           >
-            <div className="text-xl font-bold text-white mb-2">Çerkezköy</div>
+            <div className="text-xl font-bold text-white mb-2">ÇERKEZKÖY</div>
             <div className="text-2xl font-bold text-[#ff6b1a]">312 Firma</div>
           </motion.div>
 
@@ -107,7 +107,7 @@ export default function StatisticsSection() {
               background: 'linear-gradient(145deg, rgba(2,6,23,0.6), rgba(15,23,42,0.6))'
             }}
           >
-            <div className="text-xl font-bold text-white mb-2">Velimeşe</div>
+            <div className="text-xl font-bold text-white mb-2">VELİMEŞE</div>
             <div className="text-2xl font-bold text-[#ff6b1a]">176 Firma</div>
           </motion.div>
 
@@ -118,7 +118,7 @@ export default function StatisticsSection() {
               background: 'linear-gradient(145deg, rgba(2,6,23,0.6), rgba(15,23,42,0.6))'
             }}
           >
-            <div className="text-xl font-bold text-white mb-2">Ergene</div>
+            <div className="text-xl font-bold text-white mb-2">ERGENE</div>
             <div className="text-2xl font-bold text-[#ff6b1a]">190 Firma</div>
           </motion.div>
 
@@ -129,7 +129,7 @@ export default function StatisticsSection() {
               background: 'linear-gradient(145deg, rgba(2,6,23,0.6), rgba(15,23,42,0.6))'
             }}
           >
-            <div className="text-xl font-bold text-white mb-2">Kapaklı</div>
+            <div className="text-xl font-bold text-white mb-2">KAPAKLI</div>
             <div className="text-2xl font-bold text-[#ff6b1a]">31 Firma</div>
           </motion.div>
 
@@ -140,7 +140,7 @@ export default function StatisticsSection() {
               background: 'linear-gradient(145deg, rgba(2,6,23,0.6), rgba(15,23,42,0.6))'
             }}
           >
-            <div className="text-xl font-bold text-white mb-2">Veliköy</div>
+            <div className="text-xl font-bold text-white mb-2">VELİKÖY</div>
             <div className="text-2xl font-bold text-[#ff6b1a]">72 Firma</div>
           </motion.div>
 
@@ -151,7 +151,7 @@ export default function StatisticsSection() {
               background: 'linear-gradient(145deg, rgba(2,6,23,0.6), rgba(15,23,42,0.6))'
             }}
           >
-            <div className="text-xl font-bold text-white mb-2">Yalıboyu</div>
+            <div className="text-xl font-bold text-white mb-2">YALIBOYU</div>
             <div className="text-2xl font-bold text-[#ff6b1a]">34 Firma</div>
           </motion.div>
         </div>

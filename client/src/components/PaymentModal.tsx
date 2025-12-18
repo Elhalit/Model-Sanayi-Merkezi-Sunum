@@ -186,10 +186,10 @@ export default function PaymentModal({ unit, onClose }: PaymentModalProps) {
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 overflow-hidden flex flex-col md:flex-row">
+                <div className="flex-1 min-h-0 flex flex-col md:flex-row overflow-hidden">
 
                     {/* Controls Panel */}
-                    <div className="w-full md:w-80 bg-black/10 p-6 border-r border-white/10 flex flex-col gap-6">
+                    <div className="w-full md:w-80 bg-black/10 p-6 border-r border-white/10 flex flex-col gap-6 overflow-y-auto custom-scrollbar">
 
                         {/* Currency Toggle */}
                         <div>
@@ -250,9 +250,9 @@ export default function PaymentModal({ unit, onClose }: PaymentModalProps) {
                     </div>
 
                     {/* Table Panel */}
-                    <div className="flex-1 flex flex-col h-full overflow-hidden bg-white/5">
+                    <div className="flex-1 flex flex-col min-h-0 bg-white/5">
                         {/* Toolbar */}
-                        <div className="p-4 border-b border-white/10 flex justify-end gap-2">
+                        <div className="p-4 border-b border-white/10 flex justify-end gap-2 shrink-0">
                             <button onClick={handleExportPDF} className="flex items-center gap-2 px-3 py-1.5 bg-red-500/10 text-red-400 hover:bg-red-500/20 rounded-lg text-sm transition-colors font-medium border border-red-500/20">
                                 <Download className="w-4 h-4" /> PDF
                             </button>
@@ -265,7 +265,7 @@ export default function PaymentModal({ unit, onClose }: PaymentModalProps) {
                         </div>
 
                         {/* Table */}
-                        <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
+                        <div className="flex-1 min-h-0 overflow-y-auto p-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                             <table className="w-full text-left border-collapse">
                                 <thead>
                                     <tr className="text-xs font-bold text-white/40 border-b border-white/10">

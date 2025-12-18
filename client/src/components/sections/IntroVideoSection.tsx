@@ -8,7 +8,6 @@ export default function IntroVideoSection() {
                 <video
                     src="/Model Sanayi Merkezi_nde 4. Etap Başlıyor_(720P_HD).mp4"
                     className="w-full h-full object-cover"
-                    autoPlay
                     loop
                     playsInline
                     controls

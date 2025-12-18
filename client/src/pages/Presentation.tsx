@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/sections/HeroSection';
 import PartnershipSection from '@/components/sections/PartnershipSection';
-import LeaderSection from '@/components/sections/LeaderSection';
+
 import ProjectSection from '@/components/sections/ProjectSection';
 import StatisticsSection from '@/components/sections/StatisticsSection';
 import StrategicLocationSection from '@/components/sections/StrategicLocationSection';
@@ -24,7 +24,7 @@ export default function Presentation() {
     // Add keyboard navigation
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') navigateToSection(Math.max(0, currentSection - 1));
-      if (e.key === 'ArrowRight') navigateToSection(Math.min(13, currentSection + 1));
+      if (e.key === 'ArrowRight') navigateToSection(Math.min(12, currentSection + 1));
       if (e.key === 'Escape' && document.fullscreenElement) {
         document.exitFullscreen();
       }
@@ -48,7 +48,7 @@ export default function Presentation() {
       <Navigation
         currentSection={currentSection}
         onNavigate={navigateToSection}
-        totalSections={14}
+        totalSections={13}
       />
 
       {/* Main Content Container */}
@@ -60,7 +60,7 @@ export default function Presentation() {
         <PartnershipSection />
         <HeroSection />
         <ProjectSection />
-        <LeaderSection />
+
         <StatisticsSection />
         <StrategicLocationSection />
         <IntroVideoSection />

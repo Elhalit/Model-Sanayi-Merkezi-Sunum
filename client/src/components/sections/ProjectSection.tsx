@@ -11,7 +11,7 @@ function CapacityIcon(props: { className?: string }) {
       {/* Block representing load on ground */}
       <rect x="6" y="10" width="12" height="8" rx="2" stroke="white" strokeWidth="2" />
       {/* 5T label */}
-      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="8" fontFamily="sans-serif">5T</text>
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize="8" fontFamily="Canaro, sans-serif">5T</text>
     </svg>
   );
 }
@@ -107,7 +107,7 @@ export default function ProjectSection() {
       ref={sectionRef}
       className="section bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
       data-testid="project-section"
-      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', width: '100%', height: '100%', padding: '1.5rem 0', overflow: 'hidden' }}
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', width: '100%', height: '100%', padding: '4rem 0', overflow: 'hidden' }}
     >
       {/* Header */}
       <div className="text-center mb-4">
@@ -116,13 +116,13 @@ export default function ProjectSection() {
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text'
-        }}>MODEL SANAYİ MERKEZİ</h1>
+        }}>MODEL SANAYİ MERKEZİ KAPAKLI</h1>
         <h2 className="text-base md:text-lg font-semibold max-w-4xl mx-auto text-white">
           BİR SANAYİ MERKEZİNDEKİ TÜM BEKLENTİNİZİ KARŞILAMAK İÇİN TASARLANDI
         </h2>
       </div>
       {/* Features Grid - Centered 3 rows x 4 icons */}
-      <div className="w-full pl-4 pr-32 flex-1 flex items-center">
+      <div className="w-full px-4 flex-1 flex items-center justify-center">
         <div className="mx-auto max-w-7xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 place-items-center">
           {features.map((feature, idx) => {
             const Icon = feature.Icon;

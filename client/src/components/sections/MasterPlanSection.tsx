@@ -68,7 +68,7 @@ export default function MasterPlanSection() {
 
   return (
     <section className="section bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" data-testid="masterplan-section">
-      <div className="w-full h-full flex pl-12 pr-32">
+      <div className="w-full h-full flex px-12">
         {/* Left side - Title and Info */}
         <div className="w-1/4 px-8 flex flex-col py-8">
           {/* Header */}

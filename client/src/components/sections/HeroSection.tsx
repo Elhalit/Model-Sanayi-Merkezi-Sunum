@@ -30,7 +30,7 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="section relative flex flex-col items-center justify-start h-screen min-h-screen pt-6 pb-0"
+      className="section relative flex flex-col items-center justify-start h-screen min-h-screen pt-16 pb-0"
       data-testid="hero-section"
     >
       {/* Background Gradient */}
@@ -47,11 +47,11 @@ export default function HeroSection() {
           MODEL SANAYİ MERKEZİ KAPAKLI
         </h1>
         <h2 className="text-base md:text-lg font-semibold max-w-4xl mx-auto text-white">
-          Modern Sanayi Tesisi ile İşinize Değer Katın
+          MODERN SANAYİ ALTYAPISI İLE İŞİNİZE DEĞER KAYIN
         </h2>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto pl-8 pr-32 w-full flex-1 flex items-center justify-center min-h-0">
+      <div className="relative z-10 max-w-7xl mx-auto px-8 w-full flex-1 flex items-center justify-center min-h-0">
 
         {/* Content Grid */}
         <div id="hero-facilities" className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">

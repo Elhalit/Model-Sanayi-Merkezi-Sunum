@@ -129,7 +129,7 @@ export default function FloorPlansSection2() {
       className="section bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative h-screen w-full overflow-hidden"
       data-testid="floorplans-section-2"
     >
-      <div className="w-full h-full flex flex-col relative z-10 pl-12 pr-32">
+      <div className="w-full h-full flex flex-col relative z-10 px-12">
         {/* Top Section - Compact Header */}
         <div className="px-6 pt-4 shrink-0 flex flex-col gap-3">
           <h2 className="text-2xl md:text-3xl font-black text-center py-2" style={{
@@ -200,10 +200,7 @@ export default function FloorPlansSection2() {
 
               <div className="space-y-4">
                 <div>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span className="text-white/60">Görüntülenen:</span>
-                    <span className="text-white font-medium">{filteredUnits.length} / {currentBlockUnits.length}</span>
-                  </div>
+
                   {searchTerm && (
                     <div className="text-xs text-accent">
                       Arama: "{searchTerm}"
@@ -211,27 +208,7 @@ export default function FloorPlansSection2() {
                   )}
                 </div>
 
-                <div>
-                  <div className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">Göstergeler</div>
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="flex items-center gap-2 bg-white/5 p-1.5 rounded">
-                      <div className="w-3 h-3 bg-success rounded-full"></div>
-                      <span className="text-xs text-white/80">Müsait</span>
-                    </div>
-                    <div className="flex items-center gap-2 bg-white/5 p-1.5 rounded">
-                      <div className="w-3 h-3 bg-destructive rounded-full"></div>
-                      <span className="text-xs text-white/80">Satıldı</span>
-                    </div>
-                    <div className="flex items-center gap-2 bg-white/5 p-1.5 rounded">
-                      <div className="w-3 h-3 bg-warning rounded-full"></div>
-                      <span className="text-xs text-white/80">Rezerve</span>
-                    </div>
-                    <div className="flex items-center gap-2 bg-white/5 p-1.5 rounded">
-                      <div className="w-3 h-3 bg-accent rounded-full flex items-center justify-center text-[8px]">🏢</div>
-                      <span className="text-xs text-white/80">Firma</span>
-                    </div>
-                  </div>
-                </div>
+
               </div>
             </div>
 
@@ -239,8 +216,17 @@ export default function FloorPlansSection2() {
             <div className={`glass p-5 rounded-xl border border-white/10 bg-black/40 backdrop-blur-xl transition-all duration-300 ${selectedUnit ? 'opacity-100 translate-x-0' : 'opacity-50 translate-x-0'}`}>
               {selectedUnit ? (
                 <div>
-                  <div className="font-semibold text-orange-500 mb-4 text-lg border-b border-white/10 pb-2 flex items-center justify-between">
+                  <div className="font-semibold text-orange-500 mb-4 text-lg border-b border-white/10 pb-2 flex flex-col gap-1">
                     <span>Ünite {selectedUnit.unitNumber}</span>
+                    {selectedUnit.priceTL ? (
+                      <span className="text-white font-bold text-base">
+                        {new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY', maximumFractionDigits: 0 }).format(selectedUnit.priceTL)}
+                      </span>
+                    ) : selectedUnit.priceUSD ? (
+                      <span className="text-white font-bold text-base">
+                        {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(selectedUnit.priceUSD)}
+                      </span>
+                    ) : null}
                     <span className="text-xs text-white/50 font-normal">{selectedUnit.block} Blok</span>
                   </div>
 
@@ -348,9 +334,10 @@ export default function FloorPlansSection2() {
                 className="mx-auto"
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(9, 1fr)',
+                  gridTemplateColumns: 'repeat(8, 1fr)',
                   gridTemplateRows: 'repeat(10, 1fr)',
-                  gap: '0.75rem',
+                  rowGap: '0',
+                  columnGap: '0',
                   height: '96%',
                   width: '90%'
                 }}
@@ -368,7 +355,7 @@ export default function FloorPlansSection2() {
                     const isOdd = unitNum % 2 !== 0;
                     const pairRow = Math.floor((unitNum - 1) / 2); // 0-indexed row (0-8)
                     style = {
-                      gridColumn: isOdd ? '1 / span 4' : '6 / span 4',
+                      gridColumn: isOdd ? '1 / span 4' : '5 / span 4',
                       gridRow: (pairRow + 1).toString()
                     };
                   } else {
@@ -384,27 +371,29 @@ export default function FloorPlansSection2() {
                     let colSpan = 2;
 
                     if (totalBottom === 4) {
-                      // 4 units: 1-2, 3-4, 6-7, 8-9
-                      const starts = [1, 3, 6, 8];
+                      // 4 units (F Block mostly): 1, 3, 5, 7 
+                      const starts = [1, 3, 5, 7];
                       colStart = starts[bottomIndex] || 1;
                       colSpan = 2;
                     } else if (totalBottom === 2) {
-                      // 2 units: 1-4, 6-9
-                      const starts = [1, 6];
+                      // 2 units: 1-4, 5-8
+                      const starts = [1, 5];
                       colStart = starts[bottomIndex] || 1;
                       colSpan = 4;
                     } else if (totalBottom === 3) {
-                      // 3 units: 1-3, 4-6, 7-9
-                      const starts = [1, 4, 7];
-                      colStart = starts[bottomIndex] || 1;
-                      colSpan = 3;
+                      // 3 units: Adapted for 8 cols (3-2-3)
+                      // 19->1(span3), 20->4(span2), 21->6(span3)
+                      if (bottomIndex === 0) { colStart = 1; colSpan = 3; }
+                      else if (bottomIndex === 1) { colStart = 4; colSpan = 2; }
+                      else { colStart = 6; colSpan = 3; }
                     } else {
                       // Default/Fallback
                       if (totalBottom === 1) {
                         colStart = 3;
-                        colSpan = 5;
+                        colSpan = 4;
                       } else {
-                        colSpan = Math.max(1, Math.floor(9 / totalBottom));
+                        // Fallback logic
+                        colSpan = Math.max(1, Math.floor(8 / totalBottom));
                         colStart = 1 + (bottomIndex * colSpan);
                       }
                     }
@@ -427,11 +416,11 @@ export default function FloorPlansSection2() {
                       onClick={() => setSelectedUnit(unit)}
                     >
                       <div className={`
-                          w-full h-full rounded-md border transition-all duration-300
+                          w-full h-full rounded-none border transition-all duration-300
                           flex items-center justify-between px-2 relative
                           ${isSold
-                          ? 'bg-[#ef4444] border-red-700 hover:bg-red-500'
-                          : 'bg-[#22c55e] border-green-700 hover:bg-green-500'
+                          ? 'bg-[#ef4444] border-black hover:bg-red-500'
+                          : 'bg-[#22c55e] border-black hover:bg-green-500'
                         }
                           ${!isFiltered ? 'grayscale' : ''}
                           ${selectedUnit === unit ? 'ring-2 ring-white shadow-lg z-20' : ''}

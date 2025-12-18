@@ -3,7 +3,8 @@ import { MapContainer, TileLayer, Marker, Popup, Polyline, Polygon, useMap, Laye
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Clock, Navigation, MapPin } from 'lucide-react';
+
+
 
 // Fix for default Leaflet markers in React
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -173,14 +174,14 @@ const TrainMarker: React.FC<{ path: [number, number][] }> = ({ path }) => {
                 transition: transform 0.1s linear; 
                 transform-origin: center center;
                 filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.4));
-                width: 120px;
+                width: 200px;
                 height: 24px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
             ">
                 <div style="transform: scaleX(-1); width: 100%; height: 100%;">
-                    <svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="200" height="24" viewBox="0 0 200 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <!-- Locomotive -->
                         <path d="M10 3H38V21H10C5 21 2 17 2 12C2 7 5 3 10 3Z" fill="#E6E6E6" stroke="#4A4A4A" stroke-width="1"/>
                         <path d="M10 5H28V19H10C7 19 5 16 5 12C5 8 7 5 10 5Z" fill="#333333"/>
@@ -200,19 +201,39 @@ const TrainMarker: React.FC<{ path: [number, number][] }> = ({ path }) => {
                         <!-- Connector 2 -->
                         <rect x="78" y="9" width="4" height="6" fill="#333333"/>
 
-                        <!-- Car 2 (Tail) -->
-                        <path d="M82 3H110C115 3 118 7 118 12C118 17 115 21 110 21H82V3Z" fill="white" stroke="#4A4A4A" stroke-width="1"/>
+                        <!-- Car 2 -->
+                        <rect x="82" y="3" width="36" height="18" rx="1" fill="white" stroke="#4A4A4A" stroke-width="1"/>
                         <rect x="85" y="5" width="8" height="14" rx="1" fill="#88C4FF"/>
                         <rect x="96" y="5" width="8" height="14" rx="1" fill="#88C4FF"/>
-                        <path d="M108 5H110C113 5 115 7 115 12C115 17 113 19 110 19H108V5Z" fill="#333333" opacity="0.3"/>
-                        <rect x="82" y="15" width="30" height="3" fill="#FF5300"/>
+                        <rect x="107" y="5" width="8" height="14" rx="1" fill="#88C4FF"/>
+                        <rect x="82" y="15" width="36" height="3" fill="#FF5300"/>
+
+                        <!-- Connector 3 -->
+                        <rect x="118" y="9" width="4" height="6" fill="#333333"/>
+
+                        <!-- Car 3 -->
+                        <rect x="122" y="3" width="36" height="18" rx="1" fill="white" stroke="#4A4A4A" stroke-width="1"/>
+                        <rect x="125" y="5" width="8" height="14" rx="1" fill="#88C4FF"/>
+                        <rect x="136" y="5" width="8" height="14" rx="1" fill="#88C4FF"/>
+                        <rect x="147" y="5" width="8" height="14" rx="1" fill="#88C4FF"/>
+                        <rect x="122" y="15" width="36" height="3" fill="#FF5300"/>
+
+                        <!-- Connector 4 -->
+                        <rect x="158" y="9" width="4" height="6" fill="#333333"/>
+
+                        <!-- Car 4 (Tail) -->
+                        <path d="M162 3H190C195 3 198 7 198 12C198 17 195 21 190 21H162V3Z" fill="white" stroke="#4A4A4A" stroke-width="1"/>
+                        <rect x="165" y="5" width="8" height="14" rx="1" fill="#88C4FF"/>
+                        <rect x="176" y="5" width="8" height="14" rx="1" fill="#88C4FF"/>
+                        <path d="M188 5H190C193 5 195 7 195 12C195 17 193 19 190 19H188V5Z" fill="#333333" opacity="0.3"/>
+                        <rect x="162" y="15" width="30" height="3" fill="#FF5300"/>
                     </svg>
                 </div>
             </div>
         `,
         className: 'train-marker-container',
-        iconSize: [120, 24],
-        iconAnchor: [60, 12]
+        iconSize: [200, 24],
+        iconAnchor: [100, 12]
     });
 
     return (
@@ -339,8 +360,8 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
 
                 {/* Markers */}
                 {locations.map((loc, idx) => {
-                    // Don't show marker for locations with polygon (e.g. KOSB)
-                    if (loc.polygon) return null;
+                    // Don't show marker for locations with polygon (e.g. KOSB) ONLY if it's currently selected (showing polygon instead)
+                    if (loc.polygon && selectedLocation?.title === loc.title) return null;
                     // Don't show static marker for train if it's selected (we show animated train instead)
                     if (loc.type === 'train' && selectedLocation?.title === loc.title) return null;
 
@@ -366,7 +387,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({
 
                 {/* Location Specific Polygons */}
                 {locations.map((loc, idx) => (
-                    loc.polygon && (
+                    loc.polygon && selectedLocation?.title === loc.title && (
                         <Polygon
                             key={`polygon-${idx}`}
                             positions={loc.polygon}
